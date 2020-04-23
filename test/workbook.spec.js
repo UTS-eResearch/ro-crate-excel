@@ -27,12 +27,12 @@ const assert = require("assert");
 
 describe("Create a workbook from a crate", function() {
 
-
   it("Should create a workbook with one sheet", function(done) {
     const c = new RoCrate();
+    c.index();
     const workbook = new Workbook(c);
-    const rootSheet = workbook.excel.Sheets["Collection"];
-    console.log(workbook.excel.Sheets["Collection"]);
+    const rootSheet = workbook.excel.Sheets["RootDataset"];
+    console.log(rootSheet);
     
     assert.equal(
       rootSheet.A1.v,
@@ -44,12 +44,52 @@ describe("Create a workbook from a crate", function() {
       );
       assert.equal(
         rootSheet.A2.v,
-        "@id"
+        "@type"
       );
       assert.equal(
           rootSheet.B2.v,
-          "./"
+          "Dataset"
         );
+
+    done();
+  });
+
+
+  it("Should create a workbook with one sheets and some metadata", function(done) {
+    const c = new RoCrate();
+    c.index();
+    const root = c.getRootDataset();
+    console.log("ROOT", root);
+    root["name"] =  "My dataset";
+    root["description"] =  "Some old dataset";
+    const workbook = new Workbook(c);
+    const rootSheetName = "RootDataset";
+    datasetItem = workbook.sheetToItem(rootSheetName);
+    console.log(datasetItem);
+    assert.equal(Object.keys(datasetItem).length, 4)
+    assert.equal(datasetItem.name, "My dataset");
+    assert.equal(datasetItem.description, "Some old dataset");
+    done();
+  });
+
+
+  it("Should create a workbook with two sheets", function(done) {
+    const c = new RoCrate();
+    c.index();
+    const root = c.getRootDataset();
+    console.log("ROOT", root);
+    root["name"] =  "My dataset";
+    root["description"] =  "Some old dataset";
+    c.addItem({
+        "@id": "https://ror.org/03f0f6041",
+        "name": "Universtiy of Technology Sydney",
+        "@type": "Organization"
+    })
+    const workbook = new Workbook(c);
+    const orgJson =  XLSX.utils.sheet_to_json(workbook.excel.Sheets["@type:Organization"]);
+
+    console.log(workbook.excel.Sheets);
+
 
     done();
   });
