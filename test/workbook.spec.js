@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Test for workbook.js */
 const XLSX = require('xlsx');
 const path = require('path');
+const fs = require('fs-extra');
 const rocrate = require('ro-crate');
 const RoCrate = rocrate.ROCrate;
 const Workbook = require("../lib/workbook.js");
@@ -76,8 +77,8 @@ describe("Create a workbook from a crate", function() {
   it("Should create a workbook with two sheets", function(done) {
     const c = new RoCrate();
     c.index();
+    console.log(c.json_ld)
     const root = c.getRootDataset();
-    console.log("ROOT", root);
     root["name"] =  "My dataset";
     root["description"] =  "Some old dataset";
     c.addItem({
@@ -86,13 +87,35 @@ describe("Create a workbook from a crate", function() {
         "@type": "Organization"
     })
     const workbook = new Workbook(c);
-    const orgJson =  XLSX.utils.sheet_to_json(workbook.excel.Sheets["@type:Organization"]);
-
-    console.log(workbook.excel.Sheets);
-
+    const orgJSON =  XLSX.utils.sheet_to_json(workbook.excel.Sheets["@type=Organization"]);
+    console.log(workbook.excel.Sheets)
+    assert.equal(Object.keys(workbook.excel.Sheets).length, 2, "Only 2 sheets (not an extra Dataset or a CreativeWork")
+    console.log(orgJSON);
+    assert.equal(orgJSON.length, 1, "one org");
+    assert.equal(orgJSON[0]["@id"], "https://ror.org/03f0f6041");
 
     done();
   });
+
+  it("Should handle the sample dataset ", function(done) {
+    metadataPath = "test_data/sample/ro-crate-metadata.jsonld";
+    var c = new RoCrate(JSON.parse(fs.readFileSync(metadataPath)));
+    c.index();
+    
+    const workbook = new Workbook(c);
+    const orgJSON =  XLSX.utils.sheet_to_json(workbook.excel.Sheets["@type=Organization"]);
+    //console.log(workbook.excel.Sheets)
+
+    XLSX.writeFile(workbook.excel, 'test.xlsx');
+
+    assert.equal(Object.keys(workbook.excel.Sheets).length, 16, "Only 2 sheets (not an extra Dataset or a CreativeWork")
+    //console.log(orgJSON);
+    assert.equal(orgJSON.length, 3, "three org");
+    assert.equal(orgJSON[0]["@id"], "https://ror.org/03f0f6041");
+
+    done();
+  });
+
 });
 
 
