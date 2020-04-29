@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/UTS-eResearch/ro-crate-excel#readme",
   "dependencies": {
+    "exceljs": "^3.9.0",
     "path": "^0.12.7",
     "ro-crate": "^1.3.0",
     "xlsx": "^0.15.6"

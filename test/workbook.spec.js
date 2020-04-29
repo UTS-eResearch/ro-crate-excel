@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Test for workbook.js */
 const XLSX = require('xlsx');
+const ExcelJS = require('exceljs');
 const path = require('path');
 const fs = require('fs-extra');
 const rocrate = require('ro-crate');
@@ -28,27 +29,26 @@ const assert = require("assert");
 
 describe("Create a workbook from a crate", function() {
 
-  it("Should create a workbook with one sheet", function(done) {
+  it("Should create a workbook with just one sheet", function(done) {
     const c = new RoCrate();
     c.index();
     const workbook = new Workbook(c);
-    const rootSheet = workbook.excel.Sheets["RootDataset"];
-    console.log(rootSheet);
-    
+    const sheet = workbook.workbook.getWorksheet("RootDataset");
+    console.log("SHEET", sheet)
     assert.equal(
-      rootSheet.A1.v,
+      sheet.getCell("A1").value,
       "Name"
     );
     assert.equal(
-        rootSheet.B1.v,
+        sheet.getCell("B1").value,
         "Value"
       );
       assert.equal(
-        rootSheet.A2.v,
+        sheet.getCell("A2").value,
         "@type"
       );
       assert.equal(
-          rootSheet.B2.v,
+          sheet.getCell("B2").value,
           "Dataset"
         );
 
@@ -56,7 +56,7 @@ describe("Create a workbook from a crate", function() {
   });
 
 
-  it("Should create a workbook with one sheets and some metadata", function(done) {
+  it("Should create a workbook with one sheet and some metadata", function(done) {
     const c = new RoCrate();
     c.index();
     const root = c.getRootDataset();
@@ -77,7 +77,6 @@ describe("Create a workbook from a crate", function() {
   it("Should create a workbook with two sheets", function(done) {
     const c = new RoCrate();
     c.index();
-    console.log(c.json_ld)
     const root = c.getRootDataset();
     root["name"] =  "My dataset";
     root["description"] =  "Some old dataset";
@@ -87,31 +86,25 @@ describe("Create a workbook from a crate", function() {
         "@type": "Organization"
     })
     const workbook = new Workbook(c);
-    const orgJSON =  XLSX.utils.sheet_to_json(workbook.excel.Sheets["@type=Organization"]);
-    console.log(workbook.excel.Sheets)
-    assert.equal(Object.keys(workbook.excel.Sheets).length, 2, "Only 2 sheets (not an extra Dataset or a CreativeWork")
-    console.log(orgJSON);
-    assert.equal(orgJSON.length, 1, "one org");
-    assert.equal(orgJSON[0]["@id"], "https://ror.org/03f0f6041");
+    // This is not using the api - may be fragile
+    assert.equal(workbook.workbook["_worksheets"].length, 3, "There are only two sheets");
+
 
     done();
   });
 
-  it("Should handle the sample dataset ", function(done) {
+  it("Should handle the sample dataset ", async function(done) {
     metadataPath = "test_data/sample/ro-crate-metadata.jsonld";
     var c = new RoCrate(JSON.parse(fs.readFileSync(metadataPath)));
     c.index();
     
     const workbook = new Workbook(c);
-    const orgJSON =  XLSX.utils.sheet_to_json(workbook.excel.Sheets["@type=Organization"]);
     //console.log(workbook.excel.Sheets)
+    assert.equal(workbook.workbook["_worksheets"].length, 14, "13 sheets")
 
-    XLSX.writeFile(workbook.excel, 'test.xlsx');
+    workbook.workbook.xlsx.writeFile("test.xlsx");
 
-    assert.equal(Object.keys(workbook.excel.Sheets).length, 16, "Only 2 sheets (not an extra Dataset or a CreativeWork")
-    //console.log(orgJSON);
-    assert.equal(orgJSON.length, 3, "three org");
-    assert.equal(orgJSON[0]["@id"], "https://ror.org/03f0f6041");
+     // TODO extract acutal data!
 
     done();
   });
