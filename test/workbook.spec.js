@@ -108,6 +108,10 @@ describe("Create a workbook from a crate", function() {
     assert.equal(root.hasPart[0], "lots_of_little_files/")
     assert.equal(root.hasParh[1], "pics/")
 
+    workbook.indexCrateByName();
+    const pt = workbook.getItemByName("Peter Sefton")
+    assert.equal(root.name, "Peter Sefton")
+
 
     done();
   });
