@@ -103,14 +103,15 @@ The quotes around the `Value`s for license and author indicate that the value is
 
 Then the Person and the CreativeWork will be described in two additional worksheets named `@type=Person` and `@type=CreativeWork`, these `Type Worksheets` use a different format to represent one item per line.
 
-The person worksheet is as follows:
+The `@type=Person` worksheet is as follows:
 
 | @id | @type | name | FamilyName | givenName  | affiliation |  
 | -- | -- | -- | -- | -- | -- |
 | http://orcid.org/0000-0002-3545-944X | Person  | Peter Sefton | Sefton | Peter | 	"https://ror.org/0384j8v12" | 
 | https://orcid.org/0000-0001-5152-5307 | Person | Michael Lynch | Lynch | Michael | "https://ror.org/0384j8v12" | 
 
-And the `CreativeWork` worksheet:
+
+And the `@type=CreativeWork` worksheet:
 
 | @id | @type  | name   | description |
 | --- | ------ | ------ | ----------- |
@@ -120,7 +121,7 @@ And the `CreativeWork` worksheet:
 
 ### Representing multiple values
 
-To represent multiple values - for example if there are multiple affiliations for a person then 
+To represent multiple values - for example if there are multiple affiliations for a person then a comma separated list enclosed in square brackets.
 
 | @id | @type | name | FamilyName | givenName  | affiliation |  
 | -- | -- | -- | -- | -- | -- |
@@ -133,7 +134,7 @@ This approach can also be used in the `Root Dataset Worksheet`. The URL is treat
 | ----        | --------------------------------- |
 | author      | ["Peter Sefton", http://ptsefton.com] |
 
-These values will be interpreted as references, omitting the quotes will cause a value to be interpreted as a strings.
+These values will be interpreted as references, omitting the quotes will cause a value to be interpreted as a string.
 
 ### Embedding JSON
 
@@ -166,7 +167,7 @@ http://www.geonames.org/8152662/catalina-park.html | Place | Katoomba, NSW | Cat
 
 When converting from a worksheet to a JSON-LD item the process is to:
 
--  Convert the `Root 
+-  Convert the `Root DataSet Workseet` to an RO Crate `Root Dataset` - with the necessary `@id` and other 
 
 -  Convert  each `@type sheet` to an item by mapping column names to properties; each row becomes an item in the RO-Crate graph.
 
@@ -179,6 +180,6 @@ When converting from a worksheet to a JSON-LD item the process is to:
   -  for each value of a property that starts and ends with double quotes:
     -  If the value matches a known @id then add a reference `{"@id": "#someid"}`
     -  else if the value (without quotes) matches a known name add a regference to the item with that name
-    -  else if the value (without quotes) does not start with `#` prepend `#` and see if it matches a known `@id` - if it does add it as a reference `{"@id": "#someid"}`
+    -  else if the value (without quotes) does not start with `#` prepend `#` and see if it matches a known `@id` - if it does add it as a reference 
 
 
