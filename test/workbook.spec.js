@@ -103,8 +103,11 @@ describe("Create a workbook from a crate", function() {
     assert.equal(workbook.workbook["_worksheets"].length, 14, "13 sheets")
 
     workbook.workbook.xlsx.writeFile("test.xlsx");
+    const root = workbook.sheetToItem("RootDataset");
+    assert.equal(root.publisher, "https://ror.org/0384j8v12")
+    assert.equal(root.hasPart[0], "lots_of_little_files/")
+    assert.equal(root.hasParh[1], "pics/")
 
-     // TODO extract acutal data!
 
     done();
   });
