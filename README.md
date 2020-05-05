@@ -160,7 +160,7 @@ For example, this `Place` item:
 --- | ------|  -------- | ----------------------------------- | --- | ----
 http://www.geonames.org/8152662/catalina-park.html | Place | Katoomba, NSW | Catalina Park is a disused motor racing venue, located at Katoomba, in the Blue Mountains, New South Wales, Australia, and is recognised as an Aboriginal Place due to the long association of the local Gundungarra and Darug clans to the area. | {"@id":"#d2c5b5e0-a720-4b21-ad3a-f44ad89488e7","@type":"GeoCoordinates","latitude":"-33.7152","longitude":"150.30119","name":"Latitude: -33.7152, Longitude: 150.30119"} | Catalina Park
 
-
+NOTE: Any cell that contains at least one `{` and one `}` will be parsed as JSON - if that fails it will be included as an escaped string.
 
 # Implementing Workbook to RO-Crate 
 
@@ -179,7 +179,7 @@ When converting from a worksheet to a JSON-LD item the process is to:
     - else prepend `#` to the `@id`
   -  for each value of a property that starts and ends with double quotes:
     -  If the value matches a known @id then add a reference `{"@id": "#someid"}`
-    -  else if the value (without quotes) matches a known name add a regference to the item with that name
+    -  else if the value (without quotes) matches a known name add a reference to the item with that name
     -  else if the value (without quotes) does not start with `#` prepend `#` and see if it matches a known `@id` - if it does add it as a reference 
 
 
