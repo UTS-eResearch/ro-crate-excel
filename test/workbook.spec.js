@@ -38,7 +38,6 @@ describe("Create a workbook from a crate", function() {
     c.index();
     const workbook = new Workbook(c);
     const sheet = workbook.workbook.getWorksheet("RootDataset");
-    console.log("SHEET", sheet)
     assert.equal(
       sheet.getCell("A1").value,
       "Name"
@@ -64,13 +63,11 @@ describe("Create a workbook from a crate", function() {
     const c = new RoCrate();
     c.index();
     const root = c.getRootDataset();
-    console.log("ROOT", root);
     root["name"] =  "My dataset";
     root["description"] =  "Some old dataset";
     const workbook = new Workbook(c);
     const rootSheetName = "RootDataset";
     datasetItem = workbook.sheetToItem(rootSheetName);
-    console.log(datasetItem);
     assert.equal(Object.keys(datasetItem).length, 4)
     assert.equal(datasetItem.name, "My dataset");
     assert.equal(datasetItem.description, "Some old dataset");
@@ -91,28 +88,35 @@ describe("Create a workbook from a crate", function() {
     })
     const workbook = new Workbook(c);
     // This is not using the api - may be fragile
-    assert.equal(workbook.workbook["_worksheets"].length, 3, "There are only two sheets");
+    assert.equal(workbook.workbook["_worksheets"].length, 4, "There are only two sheets");
 
 
     done();
   });
 
-  it("Should handle the sample dataset ", async function(done) {
+  it("Should handle the sample dataset", async function(done) {
     var c = new RoCrate(JSON.parse(fs.readFileSync(metadataPath)));
     c.index();
     
     const workbook = new Workbook(c);
     //console.log(workbook.excel.Sheets)
-    assert.equal(workbook.workbook["_worksheets"].length, 14, "13 sheets")
+    assert.equal(workbook.workbook["_worksheets"].length, 15, "14 sheets")
 
     workbook.workbook.xlsx.writeFile("test.xlsx");
     const root = workbook.sheetToItem("RootDataset");
     assert.equal(root.publisher, `"https://ror.org/0384j8v12"`)
-    assert.equal(root.hasPart, `["lots_of_little_files/", "pics/"]`)
+    expect(root.hasPart).to.deep.equal([`"lots_of_little_files/"`, `"pics/"`])
 
+    // Name indexing works
     workbook.indexCrateByName();
     const pt = workbook.getItemByName("Peter Sefton")
     assert.equal(pt.name, "Peter Sefton")
+
+    //@context handling works
+    const context = workbook.workbook.getWorksheet("@context")
+    console.log("ROW", context.getRow(3).values)
+    expect(context.getRow(3).values[1]).to.equal("@vocab");
+    expect(context.getRow(3).values[2]).to.equal("http://schema.org/");
 
     const items = workbook.sheetToItems("@type=Person");
     assert.equal(items.length, 1);
@@ -122,31 +126,45 @@ describe("Create a workbook from a crate", function() {
   });
 
 
-  it("Can parse string values into arrays", async function(done) {
+  it("Can resolve double quoted references", async function(done) {
     var c = new RoCrate();
     c.index();
     const workbook = new Workbook(c);
-    assert.equal(workbook.parseCell(`string`), "string");
-    assert.equal(workbook.parseCell(`"string"`), `"string"`);
-    expect(workbook.parseCell(`["string", "string2"]`)).to.eql([`"string"`, `"string2"`]);
-    expect(workbook.parseCell(`["string",   "string2"]`)).to.eql([`"string"`, `"string2"`]);
-    expect(workbook.parseCell(`["string",string2] `)).to.eql([`"string"`, `string2`]);
-    expect(workbook.parseCell(`{"@id": "#id", "name": "something"}`)).to.eql({"@id": "#id", "name": "something"});
-    expect(workbook.parseCell(`[{"@id": "#id", "name": "something"}, {"@id2": "#id2", "name": "something2"}]`)).to.eql([{"@id": "#id", "name": "something"}, {"@id2": "#id2", "name": "something2"}]);
-    // IF the JSON is broken don't accept it as JSON
-    expect(workbook.parseCell(`[{"@id": "#id", name: "something"}, {"@id2": "#id2", "name": "something2"}]`)).to.eql(`[{"@id": "#id", name: "something"}, {"@id2": "#id2", "name": "something2"}]`);
-
+    const graph = workbook.crate.getGraph();
+    graph.push(
+      {"@id": "#test1", name: "test 1"},
+      {"@id": "#test2", name: "test 2"},
+      {"@id": "#test3", name: "test 3"},
+      {
+        "@id": "#test4", 
+        name: "references",
+        author: `"#test1"`, //By ID
+        publisher: `"test2"`, // BY ID minus #
+        contributor: `"test 3"` // By name
+      }
+    )
+    
+    workbook.resolveLinks();
+    const item4 = workbook.crate.getItem("#test4")
+    assert.equal(item4.author["@id"], "#test1");
+    assert.equal(item4.publisher["@id"], "#test2");
+    assert.equal(item4.contributor["@id"], "#test3");
     done();
 });
 
-  it("Can export a workbook to a crate", async function(done) {
+
+
+
+  it("Can export a workbook to a crate", async function() {
     var c = new RoCrate(JSON.parse(fs.readFileSync(metadataPath)));
+    const graphLength = c.getGraph().length;
     c.index();
     const workbook = new Workbook(c);
     // 
     prom = await workbook.workbookToCrate();
     //console.log(workbook.crate.getGraph(), "XXX");
-    return prom;
+    expect(workbook.crate.getGraph().length).to.eql(graphLength);
+    
 });
 
 
