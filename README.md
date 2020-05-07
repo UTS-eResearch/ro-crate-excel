@@ -162,6 +162,61 @@ http://www.geonames.org/8152662/catalina-park.html | Place | Katoomba, NSW | Cat
 
 NOTE: Any cell that contains at least one `{` and one `}` will be parsed as JSON - if that fails it will be included as an escaped string.
 
+# Adding additional properties to the @context 
+
+There are reasons to add additional properties. 
+
+## If the URL for a property does not resolve to a useful URL. 
+
+In this case define an item of @type `Property` in the `@type=Property` worksheet (or if you're starting with a crate, add an item of `@type` `Property` to the graph.) The `@id` should be the URL of the fully resolved property - to use the example from the spec 
+
+@id | @type | name      | description                         | sameAs
+--- | ------|  -------- | ----------------------------------- | ------
+http://purl.org/ontology/bibo/interviewee | Property | | | http://neologism.ecs.soton.ac.uk/bibo.html#interviewee
+
+{
+  "@context": [ 
+    "https://w3id.org/ro/crate/1.0/context",
+    {"interviewee": "http://purl.org/ontology/bibo/interviewee"},
+  ],
+  "@graph": [
+  {
+      "@id": "http://purl.org/ontology/bibo/interviewee",
+      "sameAs": "http://neologism.ecs.soton.ac.uk/bibo.html#interviewee",
+      "@type": "Property" 
+  }
+ ]
+}
+
+## If the property is locally defined
+
+To define a local property which is specific to a dataset or because there is no available public ontology that has one - define it in the graph as an item of `@type` `Property` (this is not decided but I am recommending it for RO-Crate 1.1):
+
+{
+  "@context": [ 
+    "https://w3id.org/ro/crate/1.0/context",
+    {"myProp": "_:myProp"},
+  ],
+  "@graph": [
+  {
+      "@id": "_:myProp",
+      "@type": "Property",
+      "name": "myProp",
+      "description": "This is my custom property I want to use in describing things"
+  }
+ ]
+}
+
+Which on conversion to excel would look like:
+
+@id | @type | name      | description                         | sameAs
+--- | ------|  -------- | ----------------------------------- | ------
+_:myProp | Property | myProp | This is my custom property I want to use in describing things | 
+
+
+TODO: Make @context entries for additional `Property` items automatically show up in the `@context` if not already defined - and force appropriate IDs (they must be either full http(s) URIs or blank node `@id`s and start with a lowercase letter).
+
+
 # Implementing Workbook to RO-Crate 
 
 
@@ -171,7 +226,7 @@ When converting from a worksheet to a JSON-LD item the process is to:
 
 -  Convert  each `@type sheet` to an item by mapping column names to properties; each row becomes an item in the RO-Crate graph.
 
--  Index the crate by @id and by name
+-  Index the crate by `@id` and by `name`
 
 -  For every item in the `@graph` array:
   -  Normalise the item's `@id`:

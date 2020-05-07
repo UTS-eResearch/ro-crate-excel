@@ -29,6 +29,7 @@ const expect = chai.expect;
 
 // Fixtures
 const metadataPath = "test_data/sample/ro-crate-metadata.jsonld";
+const IDRC_metadataPath = "test_data/IDRC/ro-crate-metadata.json";
 
 
 describe("Create a workbook from a crate", function() {
@@ -126,6 +127,20 @@ describe("Create a workbook from a crate", function() {
   });
 
 
+  it("Should handle the the IDRC (Cameron Neylon) dataset", async function(done) {
+    var c = new RoCrate(JSON.parse(fs.readFileSync(IDRC_metadataPath)));
+    c.index();
+    
+    const workbook = new Workbook(c);
+    //console.log(workbook.excel.Sheets)
+    //assert.equal(workbook.workbook["_worksheets"].length, 15, "14 sheets")
+
+    workbook.workbook.xlsx.writeFile("METADATA_IDRC.xlsx");
+   
+
+    done();
+  });
+
   it("Can resolve double quoted references", async function(done) {
     var c = new RoCrate();
     c.index();
@@ -153,6 +168,46 @@ describe("Create a workbook from a crate", function() {
 });
 
 
+it("Can deal with extra context terms", async function() {
+  var c = new RoCrate();
+  c.index();
+
+  c.json_ld["@graph"].push(
+    {
+      "@type": "Property",
+      "@id": "_:myprop",
+      "label": "myProp",
+      "comment": "My description of my custom property",
+      })
+    c.json_ld["@graph"].push(
+      {
+        "@type": "Property",
+        "@id": "_:http://example.com/mybetterprop",
+        "label": "myBetterProp",
+        "comment": "My description of my custom property",
+      })
+  c.json_ld["@context"].push({ 
+    myProp: "_:myprop",
+    myBetterProp: "_:http://example.com/mybetterprop"
+  }
+  )
+
+  
+  const workbook = new Workbook(c);
+  await workbook.workbook.xlsx.writeFile("test_context.xlsx");
+
+  console.log(workbook.crate.json_ld["@context"])
+  const contextSheet = workbook.workbook.getWorksheet("@context")
+  expect(contextSheet.getRow(3).values[1]).to.equal("@vocab");
+  expect(contextSheet.getRow(3).values[2]).to.equal("http://schema.org/");
+  console.log(contextSheet.getRow(4).values[1]);
+  console.log(contextSheet.getRow(5).values)
+
+  
+  
+});
+
+
 
 
   it("Can export a workbook to a crate", async function() {
@@ -164,6 +219,7 @@ describe("Create a workbook from a crate", function() {
     prom = await workbook.workbookToCrate();
     //console.log(workbook.crate.getGraph(), "XXX");
     expect(workbook.crate.getGraph().length).to.eql(graphLength);
+
     
 });
 
