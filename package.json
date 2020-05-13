@@ -4,6 +4,7 @@
   "description": "Utilities for converting RO-Crates to Spreadsheet format for data entry and vice versa",
   "main": "index.js",
   "scripts": {
+    "xlro": "xlro",
     "test": "mocha"
   },
   "repository": {
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/UTS-eResearch/ro-crate-excel#readme",
   "dependencies": {
     "exceljs": "^3.9.0",
+    "hasha": "^5.2.0",
     "jsonld": "^3.0.1",
     "lodash": "^4.17.15",
     "path": "^0.12.7",

@@ -1,0 +1,175 @@
+#!/usr/bin/env node
+
+/*
+This is part of ro-crate-excel tool for implementing the RO-Crate data packaging
+spec.  Copyright (C) 2018  University of Technology Sydney
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+const Bag = require("./lib/bag.js");
+const update = require("./lib/update.js")
+// 
+const rocrate = require("ro-crate");
+const ROCrate = require('ro-crate').ROCrate;
+const RoCrate = rocrate.ROCrate;
+const Preview = require("ro-crate").Preview;
+const HtmlFile = require("ro-crate").HtmlFile;
+
+const path = require("path");
+const shell = require("shelljs");
+const program = require("commander");
+const defaults = require("./lib/defaults.js");
+const htmlFileName = defaults.html_file_name;
+const metadata_file_name = defaults.metadata_json_file_name;
+const fs = require("fs-extra")
+var dirs = undefined;
+program
+  .version("0.1.0")
+  .description(
+    "Generates an an excel spreadsheet and RO-Crate metadata from a set of files and updates the RO-Crate with data " + 
+    "filled in the spreadsheet. If a spreadsheet is newer than the RO-Crate metadata file then then xlro will use that or vice versa. " +
+    "The file system is ALWAYS traversed and file information merged into existing metadata."
+  )
+  .arguments("<directories...>")
+  .action(function(directories) {
+    dirs = directories;
+  })
+  .option("-b,  --bag [bag-dir]", "Create Bagit Bag(s) under [bag-dir])")
+  .option("-z --zip", "Zip the bagged ro-crate (only works with --bag")
+  .option("-p --partOf [partOf]", "This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.")
+  .option("-d,  --depth [depth]", "Maximum depth to recurse into directories looking for or creating CATALOG_.xlsx file")
+  .option("-r,  --recurse", "Recurse into directories looking for or creating CATALOG_.xslx files")
+  .option("-c,  --cratescript [cratesript]", "URL of Crate-script directory")
+  .option("-m,  --maxfiles [maxfiles]", `Maximum number of files to itemise per directory (default is ${defaults.max_files_in_dir})`)
+  .option(
+    "-u, --url [distro]",
+    "Distribution URL"
+  );
+var depth = 0;
+program.parse(process.argv);
+if (program.recurse) {
+  depth = defaults.max_depth;
+}
+if (program.depth) {
+  depth = program.depth;
+}
+if (program.maxfiles) {
+  defaults.max_files_in_dir = program.maxfiles;
+}
+if (!program.rawArgs.length || !dirs) program.help();
+
+dirs.forEach(function(dir) {
+  if (shell.test("-d", dir)) {
+    shell.rm("-rf", path.join(dir, "ro-crate-metadata_files"));
+    up(dir, depth);      
+    generateHTML(path.join(dir, defaults.metadata_json_file_name));
+  }
+});
+
+
+async function up(dir, depth) {
+  console.log("UPDATING")
+  await update(dir, depth);
+}
+
+
+async function generateHTML(metadataPath) {
+    // Save an HTML file
+    console.log("Generating html from: " + metadataPath);
+    if (!path.isAbsolute(metadataPath)) {
+        metadataPath = path.join(process.cwd(), metadataPath);
+    }
+    var dir = path.dirname(metadataPath)
+    shell.rm("-rf", path.join(dir, "ro-crate-metadata_files"));
+    var crate = new ROCrate(JSON.parse(fs.readFileSync(metadataPath)));
+    await crate.index();
+    var root = await crate.getRootDataset();
+    if (program.url){
+      // Add dowload info
+      if (!root["distribution"]) {
+        root["distribution"] = []
+      }
+      root["distribution"] = crate.utils.asArray(root["distribution"])
+      root["distribution"].push(
+        {
+          "@id": program.url
+        }
+      );
+      var graph = crate.getGraph();
+      graph.push(
+        {
+          "@id": program.url,
+          "contentUrl": program.url,
+          "@type": "DataDownload",
+          "encodingFormat": "zip"
+       });
+       fs.writeFileSync(metadataPath, JSON.stringify(crate.getJson(), null, 2))
+       crate = new ROCrate(crate.getJson());
+
+      }
+      if (program.partOf) {
+        var parentCrate = new ROCrate(JSON.parse(fs.readFileSync(program.partOf)));
+        await parentCrate.index();
+        parentRoot = await parentCrate.getRootDataset();
+        // Inherit metadata
+        if (!root.datePublished) {
+          root.datePublished = parentRoot.datePublished;
+        }
+        if (!root.name) {
+          root.name = `${root['@id']} [Part of]: ${parentRoot.name}`;
+        }
+        var desc = crate.utils.asArray(root.description)
+        desc.push(`This dataset is a part of: ${parentRoot.name} [${parentRoot.description}]`);
+        root.description = desc;
+        if (!root.isPartOf && parentRoot.identifier) {
+          root.isPartOf = parentRoot.identifier;
+        }
+       
+
+      }
+      const preview = await new Preview(crate);
+      const f = new HtmlFile(preview); 
+  
+      fs.writeFileSync(path.join(dir, htmlFileName),
+                        await f.render(program.cratescript));
+     
+
+    if (program.bag) {
+      var bagger = new Bag();
+      var dest = path.join(program.bag, path.basename(dir));
+
+      shell.rm("-rf", dest);
+      dir = await bagger.bag(dir, dest, crate);
+      console.log("bagged", dir)
+      bagger.generate_bag_info();
+      bagger.save_bag_info();
+      if (!path.isAbsolute(dir)) {
+        dir = path.join(process.cwd(), dir);
+      }
+      metadata_path = path.join(dir, metadata_file_name);
+      const index = await fs.copyFile(path.join(__dirname, "defaults", "index.html"), path.join(dest, "index.html"));
+      //bagger.update();
+     
+      if (program.zip){
+        var zipname = path.resolve(path.join(program.bag, path.basename(path.dirname(metadataPath)).replace(" ","_") + ".zip"));
+        console.log('Zipping to', zipname)
+        shell.cd(dir);
+        shell.rm("-f", `"${zipname}"`);
+        shell.exec(`zip -r "${zipname}" *`);
+      }
+    }
+     
+
+}

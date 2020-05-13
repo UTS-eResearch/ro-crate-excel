@@ -25,14 +25,73 @@ Run the tests:
 
 `mocha`
 
+# Usage
+
+To run this code use the xlro (Excel <-> Research Object) script.
+
+xlro creates RO-Crates with an HTML entry-point in ro-crate-preview.html file.
+
+Usage:
+
+```
+./xlro 
+Usage: xlro [options] <directories...>
+
+Generates an an excel spreadsheet and RO-Crate metadata from a set of files and updates the RO-Crate with data filled in the spreadsheet. If a spreadsheet is newer than the RO-Crate metadata file then then xlro will use that or vice versa. The file system is ALWAYS traversed and file information merged into existing metadata.
+
+Options:
+  -V, --version                    output the version number
+  -b,  --bag [bag-dir]             Create Bagit Bag(s) under [bag-dir])
+  -z --zip                         Zip the bagged ro-crate (only works with --bag
+  -p --partOf [partOf]             This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.
+  -d,  --depth [depth]             Maximum depth to recurse into directories looking for or creating CATALOG_.xlsx file
+  -r,  --recurse                   Recurse into directories looking for or creating CATALOG_.xslx files
+  -c,  --cratescript [cratesript]  URL of Crate-script directory
+  -m,  --maxfiles [maxfiles]       Maximum number of files to itemise per directory (default is undefined)
+  -u, --url [distro]               Distribution URL
+  -h, --help                       output usage information
+```
+
+To run xlro on a group of directories pass it a list of directories
+
+
+One directory:
+
+```
+
+xlro test_data/Glop_Pot -r
+```
+
+This will:
+- Traverse the entire Glop_Pot directory, and generate or update the ro-crate-metadata.xlsx files.
+- Create or update the `test_data/Glop_Pot/`ro-crate-metadata.jsonld`` file
+- Create a *[RO-Crate] Website* with entry-point `test_data/Glop_Pot/ro-crate-metadata.html`
+
+All the sample directories:
+
+```
+xlro -r test_data/* -c https://data.research.uts.edu.au/examples/ro-crate/examples/src/crate.js
+```
+
+xlro will generate:
+
+- a CATALOG\_$dir.xlsx file in each directory (this is for humans to fill in with
+  metadata about the data)
+
+- An `ro-crate-preview.html` file summarizing the data using metadata from CATALOG\_$dir.xlsx
+
+- An `ro-crate-metadata.jsonld` file containing JSON-LD metadata derived from the CATALOG\* files plus some basic file-format information.
+
+See the examples in `test_data`.
+
 # About the spreadsheet format
 
-This library allows transformation between RO-Crate and Excel spreadsheets using multiple worksheets in a workbook.
+This library allows transformation between RO-Crate and Excel spreadsheets using multiple worksheets in a workbook which is named 'ro-crate-metadata.xslx' and appears alongside the ro-crate-metadata.json file in the root of the dataset.
 
 ## The `Root Dataset Worksheet`
 
 The root dataset item is represented by a worksheet named "RootDataset" referred to as the `Root Dataset Worksheet`;  this worksheet has two columns, `Name` and `Value`. 
-Each value of a property is represented as a row in the spreadsdheet. 
+Each value of a property is represented as a row in the spreadsheet. 
 
 For example - the worksheet for this `Dataset`:
 
