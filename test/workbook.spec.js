@@ -28,7 +28,7 @@ const chai = require('chai');
 const expect = chai.expect;    
 
 // Fixtures
-const metadataPath = "test_data/sample/ro-crate-metadata.jsonld";
+const metadataPath = "test_data/sample/ro-crate-metadata.json";
 const IDRC_metadataPath = "test_data/IDRC/ro-crate-metadata.json";
 
 
@@ -37,7 +37,7 @@ describe("Create a workbook from a crate", function() {
   it("Should create a workbook with just one sheet", function(done) {
     const c = new RoCrate();
     c.index();
-    const workbook = new Workbook(c);
+    const workbook = new Workbook({crate: c});
     const sheet = workbook.workbook.getWorksheet("RootDataset");
     assert.equal(
       sheet.getCell("A1").value,
@@ -66,7 +66,7 @@ describe("Create a workbook from a crate", function() {
     const root = c.getRootDataset();
     root["name"] =  "My dataset";
     root["description"] =  "Some old dataset";
-    const workbook = new Workbook(c);
+    const workbook = new Workbook({crate: c});
     const rootSheetName = "RootDataset";
     datasetItem = workbook.sheetToItem(rootSheetName);
     assert.equal(Object.keys(datasetItem).length, 4)
@@ -87,7 +87,7 @@ describe("Create a workbook from a crate", function() {
         "name": "Universtiy of Technology Sydney",
         "@type": "Organization"
     })
-    const workbook = new Workbook(c);
+    const workbook = new Workbook({crate: c});
     // This is not using the api - may be fragile
     assert.equal(workbook.workbook["_worksheets"].length, 4, "There are only two sheets");
 
@@ -99,7 +99,7 @@ describe("Create a workbook from a crate", function() {
     var c = new RoCrate(JSON.parse(fs.readFileSync(metadataPath)));
     c.index();
     
-    const workbook = new Workbook(c);
+    const workbook = new Workbook({crate: c});
     //console.log(workbook.excel.Sheets)
     assert.equal(workbook.workbook["_worksheets"].length, 15, "14 sheets")
 
@@ -127,24 +127,33 @@ describe("Create a workbook from a crate", function() {
   });
 
 
-  it("Should handle the the IDRC (Cameron Neylon) dataset", async function(done) {
+  it("Should handle the the IDRC (Cameron Neylon) dataset", async function() {
+    const excelFilePath = "METADATA_IDRC.xlsx";
     var c = new RoCrate(JSON.parse(fs.readFileSync(IDRC_metadataPath)));
     c.index();
     
-    const workbook = new Workbook(c);
+    const workbook = new Workbook({crate: c});
     //console.log(workbook.excel.Sheets)
     //assert.equal(workbook.workbook["_worksheets"].length, 15, "14 sheets")
 
-    workbook.workbook.xlsx.writeFile("METADATA_IDRC.xlsx");
-   
+    await workbook.workbook.xlsx.writeFile(excelFilePath);
+    
+    const workbook2 = new Workbook();
+    await workbook2.loadExcel(excelFilePath);
+    // Check all our items have survived the round trip
+    fs.writeFileSync("test.json", JSON.stringify(workbook2.crate.json_ld, null, 2))
+    for (let item of workbook2.crate.getGraph()) {
+      assert.equal(item.name, workbook.crate.getItem(item["@id"]).name)
+    }
+    assert.equal(workbook.crate.getGraph().length, workbook2.crate.getGraph().length);
 
-    done();
+   
   });
 
   it("Can resolve double quoted references", async function(done) {
     var c = new RoCrate();
     c.index();
-    const workbook = new Workbook(c);
+    const workbook = new Workbook({crate: c});
     const graph = workbook.crate.getGraph();
     graph.push(
       {"@id": "#test1", name: "test 1"},
@@ -193,7 +202,7 @@ it("Can deal with extra context terms", async function() {
   )
 
   
-  const workbook = new Workbook(c);
+  const workbook = new Workbook({crate: c});
   await workbook.workbook.xlsx.writeFile("test_context.xlsx");
 
   console.log(workbook.crate.json_ld["@context"])
@@ -214,10 +223,10 @@ it("Can deal with extra context terms", async function() {
     var c = new RoCrate(JSON.parse(fs.readFileSync(metadataPath)));
     const graphLength = c.getGraph().length;
     c.index();
-    const workbook = new Workbook(c);
+    const workbook = new Workbook({crate: c});
     // 
     prom = await workbook.workbookToCrate();
-    //console.log(workbook.crate.getGraph(), "XXX");
+  
     expect(workbook.crate.getGraph().length).to.eql(graphLength);
 
     
