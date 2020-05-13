@@ -96,6 +96,8 @@ describe("Create a workbook from a crate", function() {
   });
 
   it("Should handle the sample dataset", async function(done) {
+    this.timeout(5000); 
+
     var c = new RoCrate(JSON.parse(fs.readFileSync(metadataPath)));
     c.index();
     
@@ -113,12 +115,7 @@ describe("Create a workbook from a crate", function() {
     const pt = workbook.getItemByName("Peter Sefton")
     assert.equal(pt.name, "Peter Sefton")
 
-    //@context handling works
-    const context = workbook.workbook.getWorksheet("@context")
-    console.log("ROW", context.getRow(3).values)
-    expect(context.getRow(3).values[1]).to.equal("@vocab");
-    expect(context.getRow(3).values[2]).to.equal("http://schema.org/");
-
+    
     const items = workbook.sheetToItems("@type=Person");
     assert.equal(items.length, 1);
     assert.equal(items[0].name, "Peter Sefton");
@@ -205,12 +202,9 @@ it("Can deal with extra context terms", async function() {
   const workbook = new Workbook({crate: c});
   await workbook.workbook.xlsx.writeFile("test_context.xlsx");
 
-  console.log(workbook.crate.json_ld["@context"])
   const contextSheet = workbook.workbook.getWorksheet("@context")
-  expect(contextSheet.getRow(3).values[1]).to.equal("@vocab");
-  expect(contextSheet.getRow(3).values[2]).to.equal("http://schema.org/");
-  console.log(contextSheet.getRow(4).values[1]);
-  console.log(contextSheet.getRow(5).values)
+  expect(contextSheet.getRow(3).values[1]).to.equal("myProp");
+  expect(contextSheet.getRow(3).values[2]).to.equal("_:myprop");
 
   
   
