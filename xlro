@@ -35,48 +35,56 @@ const htmlFileName = defaults.html_file_name;
 const metadata_file_name = defaults.metadata_json_file_name;
 const fs = require("fs-extra")
 var dirs = undefined;
-program
-  .version("0.1.0")
-  .description(
-    "Generates an an excel spreadsheet and RO-Crate metadata from a set of files and updates the RO-Crate with data " + 
-    "filled in the spreadsheet. If a spreadsheet is newer than the RO-Crate metadata file then then xlro will use that or vice versa. " +
-    "The file system is ALWAYS traversed and file information merged into existing metadata."
-  )
-  .arguments("<directories...>")
-  .action(function(directories) {
-    dirs = directories;
-  })
-  .option("-b,  --bag [bag-dir]", "Create Bagit Bag(s) under [bag-dir])")
-  .option("-z --zip", "Zip the bagged ro-crate (only works with --bag")
-  .option("-p --partOf [partOf]", "This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.")
-  .option("-d,  --depth [depth]", "Maximum depth to recurse into directories looking for or creating CATALOG_.xlsx file")
-  .option("-r,  --recurse", "Recurse into directories looking for or creating CATALOG_.xslx files")
-  .option("-c,  --cratescript [cratesript]", "URL of Crate-script directory")
-  .option("-m,  --maxfiles [maxfiles]", `Maximum number of files to itemise per directory (default is ${defaults.max_files_in_dir})`)
-  .option(
-    "-u, --url [distro]",
-    "Distribution URL"
-  );
-var depth = 0;
-program.parse(process.argv);
-if (program.recurse) {
-  depth = defaults.max_depth;
-}
-if (program.depth) {
-  depth = program.depth;
-}
-if (program.maxfiles) {
-  defaults.maxFilesInDir = program.maxfiles;
-}
-if (!program.rawArgs.length || !dirs) program.help();
 
-dirs.forEach(function(dir) {
-  if (shell.test("-d", dir)) {
-    shell.rm("-rf", path.join(dir, "ro-crate-metadata_files"));
-    up(dir, depth);      
-    generateHTML(path.join(dir, defaults.metadata_json_file_name));
+
+main();
+
+
+async function main() {
+
+  program
+    .version("0.1.0")
+    .description(
+      "Generates an an excel spreadsheet and RO-Crate metadata from a set of files and updates the RO-Crate with data " + 
+      "filled in the spreadsheet. If a spreadsheet is newer than the RO-Crate metadata file then then xlro will use that or vice versa. " +
+      "The file system is ALWAYS traversed and file information merged into existing metadata."
+    )
+    .arguments("<directories...>")
+    .action(function(directories) {
+      dirs = directories;
+    })
+    .option("-b,  --bag [bag-dir]", "Create Bagit Bag(s) under [bag-dir])")
+    .option("-z --zip", "Zip the bagged ro-crate (only works with --bag")
+    .option("-p --partOf [partOf]", "This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.")
+    .option("-d,  --depth [depth]", "Maximum depth to recurse into directories looking for or creating CATALOG_.xlsx file")
+    .option("-r,  --recurse", "Recurse into directories looking for or creating CATALOG_.xslx files")
+    .option("-c,  --cratescript [cratesript]", "URL of Crate-script directory")
+    .option("-m,  --maxfiles [maxfiles]", `Maximum number of files to itemise per directory (default is ${defaults.max_files_in_dir})`)
+    .option(
+      "-u, --url [distro]",
+      "Distribution URL"
+    );
+  var depth = 0;
+  program.parse(process.argv);
+  if (program.recurse) {
+    depth = defaults.max_depth;
   }
-});
+  if (program.depth) {
+    depth = program.depth;
+  }
+  if (program.maxfiles) {
+    defaults.maxFilesInDir = program.maxfiles;
+  }
+  if (!program.rawArgs.length || !dirs) program.help();
+
+  for( let dir of dirs ) {
+    if (shell.test("-d", dir)) {
+      shell.rm("-rf", path.join(dir, "ro-crate-metadata_files"));
+      await up(dir, depth);      
+      generateHTML(path.join(dir, defaults.metadata_json_file_name));
+    }
+  }
+}
 
 
 async function up(dir, depth) {
