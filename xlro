@@ -54,8 +54,8 @@ async function main() {
       dirs = directories;
     })
     .option("-b,  --bag [bag-dir]", "Create Bagit Bag(s) under [bag-dir])")
-    .option("-z --zip", "Zip the bagged ro-crate (only works with --bag")
-    .option("-p --partOf [partOf]", "This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.")
+    .option("-z   --zip", "Zip the bagged ro-crate (only works with --bag")
+    .option("-p   --partOf [partOf]", "This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.")
     .option("-d,  --depth [depth]", "Maximum depth to recurse into directories looking for or creating CATALOG_.xlsx file")
     .option("-r,  --recurse", "Recurse into directories looking for or creating CATALOG_.xslx files")
     .option("-c,  --cratescript [cratesript]", "URL of Crate-script directory")
