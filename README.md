@@ -36,9 +36,15 @@ Usage:
 ```
 ./xlro 
 Usage: xlro [options] <directories...>
+```
 
-Generates an an excel spreadsheet and RO-Crate metadata from a set of files and updates the RO-Crate with data filled in the spreadsheet. If a spreadsheet is newer than the RO-Crate metadata file then then xlro will use that or vice versa. The file system is ALWAYS traversed and file information merged into existing metadata.
+Generates an an excel spreadsheet and RO-Crate metadata from a set of files and
+updates the RO-Crate with data filled in the spreadsheet. If a spreadsheet is
+newer than the RO-Crate metadata file then then xlro will use that or vice
+versa. The file system is ALWAYS traversed and file information merged into
+existing metadata.
 
+```
 Options:
   -V, --version                    output the version number
   -b,  --bag [bag-dir]             Create Bagit Bag(s) under [bag-dir])
