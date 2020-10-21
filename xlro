@@ -23,7 +23,6 @@ const update = require("./lib/update.js")
 // 
 const rocrate = require("ro-crate");
 const ROCrate = require('ro-crate').ROCrate;
-const RoCrate = rocrate.ROCrate;
 const Preview = require("ro-crate").Preview;
 const HtmlFile = require("ro-crate").HtmlFile;
 
@@ -55,6 +54,7 @@ async function main() {
     })
     .option("-b,  --bag [bag-dir]", "Create Bagit Bag(s) under [bag-dir])")
     .option("-z   --zip", "Zip the bagged ro-crate (only works with --bag")
+    .option("-j   --JSON", "Use the ro-crate-metafata.json file rather than ro-crate-metadata.xslx")
     .option("-p   --partOf [partOf]", "This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.")
     .option("-d,  --depth [depth]", "Maximum depth to recurse into directories looking for or creating CATALOG_.xlsx file")
     .option("-r,  --recurse", "Recurse into directories looking for or creating CATALOG_.xslx files")
@@ -75,6 +75,7 @@ async function main() {
   if (program.maxfiles) {
     defaults.maxFilesInDir = program.maxfiles;
   }
+ 
   if (!program.rawArgs.length || !dirs) program.help();
 
   for( let dir of dirs ) {
@@ -88,8 +89,7 @@ async function main() {
 
 
 async function up(dir, depth) {
-  console.log("UPDATING")
-  await update(dir, depth);
+  await update(dir, depth, program.JSON);
 }
 
 

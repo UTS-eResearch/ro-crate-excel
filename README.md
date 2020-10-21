@@ -8,7 +8,7 @@ This is a library for building tools to assist in JSON-lD data entry, it has bee
 
 ## Installation
 
-(Not published on npm yet)
+(Not published on npm yet!)
 
 Get this repository (assuming you are working in `~/working`):
 
@@ -39,17 +39,21 @@ Usage: xlro [options] <directories...>
 ```
 
 Generates an an excel spreadsheet and RO-Crate metadata from a set of files and
-updates the RO-Crate with data filled in the spreadsheet. If a spreadsheet is
-newer than the RO-Crate metadata file then then xlro will use that or vice
-versa. The file system is ALWAYS traversed and file information merged into
+updates the RO-Crate with data filled in the spreadsheet. 
+
+To generate an excel spreadsheet from an ro-crate-metadata.json file instead, use the --JSON option.
+
+The file system is ALWAYS traversed and file information merged into
 existing metadata.
 
 ```
+
 Options:
   -V, --version                    output the version number
   -b,  --bag [bag-dir]             Create Bagit Bag(s) under [bag-dir])
-  -z --zip                         Zip the bagged ro-crate (only works with --bag
-  -p --partOf [partOf]             This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.
+  -z   --zip                       Zip the bagged ro-crate (only works with --bag
+  -j   --JSON                      Use the ro-crate-metafata.json file rather than ro-crate-metadata.xslx
+  -p   --partOf [partOf]           This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.
   -d,  --depth [depth]             Maximum depth to recurse into directories looking for or creating CATALOG_.xlsx file
   -r,  --recurse                   Recurse into directories looking for or creating CATALOG_.xslx files
   -c,  --cratescript [cratesript]  URL of Crate-script directory
