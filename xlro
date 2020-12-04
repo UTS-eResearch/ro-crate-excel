@@ -40,7 +40,7 @@ main();
 
 
 async function main() {
-
+  console.log("Here")
   program
     .version("0.1.0")
     .description(
@@ -79,6 +79,7 @@ async function main() {
   if (!program.rawArgs.length || !dirs) program.help();
 
   for( let dir of dirs ) {
+    console.log(dir);
     if (shell.test("-d", dir)) {
       shell.rm("-rf", path.join(dir, "ro-crate-metadata_files"));
       await up(dir, depth);      
