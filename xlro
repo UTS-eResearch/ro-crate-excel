@@ -21,10 +21,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 const Bag = require("./lib/bag.js");
 const update = require("./lib/update.js")
 // 
-const rocrate = require("ro-crate");
-const ROCrate = require('ro-crate').ROCrate;
-const Preview = require("ro-crate").Preview;
-const HtmlFile = require("ro-crate").HtmlFile;
+const ROCrate = require("ro-crate").ROCrate;
+const Preview = require("ro-crate-html-js").Preview;
+const HtmlFile = require("ro-crate-html-js").HtmlFile;
 
 const path = require("path");
 const shell = require("shelljs");
@@ -35,12 +34,10 @@ const metadata_file_name = defaults.metadata_json_file_name;
 const fs = require("fs-extra")
 var dirs = undefined;
 
-
 main();
 
 
 async function main() {
-  console.log("Here")
   program
     .version("0.1.0")
     .description(
@@ -79,11 +76,10 @@ async function main() {
   if (!program.rawArgs.length || !dirs) program.help();
 
   for( let dir of dirs ) {
-    console.log(dir);
     if (shell.test("-d", dir)) {
       shell.rm("-rf", path.join(dir, "ro-crate-metadata_files"));
-      await up(dir, depth);      
-      generateHTML(path.join(dir, defaults.metadata_json_file_name));
+      await up(dir, depth);     
+      await generateHTML(path.join(dir, defaults.metadata_json_file_name));
     }
   }
 }
@@ -105,6 +101,7 @@ async function generateHTML(metadataPath) {
     var crate = new ROCrate(JSON.parse(fs.readFileSync(metadataPath)));
     await crate.index();
     var root = await crate.getRootDataset();
+
     if (program.url){
       // Add dowload info
       if (!root["distribution"]) {
@@ -154,7 +151,6 @@ async function generateHTML(metadataPath) {
       fs.writeFileSync(path.join(dir, htmlFileName),
                         await f.render(program.cratescript));
      
-
     if (program.bag) {
       var bagger = new Bag();
       var dest = path.join(program.bag, path.basename(dir));
