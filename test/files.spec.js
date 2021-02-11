@@ -28,7 +28,7 @@ describe("List files", function() {
  var testPath;
 
   before(function () { testPath = fixtures.buildup(); });
-  after(function () { fixtures.teardown(); });
+  //after(function () { fixtures.teardown(); });
 
 
   it("Should create a list of test files", function() {
@@ -40,7 +40,7 @@ describe("List files", function() {
     f = new Files("test_data/sample", 5);
     assert.equal(Object.keys(f.files).length, 4);
     assert.equal(Object.keys(f.datasets).length, 3);
-    assert.equal(Object.keys(f.encodingFormats).length, 3);
+    assert.equal(Object.keys(f.encodingFormats).length, 1);
 
   });
 

@@ -26,8 +26,9 @@
     "lodash": "^4.17.19",
     "path": "^0.12.7",
     "ro-crate": "^1.6.4",
-    "ro-crate-html-js": "^1.4.5",
+    "ro-crate-html-js": "^1.4.6",
     "shelljs": "^0.8.4",
+    "uuid": "^8.3.2",
     "xlsx": "^0.15.6"
   },
   "devDependencies": {

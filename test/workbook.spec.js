@@ -32,12 +32,14 @@ const metadataPath = "test_data/sample/ro-crate-metadata.json";
 const IDRC_metadataPath = "test_data/IDRC/ro-crate-metadata.json";
 
 
-describe("Create a workbook from a crate", function() {
+describe("Create a workbook from a crate",  function() {
 
-  it("Should create a workbook with just one sheet", function(done) {
+  it("Should create a workbook with just one sheet", async function() {
+    this.timeout(5000); 
     const c = new RoCrate();
     c.index();
     const workbook = new Workbook({crate: c});
+    await workbook.crateToWorkbook();
     const sheet = workbook.workbook.getWorksheet("RootDataset");
     assert.equal(
       sheet.getCell("A1").value,
@@ -56,27 +58,32 @@ describe("Create a workbook from a crate", function() {
           "Dataset"
         );
 
-    done();
+
   });
 
 
-  it("Should create a workbook with one sheet and some metadata", function(done) {
+  it("Should create a workbook with one sheet and some metadata", async function() {
+    this.timeout(5000); 
+
     const c = new RoCrate();
     c.index();
     const root = c.getRootDataset();
     root["name"] =  "My dataset";
     root["description"] =  "Some old dataset";
     const workbook = new Workbook({crate: c});
+    await workbook.crateToWorkbook();
     const rootSheetName = "RootDataset";
     datasetItem = workbook.sheetToItem(rootSheetName);
     assert.equal(Object.keys(datasetItem).length, 4)
     assert.equal(datasetItem.name, "My dataset");
     assert.equal(datasetItem.description, "Some old dataset");
-    done();
+   
   });
 
 
-  it("Should create a workbook with two sheets", function(done) {
+  it("Should create a workbook with two sheets", async function() {
+    this.timeout(5000); 
+
     const c = new RoCrate();
     c.index();
     const root = c.getRootDataset();
@@ -88,20 +95,21 @@ describe("Create a workbook from a crate", function() {
         "@type": "Organization"
     })
     const workbook = new Workbook({crate: c});
+    await workbook.crateToWorkbook();
     // This is not using the api - may be fragile
     assert.equal(workbook.workbook["_worksheets"].length, 4, "There are only two sheets");
 
 
-    done();
   });
 
-  it("Should handle the sample dataset", async function(done) {
+  it("Should handle the sample dataset", async function() {
     this.timeout(5000); 
 
     var c = new RoCrate(JSON.parse(fs.readFileSync(metadataPath)));
     c.index();
     
     const workbook = new Workbook({crate: c});
+    await workbook.crateToWorkbook();
     //console.log(workbook.excel.Sheets)
     assert.equal(workbook.workbook["_worksheets"].length, 15, "14 sheets")
 
@@ -114,22 +122,22 @@ describe("Create a workbook from a crate", function() {
     workbook.indexCrateByName();
     const pt = workbook.getItemByName("Peter Sefton")
     assert.equal(pt.name, "Peter Sefton")
-
     
     const items = workbook.sheetToItems("@type=Person");
     assert.equal(items.length, 1);
     assert.equal(items[0].name, "Peter Sefton");
 
-    done();
   });
 
 
   it("Should handle the the IDRC (Cameron Neylon) dataset", async function() {
+    this.timeout(5000); 
     const excelFilePath = "METADATA_IDRC.xlsx";
     var c = new RoCrate(JSON.parse(fs.readFileSync(IDRC_metadataPath)));
     c.index();
     
     const workbook = new Workbook({crate: c});
+    await workbook.crateToWorkbook();
     //console.log(workbook.excel.Sheets)
     //assert.equal(workbook.workbook["_worksheets"].length, 15, "14 sheets")
 
@@ -138,19 +146,25 @@ describe("Create a workbook from a crate", function() {
     const workbook2 = new Workbook();
     await workbook2.loadExcel(excelFilePath);
     // Check all our items have survived the round trip
-    fs.writeFileSync("test.json", JSON.stringify(workbook2.crate.json_ld, null, 2))
+    fs.writeFileSync("test.json", JSON.stringify(workbook2.crate.json_ld, null, 2));
+    //console.log(workbook.crate.getRootDataset())
     for (let item of workbook2.crate.getGraph()) {
-      assert.equal(item.name, workbook.crate.getItem(item["@id"]).name)
+      if(item.name) {
+        assert.equal(item.name, workbook.crate.getItem(item["@id"]).name)
+      }
     }
     assert.equal(workbook.crate.getGraph().length, workbook2.crate.getGraph().length);
 
    
   });
 
-  it("Can resolve double quoted references", async function(done) {
+  it("Can resolve double quoted references", async function() {
     var c = new RoCrate();
     c.index();
     const workbook = new Workbook({crate: c});
+    await workbook.crateToWorkbook();
+
+
     const graph = workbook.crate.getGraph();
     graph.push(
       {"@id": "#test1", name: "test 1"},
@@ -170,7 +184,7 @@ describe("Create a workbook from a crate", function() {
     assert.equal(item4.author["@id"], "#test1");
     assert.equal(item4.publisher["@id"], "#test2");
     assert.equal(item4.contributor["@id"], "#test3");
-    done();
+ 
 });
 
 
@@ -200,11 +214,12 @@ it("Can deal with extra context terms", async function() {
 
   
   const workbook = new Workbook({crate: c});
+  await workbook.crateToWorkbook();
   await workbook.workbook.xlsx.writeFile("test_context.xlsx");
 
   const contextSheet = workbook.workbook.getWorksheet("@context")
-  expect(contextSheet.getRow(3).values[1]).to.equal("myProp");
-  expect(contextSheet.getRow(3).values[2]).to.equal("_:myprop");
+  expect(contextSheet.getRow(4).values[1]).to.equal("myBetterProp");
+  expect(contextSheet.getRow(4).values[2]).to.equal("_:http://example.com/mybetterprop");
 
   
   
@@ -214,10 +229,13 @@ it("Can deal with extra context terms", async function() {
 
 
   it("Can export a workbook to a crate", async function() {
+    this.timeout(5000); 
+
     var c = new RoCrate(JSON.parse(fs.readFileSync(metadataPath)));
     const graphLength = c.getGraph().length;
     c.index();
     const workbook = new Workbook({crate: c});
+    await workbook.crateToWorkbook();
     // 
     prom = await workbook.workbookToCrate();
   
