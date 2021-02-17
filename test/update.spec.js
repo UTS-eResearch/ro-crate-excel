@@ -35,7 +35,7 @@ describe("Create workbooks", function() {
   var testPath;
 
   before(function () { testPath = fixtures.buildup(); });
-  //after(function () { fixtures.teardown(); });
+  after(function () { fixtures.teardown(); });
 
   it("Should create a workbook from the sample data", async function() {
     this.timeout(15000); 
