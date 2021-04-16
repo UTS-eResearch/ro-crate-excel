@@ -8,7 +8,13 @@ THis replaces the Calcyte tool, both the [javascript](https://code.research.uts.
 
 This is a library for building tools to assist in JSON-lD data entry, it has been built for RO-Crate but could be used for more general purpose JSON-LD <-> Spreadsheet conversion.
 
-## Installation for development
+## Installation 
+
+### To use the script
+
+npm install xlro --global
+
+###  For development
 
 Get this repository (assuming you are working in `~/working`):
 
@@ -20,6 +26,7 @@ Change into the directory:
 Install the app:
 
 `npm install .`
+`npm link # to install the xlro script` 
 
 Run the tests:
 
@@ -27,9 +34,9 @@ Run the tests:
 
 # Usage
 
-To run this code use the xlro (Excel <-> Research Object) script.
+To run this code use the `xlro` (Excel <-> Research Object) script.
 
-xlro creates RO-Crates with an HTML entry-point in ro-crate-preview.html file.
+`xlro` creates RO-Crates with an HTML entry-point in ro-crate-preview.html file.
 
 Usage:
 
@@ -85,12 +92,14 @@ xlro -r test_data/* -c https://data.research.uts.edu.au/examples/ro-crate/exampl
 
 xlro will generate:
 
-- a CATALOG\_$dir.xlsx file in each directory (this is for humans to fill in with
+- a ro-crate-metadata.xlsx file in each root directory (this is for humans to fill in with
   metadata about the data)
 
-- An `ro-crate-preview.html` file summarizing the data using metadata from CATALOG\_$dir.xlsx
 
-- An `ro-crate-metadata.jsonld` file containing JSON-LD metadata derived from the CATALOG\* files plus some basic file-format information.
+- An `ro-crate-metadata.jsonld` file containing JSON-LD metadata derived from the spreadsbeet some basic file-format information.
+
+- An `ro-crate-preview.html` file generated from `ro-crate-metadata.jsonld`
+
 
 See the examples in `test_data`.
 
