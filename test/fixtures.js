@@ -38,7 +38,7 @@ function buildup (fixture=undefined) {
  	shell.mkdir("-p", test_dir);
  	["1", "two", "three file", "2 times 2"].forEach(function(f) {
  		[".txt", ".pdf", ".sh"].forEach(function(e) {
- 			fs.writeFileSync(path.join(test_dir, f + e));
+ 			fs.writeFileSync(path.join(test_dir, f + e), "");
  		});
  	});
  	return test_dir;

@@ -28,8 +28,8 @@ const chai = require('chai');
 const expect = chai.expect;    
 
 // Fixtures
-const metadataPath = "test_data/sample/ro-crate-metadata.json";
-const IDRC_metadataPath = "test_data/IDRC/ro-crate-metadata.json";
+const metadataPath = "test_data/sample/ro-crate-metadata.jsonld";
+const IDRC_metadataPath = "test_data/IDRC/ro-crate-metadata.jsonld";
 
 
 describe("Create a workbook from a crate",  function() {
@@ -146,7 +146,7 @@ describe("Create a workbook from a crate",  function() {
     const workbook2 = new Workbook();
     await workbook2.loadExcel(excelFilePath);
     // Check all our items have survived the round trip
-    fs.writeFileSync("test.json", JSON.stringify(workbook2.crate.json_ld, null, 2));
+    //fs.writeFileSync("test.json", JSON.stringify(workbook2.crate.json_ld, null, 2));
     //console.log(workbook.crate.getRootDataset())
     for (let item of workbook2.crate.getGraph()) {
       if(item.name) {

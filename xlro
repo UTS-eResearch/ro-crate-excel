@@ -53,8 +53,8 @@ async function main() {
     .option("-z   --zip", "Zip the bagged ro-crate (only works with --bag")
     .option("-j   --JSON", "Use the ro-crate-metafata.json file rather than ro-crate-metadata.xslx")
     .option("-p   --partOf [partOf]", "This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.")
-    .option("-d,  --depth [depth]", "Maximum depth to recurse into directories looking for or creating CATALOG_.xlsx file")
-    .option("-r,  --recurse", "Recurse into directories looking for or creating CATALOG_.xslx files")
+    .option("-d,  --depth [depth]", "Maximum depth to recurse into directories")
+    .option("-r,  --recurse", "Recurse into directories looking for files")
     .option("-c,  --cratescript [cratesript]", "URL of Crate-script directory")
     .option("-m,  --maxfiles [maxfiles]", `Maximum number of files to itemise per directory (default is ${defaults.max_files_in_dir})`)
     .option(

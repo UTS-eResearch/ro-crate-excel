@@ -6,9 +6,7 @@ Node library with utilities for converting RO-Crates to Spreadsheet format for d
 
 This is a library for building tools to assist in JSON-lD data entry, it has been built for RO-Crate but could be used for more general purpose JSON-LD <-> Spreadsheet conversion.
 
-## Installation
-
-(Not published on npm yet!)
+## Installation for development
 
 Get this repository (assuming you are working in `~/working`):
 

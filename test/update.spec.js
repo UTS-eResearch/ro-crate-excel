@@ -41,7 +41,7 @@ describe("Create workbooks", function() {
     this.timeout(15000); 
 
     var msg = await update(testPath, 5);
-    assert.equal(msg[0], `No metadata or catalog found, making: ${testPath}/ro-crate-metadata.json`)
+    assert.equal(msg[0], `No metadata or catalog found, making: ${testPath}/ro-crate-metadata.jsonld`)
     
     // Second go should use the ro-crate.metadata.json file
     msg = await update(testPath, 5);
@@ -58,7 +58,7 @@ describe("Create workbooks", function() {
     sheet.getCell("B4").value = "A Dataset";
     await wb.workbook.xlsx.writeFile(catalogPath);
     msg = await update(testPath, 5);
-    const finalCrate = new ROCrate(JSON.parse(await fs.readFile(path.join(testPath, "ro-crate-metadata.json"))));
+    const finalCrate = new ROCrate(JSON.parse(await fs.readFile(path.join(testPath, "ro-crate-metadata.jsonld"))));
     finalCrate.index();
     assert.equal("A Dataset", finalCrate.getRootDataset().name)
 
