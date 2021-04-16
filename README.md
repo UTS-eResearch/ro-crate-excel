@@ -2,6 +2,8 @@
 
 Node library with utilities for converting RO-Crates to Spreadsheet format for data entry and vice versa
 
+THis replaces the Calcyte tool, both the [javascript](https://code.research.uts.edu.au/eresearch/calcytejs) and previous Python versions.
+
 ## What is this?
 
 This is a library for building tools to assist in JSON-lD data entry, it has been built for RO-Crate but could be used for more general purpose JSON-LD <-> Spreadsheet conversion.
@@ -52,8 +54,8 @@ Options:
   -z   --zip                       Zip the bagged ro-crate (only works with --bag
   -j   --JSON                      Use the ro-crate-metafata.json file rather than ro-crate-metadata.xslx
   -p   --partOf [partOf]           This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.
-  -d,  --depth [depth]             Maximum depth to recurse into directories looking for or creating CATALOG_.xlsx file
-  -r,  --recurse                   Recurse into directories looking for or creating CATALOG_.xslx files
+  -d,  --depth [depth]             Maximum depth to recurse into directories looking for files
+  -r,  --recurse                   Recurse into directories looking for files
   -c,  --cratescript [cratesript]  URL of Crate-script directory
   -m,  --maxfiles [maxfiles]       Maximum number of files to itemise per directory (default is undefined)
   -u, --url [distro]               Distribution URL
