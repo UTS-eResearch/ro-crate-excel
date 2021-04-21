@@ -12,7 +12,7 @@ This is a library for building tools to assist in JSON-lD data entry, it has bee
 
 ### To use the script
 
-npm install xlro --global
+npm install rocxl --global
 
 ###  For development
 
@@ -26,7 +26,7 @@ Change into the directory:
 Install the app:
 
 `npm install .`
-`npm link # to install the xlro script` 
+`npm link # to install the rocxl script` 
 
 Run the tests:
 
@@ -34,15 +34,15 @@ Run the tests:
 
 # Usage
 
-To run this code use the `xlro` (Excel <-> Research Object) script.
+To run this code use the `rocxl` (Excel <-> Research Object) script.
 
-`xlro` creates RO-Crates with an HTML entry-point in ro-crate-preview.html file.
+`rocxl` creates RO-Crates with an HTML entry-point in ro-crate-preview.html file.
 
 Usage:
 
 ```
-./xlro 
-Usage: xlro [options] <directories...>
+./rocxl 
+Usage: rocxl [options] <directories...>
 ```
 
 Generates an an excel spreadsheet and RO-Crate metadata from a set of files and
@@ -69,14 +69,14 @@ Options:
   -h, --help                       output usage information
 ```
 
-To run xlro on a group of directories pass it a list of directories
+To run rocxl on a group of directories pass it a list of directories
 
 
 One directory:
 
 ```
 
-xlro test_data/Glop_Pot -r
+rocxl test_data/Glop_Pot -r
 ```
 
 This will:
@@ -87,10 +87,10 @@ This will:
 All the sample directories:
 
 ```
-xlro -r test_data/* -c https://data.research.uts.edu.au/examples/ro-crate/examples/src/crate.js
+rocxl -r test_data/* -c https://data.research.uts.edu.au/examples/ro-crate/examples/src/crate.js
 ```
 
-xlro will generate:
+rocxl will generate:
 
 - a ro-crate-metadata.xlsx file in each root directory (this is for humans to fill in with
   metadata about the data)
