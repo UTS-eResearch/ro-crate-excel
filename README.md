@@ -60,7 +60,7 @@ Options:
   -b,  --bag [bag-dir]             Create Bagit Bag(s) under [bag-dir])
   -z   --zip                       Zip the bagged ro-crate (only works with --bag
   -j   --JSON                      Use the ro-crate-metafata.json file rather than ro-crate-metadata.xslx
-  -p   --partOf [partOf]           This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.
+  -p   --partOf [partOf]           This is part of another RO-Crate, supply the ro-crate-metadata.json path.
   -d,  --depth [depth]             Maximum depth to recurse into directories looking for files
   -r,  --recurse                   Recurse into directories looking for files
   -c,  --cratescript [cratesript]  URL of Crate-script directory
@@ -81,7 +81,7 @@ rocxl test_data/Glop_Pot -r
 
 This will:
 - Traverse the entire Glop_Pot directory, and generate or update the ro-crate-metadata.xlsx files.
-- Create or update the `test_data/Glop_Pot/`ro-crate-metadata.jsonld`` file
+- Create or update the `test_data/Glop_Pot/`ro-crate-metadata.json`` file
 - Create a *[RO-Crate] Website* with entry-point `test_data/Glop_Pot/ro-crate-metadata.html`
 
 All the sample directories:
@@ -96,9 +96,9 @@ rocxl will generate:
   metadata about the data)
 
 
-- An `ro-crate-metadata.jsonld` file containing JSON-LD metadata derived from the spreadsbeet some basic file-format information.
+- An `ro-crate-metadata.json` file containing JSON-LD metadata derived from the spreadsbeet some basic file-format information.
 
-- An `ro-crate-preview.html` file generated from `ro-crate-metadata.jsonld`
+- An `ro-crate-preview.html` file generated from `ro-crate-metadata.json`
 
 
 See the examples in `test_data`.
@@ -268,28 +268,29 @@ http://purl.org/ontology/bibo/interviewee | Property | | | http://neologism.ecs.
 
 ## If the property is locally defined
 
-To define a local property which is specific to a dataset or because there is no available public ontology that has one - define it in the graph as an item of `@type` `Property` (this is not decided but I am recommending it for RO-Crate 1.1):
+To define a local property which is specific to a dataset or because there is no available public ontology that has one - define it in the graph as an item of `@type` `rdf:Property`, as [per the RO-Crate Spec advice on ad hoc terms](https://www.researchobject.org/ro-crate/1.1/appendix/jsonld.html#add-local-definitions-of-ad-hoc-terms).
+
 
 {
   "@context": [ 
     "https://w3id.org/ro/crate/1.0/context",
-    {"myProp": "_:myProp"},
+    {"myProp": "https://w3id.org/ro/terms/myNameSpace/#myProp"},
   ],
   "@graph": [
   {
-      "@id": "_:myProp",
-      "@type": "Property",
-      "name": "myProp",
-      "description": "This is my custom property I want to use in describing things"
+      "@id": "https://w3id.org/ro/terms/myNameSpace/#myProp",
+      "@type": "rdf:Property",
+      "rdfs:label": "myProp",
+      "rdfs:comment": "This is my custom property I want to use in describing things"
   }
  ]
 }
 
-Which on conversion to excel would look like:
+Which on conversion to Excel would look like:
 
-@id | @type | name      | description                         | sameAs
---- | ------|  -------- | ----------------------------------- | ------
-_:myProp | Property | myProp | This is my custom property I want to use in describing things | 
+@id | @type | rdfs:label  | rdfs:comment                                                  | sameAs
+--- | ------|  --------   | -----------------------------------                           | ------
+_:myProp    | myProp      | This is my custom property I want to use in describing things | 
 
 
 TODO: Make @context entries for additional `Property` items automatically show up in the `@context` if not already defined - and force appropriate IDs (they must be either full http(s) URIs or blank node `@id`s and start with a lowercase letter).
