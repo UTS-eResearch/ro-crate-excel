@@ -28,8 +28,8 @@ const chai = require('chai');
 const expect = chai.expect;    
 
 // Fixtures
-const metadataPath = "test_data/sample/ro-crate-metadata.jsonld";
-const IDRC_metadataPath = "test_data/IDRC/ro-crate-metadata.jsonld";
+const metadataPath = "test_data/sample/ro-crate-metadata.json";
+const IDRC_metadataPath = "test_data/IDRC/ro-crate-metadata.json";
 
 
 describe("Create a workbook from a crate",  function() {

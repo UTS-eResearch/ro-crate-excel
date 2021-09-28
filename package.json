@@ -22,9 +22,12 @@
   "homepage": "https://github.com/UTS-eResearch/ro-crate-excel#readme",
   "dependencies": {
     "exceljs": "^3.10.0",
+    "fast-csv": "^4.3.6",
     "hasha": "^5.2.0",
     "jsonld": "^3.1.1",
     "lodash": "^4.17.19",
+    "n-readlines": "^1.0.1",
+    "neat-csv": "^6.0.1",
     "path": "^0.12.7",
     "ro-crate": "^2.0.1",
     "ro-crate-html-js": "^1.4.17",
@@ -34,7 +37,7 @@
   },
   "devDependencies": {
     "chai": "*",
-    "mocha": "^8.1.1"
+    "mocha": "^8.4.0"
   },
   "//": "mocha is our preference, but you can use any test runner you like"
 }
