@@ -146,7 +146,7 @@ describe("Create a workbook from a crate",  function() {
     const workbook2 = new Workbook();
     await workbook2.loadExcel(excelFilePath);
     // Check all our items have survived the round trip
-    //fs.writeFileSync("test.json", JSON.stringify(workbook2.crate.json_ld, null, 2));
+    //fs.writeFileSync("test.json", JSON.stringify(workbook2.crate.getJson(), null, 2));
     //console.log(workbook.crate.getRootDataset())
     for (let item of workbook2.crate.getGraph()) {
       if(item.name) {
@@ -192,21 +192,21 @@ it("Can deal with extra context terms", async function() {
   var c = new RoCrate();
   c.index();
 
-  c.json_ld["@graph"].push(
+  c.getJson()["@graph"].push(
     {
       "@type": "Property",
       "@id": "_:myprop",
       "label": "myProp",
       "comment": "My description of my custom property",
       })
-    c.json_ld["@graph"].push(
+    c.getJson()["@graph"].push(
       {
         "@type": "Property",
         "@id": "_:http://example.com/mybetterprop",
         "label": "myBetterProp",
         "comment": "My description of my custom property",
       })
-  c.json_ld["@context"].push({ 
+  c.getJson()["@context"].push({ 
     myProp: "_:myprop",
     myBetterProp: "_:http://example.com/mybetterprop"
   }

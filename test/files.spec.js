@@ -40,7 +40,7 @@ describe("List files", function() {
     f = new Files("test_data/sample", 5);
     assert.equal(Object.keys(f.files).length, 4, "Four files");
     assert.equal(Object.keys(f.datasets).length, 4, "Four datasets");
-    assert.equal(Object.keys(f.encodingFormats).length, 3, "Three encoding formats");
+    assert.equal(Object.keys(f.encodingFormats).length, 3, "Three encoding formats  ");
 
   });
 
