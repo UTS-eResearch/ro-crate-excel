@@ -14,6 +14,16 @@ This is a library for building tools to assist in JSON-lD data entry, it has bee
 
 npm install rocxl --global
 
+### As a docker container (experimental)
+
+Make a container: 
+
+`docker build -t rocxl .`
+
+Run the container:
+
+`docker run -v ~/path/to/data/:/data rocxl -d 5 /data`
+
 ###  For development
 
 Get this repository (assuming you are working in `~/working`):
