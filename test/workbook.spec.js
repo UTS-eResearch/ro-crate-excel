@@ -243,6 +243,27 @@ it("Can deal with extra context terms", async function() {
 });
 
 
+it("Can handle mixed languages and various kinds of cell value", async function() {
+  this.timeout(5000); 
+  const catalogPath = "test_data/mixed_lg/ro-crate-metadata.xlsx";
+  const wb = new Workbook();     
+  await wb.loadExcel(catalogPath);
+  // Start with a crate from a spreadsheet
+  sourceCrate = wb.crate;
+  const item = sourceCrate.getItem("ConcessionHealthCareCard/13655-1706ar.pdf")
+  console.log(item.name);
+  expect(item.name).to.equal("وبطاقات الرعاية الصحية(بطاقات التخفيض)  Concession");
+  const root = sourceCrate.getRootDataset();
+
+  expect(root.datePublished).to.equal("2022-01-10");
+  expect(root.testProp).to.equal("وبطاقات الرعاية الصحية(بطاقات التخفيض)  Concession");
+  expect(root.SUM).to.equal("5");
+
+  expect(root.REFS).to.equal("5Dataset");
+  
+});
+
+
 });
 
 
