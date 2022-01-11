@@ -16,9 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 /* Test for workbook.js */
-const XLSX = require('xlsx');
-const ExcelJS = require('exceljs');
-const path = require('path');
+
 const fs = require('fs-extra');
 const rocrate = require('ro-crate');
 const RoCrate = rocrate.ROCrate;
