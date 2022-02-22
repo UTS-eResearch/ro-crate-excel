@@ -12,11 +12,11 @@ This is a library for building tools to assist in JSON-lD data entry, it has bee
 
 ### To use the script
 
-npm install rocxl --global
+npm install ro-crate-excel --global
 
 ### As a docker container (experimental)
 
-Make a container: 
+Clone this repository, change into the root then make a container: 
 
 `docker build -t rocxl .`
 
