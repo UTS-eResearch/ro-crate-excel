@@ -29,7 +29,7 @@
     "n-readlines": "^1.0.1",
     "neat-csv": "^6.0.1",
     "path": "^0.12.7",
-    "ro-crate": "^2.0.1",
+    "ro-crate": "^2.0.7",
     "ro-crate-html-js": "^1.4.17",
     "shell": "^0.8.6",
     "shelljs": "^0.8.4",

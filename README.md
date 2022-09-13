@@ -14,7 +14,7 @@ This is a library for building tools to assist in JSON-lD data entry, it has bee
 
 npm install ro-crate-excel --global
 
-### As a docker container (experimental)
+### As a docker container (experimentcode .al)
 
 Clone this repository, change into the root then make a container: 
 
