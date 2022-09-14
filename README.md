@@ -1,3 +1,6 @@
+## Important Notice:
+> The active fork of this repo is https://github.com/Arkisto-Platform/ro-crate-excel and development efforts should be focused over there.
+
 # ro-crate-excel
 
 Node library with utilities for converting RO-Crates to Spreadsheet format for data entry and vice versa
