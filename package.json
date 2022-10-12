@@ -24,7 +24,7 @@
     "exceljs": "^3.10.0",
     "fast-csv": "^4.3.6",
     "hasha": "^5.2.0",
-    "jsonld": "^3.1.1",
+    "jsonld": "^8.1.0",
     "lodash": "^4.17.19",
     "n-readlines": "^1.0.1",
     "neat-csv": "^6.0.1",
