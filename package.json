@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "chai": "*",
-    "mocha": "^8.4.0"
+    "mocha": "^10.1.0"
   },
   "//": "mocha is our preference, but you can use any test runner you like"
 }
