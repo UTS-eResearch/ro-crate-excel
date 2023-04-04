@@ -158,33 +158,15 @@ describe("Create a workbook from a crate",  function() {
    
   });
 
-  /* it("Can extract data from individual sheets", async function() {
+  it("Can extract data from individual sheets", async function() {
     this.timeout(5000); 
-    const excelFilePath = "METADATA_IDRC.xlsx";
-    var c = new RoCrate();
-    c.index();
-    
-    const workbook = new Workbook({crate: c});
-    await workbook.crateToWorkbook();
-    //console.log(workbook.excel.Sheets)
-    //assert.equal(workbook.workbook["_worksheets"].length, 15, "14 sheets")
-
-    await workbook.workbook.xlsx.writeFile(excelFilePath);
-    
-    const workbook2 = new Workbook();
-    await workbook2.loadExcel(excelFilePath);
-    // Check all our items have survived the round trip
-    //fs.writeFileSync("test.json", JSON.stringify(workbook2.crate.getJson(), null, 2));
-    //console.log(workbook.crate.getRootDataset())
-    for (let item of workbook2.crate.getGraph()) {
-      if(item.name) {
-        assert.equal(item.name, workbook.crate.getItem(item["@id"]).name)
-      }
-    }
-    assert.equal(workbook.crate.getGraph().length, workbook2.crate.getGraph().length);
-
+    const excelFilePath = "test_data/collections-workbook.xlsx";
+    var c = new RoCrate({array: true, link: true});
+    const workbook2 = new Workbook({crate: c});
+    await workbook2.loadExcel(excelFilePath, true);
+    console.log(JSON.stringify(workbook2.crate.toJSON(), null, 2));
    
-  }); */
+  }); 
 
   it("Can resolve double quoted references", async function() {
     var c = new RoCrate({array: true, list: true});
