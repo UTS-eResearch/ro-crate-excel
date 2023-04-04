@@ -34,11 +34,13 @@ describe("Create a workbook from a crate",  function() {
 
   it("Should create a workbook with just one sheet", async function() {
     this.timeout(5000); 
-    const c = new RoCrate();
-    c.index();
+    const c = new RoCrate({array: true, link: true});
+    c.name = "Test"
+
     const workbook = new Workbook({crate: c});
     await workbook.crateToWorkbook();
     const sheet = workbook.workbook.getWorksheet("RootDataset");
+    console.log(sheet.getCell("A1").value, sheet.getCell("A2").value, sheet.getCell("A3").value, sheet.getCell("A4").value)
     assert.equal(
       sheet.getCell("A1").value,
       "Name"
@@ -49,11 +51,11 @@ describe("Create a workbook from a crate",  function() {
       );
       assert.equal(
         sheet.getCell("A2").value,
-        "@type"
+        "@id"
       );
       assert.equal(
           sheet.getCell("B2").value,
-          "Dataset"
+          "./"
         );
 
 
@@ -109,7 +111,7 @@ describe("Create a workbook from a crate",  function() {
     const workbook = new Workbook({crate: c});
     await workbook.crateToWorkbook();
     //console.log(workbook.excel.Sheets)
-    assert.equal(workbook.workbook["_worksheets"].length, 15, "14 sheets")
+    assert.equal(workbook.workbook["_worksheets"].length, 17, "16 sheets")
 
     workbook.workbook.xlsx.writeFile("test.xlsx");
     const root = workbook.sheetToItem("RootDataset");
@@ -156,19 +158,43 @@ describe("Create a workbook from a crate",  function() {
    
   });
 
-  it("Can resolve double quoted references", async function() {
+  /* it("Can extract data from individual sheets", async function() {
+    this.timeout(5000); 
+    const excelFilePath = "METADATA_IDRC.xlsx";
     var c = new RoCrate();
     c.index();
+    
     const workbook = new Workbook({crate: c});
     await workbook.crateToWorkbook();
+    //console.log(workbook.excel.Sheets)
+    //assert.equal(workbook.workbook["_worksheets"].length, 15, "14 sheets")
+
+    await workbook.workbook.xlsx.writeFile(excelFilePath);
+    
+    const workbook2 = new Workbook();
+    await workbook2.loadExcel(excelFilePath);
+    // Check all our items have survived the round trip
+    //fs.writeFileSync("test.json", JSON.stringify(workbook2.crate.getJson(), null, 2));
+    //console.log(workbook.crate.getRootDataset())
+    for (let item of workbook2.crate.getGraph()) {
+      if(item.name) {
+        assert.equal(item.name, workbook.crate.getItem(item["@id"]).name)
+      }
+    }
+    assert.equal(workbook.crate.getGraph().length, workbook2.crate.getGraph().length);
+
+   
+  }); */
+
+  it("Can resolve double quoted references", async function() {
+    var c = new RoCrate({array: true, list: true});
+    
 
 
-    const graph = workbook.crate.getGraph();
-    graph.push(
-      {"@id": "#test1", name: "test 1"},
-      {"@id": "#test2", name: "test 2"},
-      {"@id": "#test3", name: "test 3"},
-      {
+    c.addEntity({"@id": "#test1", name: "test 1"});
+    c.addEntity({"@id": "#test2", name: "test 2"});
+    c.addEntity({"@id": "#test3", name: "test 3"});
+    c.addEntity(  {
         "@id": "#test4", 
         name: "references",
         author: `"#test1"`, //By ID
@@ -176,12 +202,14 @@ describe("Create a workbook from a crate",  function() {
         contributor: `"test 3"` // By name
       }
     )
-    
+    const workbook = new Workbook({crate: c});
+    await workbook.crateToWorkbook();
     workbook.resolveLinks();
-    const item4 = workbook.crate.getItem("#test4")
-    assert.equal(item4.author["@id"], "#test1");
-    assert.equal(item4.publisher["@id"], "#test2");
-    assert.equal(item4.contributor["@id"], "#test3");
+    const item4 = workbook.crate.getEntity("#test4")
+    console.log(item4.author)
+    assert.equal(item4.author[0]['@id'], "#test1");
+    assert.equal(item4.publisher[0]['@id'], "#test2");
+    assert.equal(item4.contributor[0]['@id'], "#test3");
  
 });
 
@@ -229,15 +257,16 @@ it("Can deal with extra context terms", async function() {
   it("Can export a workbook to a crate", async function() {
     this.timeout(5000); 
 
-    var c = new RoCrate(JSON.parse(fs.readFileSync(metadataPath)));
-    const graphLength = c.getGraph().length;
-    c.index();
+    var c = new RoCrate(JSON.parse(fs.readFileSync(metadataPath)), {array: true, link: true});
+    const graphLength = c.toJSON()["@graph"].length;
     const workbook = new Workbook({crate: c});
+    await workbook.workbook.xlsx.writeFile("test-this.xlsx");
+
     await workbook.crateToWorkbook();
-    // 
-    prom = await workbook.workbookToCrate();
-  
-    expect(workbook.crate.getGraph().length).to.eql(graphLength);
+    
+    await workbook.workbookToCrate();
+    console.log(JSON.stringify(workbook.crate.toJSON(), null, 2));
+    expect(workbook.crate.toJSON()["@graph"].length).to.eql(graphLength);
 
     
 });
@@ -252,14 +281,14 @@ it("Can handle mixed languages and various kinds of cell value", async function(
   sourceCrate = wb.crate;
   const item = sourceCrate.getItem("ConcessionHealthCareCard/13655-1706ar.pdf")
   console.log(item.name);
-  expect(item.name).to.equal("وبطاقات الرعاية الصحية(بطاقات التخفيض)  Concession");
+  expect(item.name[0]).to.equal("وبطاقات الرعاية الصحية(بطاقات التخفيض)  Concession");
   const root = sourceCrate.getRootDataset();
 
-  expect(root.datePublished).to.equal("2022-01-10");
-  expect(root.testProp).to.equal("وبطاقات الرعاية الصحية(بطاقات التخفيض)  Concession");
-  expect(root.SUM).to.equal("5");
+  expect(root.datePublished[0]).to.equal("2022-01-10");
+  expect(root.testProp[0]).to.equal("وبطاقات الرعاية الصحية(بطاقات التخفيض)  Concession");
+  expect(root.SUM[0]).to.equal("5");
 
-  expect(root.REFS).to.equal("5Dataset");
+  expect(root.REFS[0]).to.equal("5Dataset");
   
 });
 

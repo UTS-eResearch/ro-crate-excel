@@ -59,8 +59,8 @@ describe("Create workbooks", function() {
     await wb.workbook.xlsx.writeFile(catalogPath);
     msg = await update(testPath, 5);
     const finalCrate = new ROCrate(JSON.parse(await fs.readFile(path.join(testPath, "ro-crate-metadata.json"))));
-    finalCrate.index();
-    assert.equal("A Dataset", finalCrate.getRootDataset().name)
+    console.log(finalCrate.toJSON())
+    assert.equal("A Dataset", finalCrate.rootDataset.name)
 
     assert.equal(msg[0], `Using existing spreadsheet: ${testPath}/ro-crate-metadata.xlsx`)
 
