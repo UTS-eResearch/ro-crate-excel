@@ -77,6 +77,7 @@ describe("Create a workbook from a crate",  function() {
     assert.equal(Object.keys(datasetItem).length, 4)
     assert.equal(datasetItem.name, "My dataset");
     assert.equal(datasetItem.description, "Some old dataset");
+    console.log(workbook.sheetDefaults)
    
   });
 
@@ -158,14 +159,23 @@ describe("Create a workbook from a crate",  function() {
    
   });
 
-  it("Can extract data from individual sheets", async function() {
+
+
+  it("Can add to an existing crate", async function() {
     this.timeout(5000); 
     const excelFilePath = "test_data/collections-workbook.xlsx";
+    // New empty crate
     var c = new RoCrate({array: true, link: true});
+
     const workbook2 = new Workbook({crate: c});
-    await workbook2.loadExcel(excelFilePath, true);
-    console.log(JSON.stringify(workbook2.crate.toJSON(), null, 2));
-   
+    await workbook2.loadExcel(excelFilePath, true); // true here means add to crate not
+    //console.log(JSON.stringify(workbook2.crate.toJSON(), null, 2));
+    const f = workbook2.crate.getEntity("/object2/1.mp4");
+    assert(f);
+    console.log(f['@type']);
+    assert(f['@type'].includes('PrimaryMaterial'), "Picked up an extra type from is@typePrimaryMaterial column")
+    assert.equal(f.linguisticGenre[0]['@id'], "http://purl.archive.org/language-data-commons/terms#Dialogue", "Resolved context term")
+    console.log("DEFAULTS", workbook2.sheetDefaults)
   }); 
 
   it("Can resolve double quoted references", async function() {
@@ -188,7 +198,7 @@ describe("Create a workbook from a crate",  function() {
     await workbook.crateToWorkbook();
     workbook.resolveLinks();
     const item4 = workbook.crate.getEntity("#test4")
-    console.log(item4.author)
+    //console.log(item4.author)
     assert.equal(item4.author[0]['@id'], "#test1");
     assert.equal(item4.publisher[0]['@id'], "#test2");
     assert.equal(item4.contributor[0]['@id'], "#test3");
@@ -247,7 +257,7 @@ it("Can deal with extra context terms", async function() {
     await workbook.crateToWorkbook();
     
     await workbook.workbookToCrate();
-    console.log(JSON.stringify(workbook.crate.toJSON(), null, 2));
+    //console.log(JSON.stringify(workbook.crate.toJSON(), null, 2));
     expect(workbook.crate.toJSON()["@graph"].length).to.eql(graphLength);
 
     
