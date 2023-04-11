@@ -71,6 +71,7 @@ existing metadata.
 Options:
   -V, --version                    output the version number
   -b,  --bag [bag-dir]             Create Bagit Bag(s) under [bag-dir])
+  -a,  --add                       Add metadata from additional-ro-crate-metadata.xlsx to an existing ro-crate-metadata.json crate). Does not re-write the excel input file.
   -z   --zip                       Zip the bagged ro-crate (only works with --bag
   -j   --JSON                      Use the ro-crate-metafata.json file rather than ro-crate-metadata.xslx
   -p   --partOf [partOf]           This is part of another RO-Crate, supply the ro-crate-metadata.json path.
@@ -116,9 +117,48 @@ rocxl will generate:
 
 See the examples in `test_data`.
 
+# To create an excel file in which to describe a bunch of objects
+
+To describe some things such as large numbers of predictably named files using a spreadsheet but use another tools such as Crate-O to describe the root dataset and top levl context
+
+Assuming data is in mydir.
+
+
+-  Create an excel crate in mydir 
+
+   `xlro -d 5 mydir`
+
+- Move the resulting .xlsx file out of the way
+  
+   `mv mydir/ro-crate-metadata.xlsx mydir/additional-ro-crate-metadata.xlsx`
+
+- Add whatever is needed to additional-ro-crate-metadata.xlsx to describe the files therein, and their relationship to RepositoryObject and RepositoryCollection entities
+
+-  Edit the `mydir/ro-crate-metadata.json` file  other tools of your choice
+
+-  Re-generate `mydir/ro-crate-metadata.json` with medata from `mydir/additional-ro-crate-metadata.xlsx` by typing:
+    `xlro -a mydir`
+
+
+
+
+```
+
 # About the spreadsheet format
 
 This library allows transformation between RO-Crate and Excel spreadsheets using multiple worksheets in a workbook which is named 'ro-crate-metadata.xslx' and appears alongside the ro-crate-metadata.json file in the root of the dataset.
+
+## SheetDefaults Worksheet
+
+Optionally, a sheet name SheetDefaults can specify a defult item template for that worksheet.
+
+This sheet (at the moment) has two rows - the top row lists the names of worksheets that have default values and the second 
+
+| SheetName	   | File	              | RepositoryObject	| Person
+| itemtemplate |	{"@type": "File"} |	{"@type": "RepositoryObject", "license" : "LICENSE.txt"}	| {"@type": "Person"}
+
+With the above configuration every object in the sheet named `RepositpryObject` will have {"@type": "RepositoryObject", "license" : "LICENSE.txt"} as a starting point -- any additional valies such as a `@type` column will be *added* to the item.
+
 
 ## The `Root Dataset Worksheet`
 
@@ -208,7 +248,53 @@ And the `@type=CreativeWork` worksheet:
 | --- | ------ | ------ | ----------- |
 | https://creativecommons.org/licenses/by/4.0/ | CreativeWork | CC BY 4.0 | Creative Commons Attribution 4.0 International License | 
 
+### Adding addtional @types using is@type<Type>
 
+If there is a column named `is@type<Type>` such as `is@typeAnnotation` then rows representing items will ahve an additional type (eg `Annotation`) if the value of the cell evalutates to True (ie it has a non empty, no-zero value).
+ 
+### Referring to other items
+
+Columns with names that start with isRef_ are converted as references to an ids references to an @id 
+
+eg
+
+| @id | @type  |  isRef_hasAnnotation |
+| --- | ------ |  ----------- |
+| my_audio.wav  |File  |  ./my_audio_annotation.json
+
+Will be converted to 
+```
+{
+  "@id": "Mmy_audio.wav",
+  "@type": "File",
+  "hasAnnotation" : {"@id": "./my_audio_annotation.json"}
+}
+
+
+```
+Columns with names that start with isTerm_ are treated as references to vocabulary items that are defined in the context:
+
+So assuming the @context sheet contains:
+
+| name |	@id |
+| ----- | -----------------------------|
+| ldac	| http://purl.archive.org/language-data-commons/terms# |
+
+
+| @id | @type  |  isTerm_annotationType  |
+| --- | ------ |  ----------- |
+| my_audio.wav  | File  |  ldac:Dialogue |
+
+
+The resulting item will be:
+
+```
+{
+  "@id": "my_audio.wav",
+  "@type": "File",
+  "annotationType" : {"@id": "http://purl.archive.org/language-data-commons/terms#Dialogue"}
+}
+```
 
 ### Representing multiple values
 
@@ -255,7 +341,8 @@ NOTE: Any cell that contains at least one `{` and one `}` will be parsed as JSON
 
 # Adding additional properties to the @context 
 
-There are reasons to add additional properties. 
+TODO
+
 
 ## If the URL for a property does not resolve to a useful URL. 
 

@@ -2,7 +2,7 @@
 
 /*
 This is part of ro-crate-excel tool for implementing the RO-Crate data packaging
-spec.  Copyright (C) 2018  University of Technology Sydney
+spec.  Copyright (C) 2018  University of Technology Sydney and 2023 University of QUeensland
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -50,6 +50,7 @@ async function main() {
       dirs = directories;
     })
     .option("-b,  --bag [bag-dir]", "Create Bagit Bag(s) under [bag-dir])")
+    .option("-a,  --add", "Add metadata from additional-ro-crate-metadata.xlsx to an existing ro-crate-metadata.json crate). Does not re-write the excel input file.")
     .option("-z   --zip", "Zip the bagged ro-crate (only works with --bag")
     .option("-j   --JSON", "Use the ro-crate-metafata.json file rather than ro-crate-metadata.xslx")
     .option("-p   --partOf [partOf]", "This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.")
@@ -78,15 +79,16 @@ async function main() {
   for( let dir of dirs ) {
     if (shell.test("-d", dir)) {
       shell.rm("-rf", path.join(dir, "ro-crate-metadata_files"));
-      await up(dir, depth);     
+      await processDirectory(dir, depth);   
+
       await generateHTML(path.join(dir, defaults.metadata_json_file_name));
     }
   }
 }
 
 
-async function up(dir, depth) {
-  await update(dir, depth, program.JSON);
+async function processDirectory(dir, depth) {
+  await update(dir, depth, program.JSON, program.add);
 }
 
 

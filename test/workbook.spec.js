@@ -123,8 +123,9 @@ describe("Create a workbook from a crate",  function() {
     workbook.indexCrateByName();
     const pt = workbook.getItemByName("Peter Sefton")
     assert.equal(pt.name, "Peter Sefton")
-    
-    const items = workbook.sheetToItems("@type=Person");
+    const s =  workbook.workbook.getWorksheet("@type=Person");
+    console.log("WORKBOOK", s.id)
+    const items = workbook.sheetToItems(s.id);
     assert.equal(items.length, 1);
     assert.equal(items[0].name, "Peter Sefton");
 
@@ -170,12 +171,15 @@ describe("Create a workbook from a crate",  function() {
     const workbook2 = new Workbook({crate: c});
     await workbook2.loadExcel(excelFilePath, true); // true here means add to crate not
     //console.log(JSON.stringify(workbook2.crate.toJSON(), null, 2));
+
+    console.log("DEFAULTS", workbook2.sheetDefaults)
+
     const f = workbook2.crate.getEntity("/object2/1.mp4");
     assert(f);
     console.log(f['@type']);
     assert(f['@type'].includes('PrimaryMaterial'), "Picked up an extra type from is@typePrimaryMaterial column")
     assert.equal(f.linguisticGenre[0]['@id'], "http://purl.archive.org/language-data-commons/terms#Dialogue", "Resolved context term")
-    console.log("DEFAULTS", workbook2.sheetDefaults)
+    
   }); 
 
   it("Can resolve double quoted references", async function() {
