@@ -22,8 +22,8 @@ const Bag = require("./lib/bag.js");
 const update = require("./lib/update.js")
 // 
 const ROCrate = require("ro-crate").ROCrate;
-const Preview = require("ro-crate-html-js").Preview;
-const HtmlFile = require("ro-crate-html-js").HtmlFile;
+const Preview = require("ro-crate-html").Preview;
+const HtmlFile = require("ro-crate-html").HtmlFile;
 
 const path = require("path");
 const shell = require("shelljs");
