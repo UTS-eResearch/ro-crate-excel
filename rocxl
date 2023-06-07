@@ -24,6 +24,8 @@ const update = require("./lib/update.js")
 const ROCrate = require("ro-crate").ROCrate;
 const Preview = require("ro-crate-html").Preview;
 const HtmlFile = require("ro-crate-html").HtmlFile;
+const htmlDefaults = require("ro-crate-html").Defaults;
+
 
 const path = require("path");
 const shell = require("shelljs");
@@ -57,7 +59,8 @@ async function main() {
     .option("-d,  --depth [depth]", "Maximum depth to recurse into directories")
     .option("-r,  --recurse", "Recurse into directories looking for files")
     .option("-c,  --cratescript [cratesript]", "URL of Crate-script directory")
-    .option("-m,  --maxfiles [maxfiles]", `Maximum number of files to itemise per directory (default is ${defaults.max_files_in_dir})`)
+    .option("-f,  --filesOnly", "Find files and stop")
+
     .option(
       "-u, --url [distro]",
       "Distribution URL"
@@ -155,7 +158,7 @@ async function generateHTML(metadataPath) {
       const f = new HtmlFile(preview); 
   
       fs.writeFileSync(path.join(dir, htmlFileName),
-                        await f.render(program.cratescript), "utf-8");
+      await f.render(program.cratescript || htmlDefaults.render_script), "utf-8");
      
     if (program.bag) {
       var bagger = new Bag();

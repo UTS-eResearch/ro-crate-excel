@@ -1,5 +1,4 @@
-## Important Notice:
-> The active fork of this repo is https://github.com/Arkisto-Platform/ro-crate-excel and development efforts should be focused over there.
+
 
 # ro-crate-excel
 
@@ -18,7 +17,7 @@ This is a library for building tools to assist in JSON-lD data entry, it has bee
 npm install ro-crate-excel --global
 
 ### As a docker container (experimentcode .al)
-
+See :)
 Clone this repository, change into the root then make a container: 
 
 `docker build -t rocxl .`
@@ -71,7 +70,7 @@ existing metadata.
 Options:
   -V, --version                    output the version number
   -b,  --bag [bag-dir]             Create Bagit Bag(s) under [bag-dir])
-  -a,  --add                       Add metadata from additional-ro-crate-metadata.xlsx to an existing ro-crate-metadata.json crate). Does not re-write the excel input file.
+  -a,  --add                       Add metadata from additional-ro-crate-metadata.xlsx to an existing ro-crate-metadata.json crate). Does not re-write the excel input file ro create ro-crate-metadata.xslsx.
   -z   --zip                       Zip the bagged ro-crate (only works with --bag
   -j   --JSON                      Use the ro-crate-metafata.json file rather than ro-crate-metadata.xslx
   -p   --partOf [partOf]           This is part of another RO-Crate, supply the ro-crate-metadata.json path.
@@ -248,10 +247,15 @@ And the `@type=CreativeWork` worksheet:
 | --- | ------ | ------ | ----------- |
 | https://creativecommons.org/licenses/by/4.0/ | CreativeWork | CC BY 4.0 | Creative Commons Attribution 4.0 International License | 
 
-### Adding addtional @types using is@type<Type>
+### Adding addtional @types using isType_<Type>
 
-If there is a column named `is@type<Type>` such as `is@typeAnnotation` then rows representing items will ahve an additional type (eg `Annotation`) if the value of the cell evalutates to True (ie it has a non empty, no-zero value).
+If there is a column named `is@type<Type>` such as `is@typeAnnotation` then rows representing items will have an additional type (eg `Annotation`) if the value of the cell evalutates to True (ie it has a non empty, no-zero value).
  
+
+
+| @id | @type  | name   | description | isType_
+| --- | ------ | ------ | ----------- |
+| somefile.txt | CreativeWork | My annotation | A description of  | 
 ### Referring to other items
 
 Columns with names that start with isRef_ are converted as references to an ids references to an @id 
@@ -298,7 +302,10 @@ The resulting item will be:
 
 ### Representing multiple values
 
-To represent multiple values - for example if there are multiple affiliations for a person then a comma separated list enclosed in square brackets.
+To represent multiple values - for example if there are multiple affiliations for a person there are two ways to accomplish this:
+
+1.  Repeat a column header with the SAME name as many times as needed (for the maximum number of repeats in the colum), OR
+2.  Use a comma separated list enclosed in square brackets
 
 | @id | @type | name | FamilyName | givenName  | affiliation |  
 | -- | -- | -- | -- | -- | -- |
@@ -312,6 +319,14 @@ This approach can also be used in the `Root Dataset Worksheet`. The URL is treat
 | author      | ["Peter Sefton", http://ptsefton.com] |
 
 These values will be interpreted as references, omitting the quotes will cause a value to be interpreted as a string.
+
+### Hiding values (and showing provenance)
+
+To stop a column in the spreadsheet from being copied to the output crate, add a "." to the name. For example, if an orignal data source uses the term `Title`, then in order to show the provenance of the data, create a column called `name` (which is the RO-Crate correct term for the name of a work), and use a formula to copy the data into the `name` column.
+
+| .Title                                 | name                             |
+| ----                                   | --------------------------------- |
+| A Short Introduction to Spreadsheets   | =A1 |
 
 ### Embedding JSON
 
@@ -415,5 +430,8 @@ When converting from a worksheet to a JSON-LD item the process is to:
     -  If the value matches a known @id then add a reference `{"@id": "#someid"}`
     -  else if the value (without quotes) matches a known name add a reference to the item with that name
     -  else if the value (without quotes) does not start with `#` prepend `#` and see if it matches a known `@id` - if it does add it as a reference 
+
+
+
 
 
