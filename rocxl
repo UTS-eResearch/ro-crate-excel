@@ -59,8 +59,8 @@ async function main() {
     .option("-d,  --depth [depth]", "Maximum depth to recurse into directories")
     .option("-r,  --recurse", "Recurse into directories looking for files")
     .option("-c,  --cratescript [cratesript]", "URL of Crate-script directory")
-    .option("-f,  --filesOnly", "Find files and stop")
-
+    .option("-m,  --maxfiles [maxfiles]", `Maximum number of files to itemise per directory (default is ${defaults.max_files_in_dir})`)
+    //.option("-f,  --filesOnly", "Find files and stop") NOT IMPLEMEMTED YET
     .option(
       "-u, --url [distro]",
       "Distribution URL"
