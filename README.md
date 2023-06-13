@@ -249,12 +249,12 @@ And the `@type=CreativeWork` worksheet:
 
 ### Adding addtional @types using isType_<Type>
 
-If there is a column named `is@type<Type>` such as `is@typeAnnotation` then rows representing items will have an additional type (eg `Annotation`) if the value of the cell evalutates to True (ie it has a non empty, no-zero value).
+If there is a column named `isType_<Type>` such as `istype_Annotation` then rows representing items will have an additional type (eg `Annotation`) if the value of the cell evalutates to True (ie it has a non empty, no-zero value).
  
 
 
-| @id | @type  | name   | description | isType_
-| --- | ------ | ------ | ----------- |
+| @id | @type  | name   | description | isType_Annotation |
+| --- | ------ | ------ | ----------- | ----------------- |
 | somefile.txt | CreativeWork | My annotation | A description of  | 
 ### Referring to other items
 

@@ -1,85 +1,18 @@
 {
   "@context": [
-    "https://researchobject.github.io/ro-crate/1.0/context.jsonld",
+    "https://w3id.org/ro/crate/1.1/context",
     {
       "@vocab": "http://schema.org/"
     }
   ],
   "@graph": [
     {
-      "@id": "#3e53e101-db05-49ad-a988-d97e484c2310",
-      "@type": "GeoCoordinates",
-      "latitude": "-33.7152",
-      "longitude": "150.30119",
-      "name": "Latitude: -33.7152, Longitude: 150.30119"
-    },
-    {
-      "@id": "#EPL1",
-      "@type": "IndividualProduct",
-      "URL": "https://en.wikipedia.org/wiki/Olympus_PEN_E-PL1",
-      "description": "Olympus camera with Panasonic 20mm lens",
-      "manufacturer": "Olympus",
-      "model": "EPL 1",
-      "name": "EPL1 Camera",
-      "serialNumber": "B3B505338"
-    },
-    {
-      "@id": "#Panny20mm",
-      "@type": "IndividualProduct",
-      "URL": "https://en.wikipedia.org/wiki/Panasonic_Lumix_20mm_lens",
-      "description": "Panasonic lens",
-      "manufacturer": "Panasonic",
-      "model": "Lumix G 20mm F1.7 Asph.",
-      "name": "Lumix G 20/F1.7 lens",
-      "serialNumber": "01FG3033651"
-    },
-    {
-      "@id": "#Photo1",
-      "@type": "CreateAction",
-      "agent": {
-        "@id": "http://orcid.org/0000-0002-3545-944X"
-      },
-      "description": "Photo snapped on a photo walk on a misty day",
-      "endTime": "2017:06:11T12:56:14+10:00",
-      "instrument": [
-        {
-          "@id": "#EPL1"
-        },
-        {
-          "@id": "#Panny20mm"
-        }
-      ],
-      "name": "Took dog picture",
-      "object": {
-        "@id": "http://www.geonames.org/8152662/catalina-park.html"
-      },
-      "result": {
-        "@id": "pics/2017-06-11 12.56.14.jpg"
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "identifier": "ro-crate-metadata.json",
+      "about": {
+        "@id": "./"
       }
-    },
-    {
-      "@id": "#SepiaConversion",
-      "@type": "CreateAction",
-      "agent": {
-        "@id": "http://orcid.org/0000-0002-3545-944X"
-      },
-      "description": "convert -sepia-tone 80% test_data/sample/pics/2017-06-11\\ 12.56.14.jpg test_data/sample/pics/sepia_fence.jpg",
-      "endTime": "2018:09:19T17:01:07+10:00",
-      "instrument": {
-        "@id": "https://www.imagemagick.org/"
-      },
-      "name": "Converted dog picture to sepia",
-      "object": {
-        "@id": "pics/2017-06-11 12.56.14.jpg"
-      },
-      "result": {
-        "@id": "pics/sepia_fence.jpg"
-      }
-    },
-    {
-      "@id": "#picsdistro",
-      "@type": "DataDownload",
-      "path": "http://data.research.uts.edu.au"
     },
     {
       "@id": "./",
@@ -98,23 +31,16 @@
       },
       "datePublished": "2017-06-29",
       "description": "This is a simple dataset for demonstration purposes it contains just one image and a directory full of useless text files.",
-      "funder": [
-        {
-          "@id": "http://ands.org.au"
-        },
-        {
-          "@id": "https://ror.org/0384j8v12"
-        },
-        {
-          "@id": "https://github.com/UTS-eResearch/projects/datacrate"
-        }
-      ],
+      "funder": {
+        "@id": "http://ands.org.au"
+      },
       "hasPart": [
+        "",
         {
-          "@id": "lots_of_little_files/"
+          "@id": "lots_of_little_files"
         },
         {
-          "@id": "pics/"
+          "@id": "pics"
         }
       ],
       "identifier": "https://dx.doi.org/10.5281/zenodo.1009240",
@@ -127,2471 +53,14 @@
         "@id": "https://ror.org/0384j8v12"
       },
       "temporalCoverage": "2017",
-      "distribution": [
-        {
-          "@id": "https://data.research.uts.edu.au/examples/ro-crate/examples/src/downloads/sample.zip"
-        }
-      ]
+      "distribution": {
+        "@id": "https://data.research.uts.edu.au/examples/ro-crate/examples/src/downloads/sample.zip"
+      }
     },
     {
-      "@id": "#b0",
-      "@type": "PropertyValue",
-      "name": "AELock",
-      "value": "Off"
-    },
-    {
-      "@id": "#b1",
-      "@type": "PropertyValue",
-      "name": "AFAreas",
-      "value": "(111,106)-(144,149)"
-    },
-    {
-      "@id": "#b10",
-      "@type": "PropertyValue",
-      "name": "AspectRatio",
-      "value": "3:2"
-    },
-    {
-      "@id": "#b100",
-      "@type": "PropertyValue",
-      "name": "ISO",
-      "value": 400
-    },
-    {
-      "@id": "#b101",
-      "@type": "PropertyValue",
-      "name": "ImageDescription",
-      "value": "OLYMPUS DIGITAL CAMERA         "
-    },
-    {
-      "@id": "#b102",
-      "@type": "PropertyValue",
-      "name": "ImageHeight",
-      "value": 2688
-    },
-    {
-      "@id": "#b103",
-      "@type": "PropertyValue",
-      "name": "ImageProcessingVersion",
-      "value": "0112"
-    },
-    {
-      "@id": "#b104",
-      "@type": "PropertyValue",
-      "name": "ImageSize",
-      "value": "4032x2688"
-    },
-    {
-      "@id": "#b105",
-      "@type": "PropertyValue",
-      "name": "ImageStabilization",
-      "value": "On, Mode 1"
-    },
-    {
-      "@id": "#b106",
-      "@type": "PropertyValue",
-      "name": "ImageWidth",
-      "value": 4032
-    },
-    {
-      "@id": "#b107",
-      "@type": "PropertyValue",
-      "name": "InternalFlash",
-      "value": "Off"
-    },
-    {
-      "@id": "#b108",
-      "@type": "PropertyValue",
-      "name": "InternalSerialNumber",
-      "value": "4102011002108002               "
-    },
-    {
-      "@id": "#b109",
-      "@type": "PropertyValue",
-      "name": "InteropIndex",
-      "value": "R98 - DCF basic file (sRGB)"
-    },
-    {
-      "@id": "#b11",
-      "@type": "PropertyValue",
-      "name": "BitsPerSample",
-      "value": 8
-    },
-    {
-      "@id": "#b110",
-      "@type": "PropertyValue",
-      "name": "InteropVersion",
-      "value": "0100"
-    },
-    {
-      "@id": "#b111",
-      "@type": "PropertyValue",
-      "name": "LensFirmwareVersion",
-      "value": 1.1
-    },
-    {
-      "@id": "#b112",
-      "@type": "PropertyValue",
-      "name": "LensID",
-      "value": "Lumix G 20mm F1.7 Asph."
-    },
-    {
-      "@id": "#b113",
-      "@type": "PropertyValue",
-      "name": "LensModel",
-      "value": "LUMIX G 20/F1.7"
-    },
-    {
-      "@id": "#b114",
-      "@type": "PropertyValue",
-      "name": "LensProperties",
-      "value": "0x4110"
-    },
-    {
-      "@id": "#b115",
-      "@type": "PropertyValue",
-      "name": "LensSerialNumber",
-      "value": "01FG3033651"
-    },
-    {
-      "@id": "#b116",
-      "@type": "PropertyValue",
-      "name": "LensType",
-      "value": "Lumix G 20mm F1.7 Asph."
-    },
-    {
-      "@id": "#b117",
-      "@type": "PropertyValue",
-      "name": "LightSource",
-      "value": "Unknown"
-    },
-    {
-      "@id": "#b118",
-      "@type": "PropertyValue",
-      "name": "LightValue",
-      "value": 9.6
-    },
-    {
-      "@id": "#b119",
-      "@type": "PropertyValue",
-      "name": "MIMEType",
-      "value": "image/jpeg"
-    },
-    {
-      "@id": "#b12",
-      "@type": "PropertyValue",
-      "name": "BlackLevel2",
-      "value": "64 64 64 64"
-    },
-    {
-      "@id": "#b120",
-      "@type": "PropertyValue",
-      "name": "MacroLED",
-      "value": "Off"
-    },
-    {
-      "@id": "#b121",
-      "@type": "PropertyValue",
-      "name": "MacroMode",
-      "value": "Off"
-    },
-    {
-      "@id": "#b122",
-      "@type": "PropertyValue",
-      "name": "Make",
-      "value": "OLYMPUS IMAGING CORP."
-    },
-    {
-      "@id": "#b123",
-      "@type": "PropertyValue",
-      "name": "ManometerPressure",
-      "value": "0 kPa"
-    },
-    {
-      "@id": "#b124",
-      "@type": "PropertyValue",
-      "name": "ManometerReading",
-      "value": "0 m, 0 ft"
-    },
-    {
-      "@id": "#b125",
-      "@type": "PropertyValue",
-      "name": "ManualFlash",
-      "value": "Off"
-    },
-    {
-      "@id": "#b126",
-      "@type": "PropertyValue",
-      "name": "ManualFlashStrength",
-      "value": "n/a"
-    },
-    {
-      "@id": "#b127",
-      "@type": "PropertyValue",
-      "name": "MaxAperture",
-      "value": 1.8
-    },
-    {
-      "@id": "#b128",
-      "@type": "PropertyValue",
-      "name": "MaxApertureAtMaxFocal",
-      "value": 1.7
-    },
-    {
-      "@id": "#b129",
-      "@type": "PropertyValue",
-      "name": "MaxApertureAtMinFocal",
-      "value": 1.7
-    },
-    {
-      "@id": "#b13",
-      "@type": "PropertyValue",
-      "name": "BlueBalance",
-      "value": 1.367188
-    },
-    {
-      "@id": "#b130",
-      "@type": "PropertyValue",
-      "name": "MaxApertureValue",
-      "value": 1.7
-    },
-    {
-      "@id": "#b131",
-      "@type": "PropertyValue",
-      "name": "MaxFaces",
-      "value": "8 8 0"
-    },
-    {
-      "@id": "#b132",
-      "@type": "PropertyValue",
-      "name": "MaxFocalLength",
-      "value": 20
-    },
-    {
-      "@id": "#b133",
-      "@type": "PropertyValue",
-      "name": "Megapixels",
-      "value": 10.8
-    },
-    {
-      "@id": "#b134",
-      "@type": "PropertyValue",
-      "name": "MeteringMode",
-      "value": "ESP"
-    },
-    {
-      "@id": "#b135",
-      "@type": "PropertyValue",
-      "name": "MinFocalLength",
-      "value": 20
-    },
-    {
-      "@id": "#b136",
-      "@type": "PropertyValue",
-      "name": "Model",
-      "value": "E-PL1"
-    },
-    {
-      "@id": "#b137",
-      "@type": "PropertyValue",
-      "name": "ModifiedSaturation",
-      "value": "Off"
-    },
-    {
-      "@id": "#b138",
-      "@type": "PropertyValue",
-      "name": "ModifyDate",
-      "value": "2017:06:11 12:56:14"
-    },
-    {
-      "@id": "#b139",
-      "@type": "PropertyValue",
-      "name": "MultipleExposureMode",
-      "value": "Off; 1"
-    },
-    {
-      "@id": "#b14",
-      "@type": "PropertyValue",
-      "name": "BodyFirmwareVersion",
-      "value": 1.103
-    },
-    {
-      "@id": "#b140",
-      "@type": "PropertyValue",
-      "name": "NoiseFilter",
-      "value": "Standard"
-    },
-    {
-      "@id": "#b141",
-      "@type": "PropertyValue",
-      "name": "NoiseReduction",
-      "value": "Auto"
-    },
-    {
-      "@id": "#b142",
-      "@type": "PropertyValue",
-      "name": "NoiseReduction2",
-      "value": "(none)"
-    },
-    {
-      "@id": "#b143",
-      "@type": "PropertyValue",
-      "name": "Orientation",
-      "value": "Horizontal (normal)"
-    },
-    {
-      "@id": "#b144",
-      "@type": "PropertyValue",
-      "name": "PanoramaMode",
-      "value": "Off"
-    },
-    {
-      "@id": "#b145",
-      "@type": "PropertyValue",
-      "name": "PictureMode",
-      "value": "Vivid; 2"
-    },
-    {
-      "@id": "#b146",
-      "@type": "PropertyValue",
-      "name": "PictureModeBWFilter",
-      "value": "n/a"
-    },
-    {
-      "@id": "#b147",
-      "@type": "PropertyValue",
-      "name": "PictureModeContrast",
-      "value": "0 (min -2, max 2)"
-    },
-    {
-      "@id": "#b148",
-      "@type": "PropertyValue",
-      "name": "PictureModeEffect",
-      "value": "Standard"
-    },
-    {
-      "@id": "#b149",
-      "@type": "PropertyValue",
-      "name": "PictureModeSaturation",
-      "value": "0 (min -2, max 2)"
-    },
-    {
-      "@id": "#b15",
-      "@type": "PropertyValue",
-      "name": "CameraID",
-      "value": "OLYMPUS DIGITAL CAMERA         "
-    },
-    {
-      "@id": "#b150",
-      "@type": "PropertyValue",
-      "name": "PictureModeSharpness",
-      "value": "0 (min -2, max 2)"
-    },
-    {
-      "@id": "#b151",
-      "@type": "PropertyValue",
-      "name": "PictureModeTone",
-      "value": "n/a"
-    },
-    {
-      "@id": "#b152",
-      "@type": "PropertyValue",
-      "name": "PreviewImage",
-      "value": "(Binary data 514170 bytes, use -b option to extract)"
-    },
-    {
-      "@id": "#b153",
-      "@type": "PropertyValue",
-      "name": "PreviewImageLength",
-      "value": 514170
-    },
-    {
-      "@id": "#b154",
-      "@type": "PropertyValue",
-      "name": "PreviewImageStart",
-      "value": 4600608
-    },
-    {
-      "@id": "#b155",
-      "@type": "PropertyValue",
-      "name": "PreviewImageValid",
-      "value": "Yes"
-    },
-    {
-      "@id": "#b156",
-      "@type": "PropertyValue",
-      "name": "PrintIMVersion",
-      "value": "0300"
-    },
-    {
-      "@id": "#b157",
-      "@type": "PropertyValue",
-      "name": "RawDevColorSpace",
-      "value": "sRGB"
-    },
-    {
-      "@id": "#b158",
-      "@type": "PropertyValue",
-      "name": "RawDevContrastValue",
-      "value": "0 0 0"
-    },
-    {
-      "@id": "#b159",
-      "@type": "PropertyValue",
-      "name": "RawDevEditStatus",
-      "value": "Original"
-    },
-    {
-      "@id": "#b16",
-      "@type": "PropertyValue",
-      "name": "CameraSettingsVersion",
-      "value": "0100"
-    },
-    {
-      "@id": "#b160",
-      "@type": "PropertyValue",
-      "name": "RawDevEngine",
-      "value": "High Speed"
-    },
-    {
-      "@id": "#b161",
-      "@type": "PropertyValue",
-      "name": "RawDevExposureBiasValue",
-      "value": 0
-    },
-    {
-      "@id": "#b162",
-      "@type": "PropertyValue",
-      "name": "RawDevGrayPoint",
-      "value": "0 0 0"
-    },
-    {
-      "@id": "#b163",
-      "@type": "PropertyValue",
-      "name": "RawDevMemoryColorEmphasis",
-      "value": 0
-    },
-    {
-      "@id": "#b164",
-      "@type": "PropertyValue",
-      "name": "RawDevNoiseReduction",
-      "value": "(none)"
-    },
-    {
-      "@id": "#b165",
-      "@type": "PropertyValue",
-      "name": "RawDevSaturationEmphasis",
-      "value": "0 0 0"
-    },
-    {
-      "@id": "#b166",
-      "@type": "PropertyValue",
-      "name": "RawDevSettings",
-      "value": "(none)"
-    },
-    {
-      "@id": "#b167",
-      "@type": "PropertyValue",
-      "name": "RawDevSharpnessValue",
-      "value": "0 0 0"
-    },
-    {
-      "@id": "#b168",
-      "@type": "PropertyValue",
-      "name": "RawDevVersion",
-      "value": "0100"
-    },
-    {
-      "@id": "#b169",
-      "@type": "PropertyValue",
-      "name": "RawDevWBFineAdjustment",
-      "value": 0
-    },
-    {
-      "@id": "#b17",
-      "@type": "PropertyValue",
-      "name": "CameraType2",
-      "value": "E-PL1"
-    },
-    {
-      "@id": "#b170",
-      "@type": "PropertyValue",
-      "name": "RawDevWhiteBalanceValue",
-      "value": 0
-    },
-    {
-      "@id": "#b171",
-      "@type": "PropertyValue",
-      "name": "RedBalance",
-      "value": 1.78125
-    },
-    {
-      "@id": "#b172",
-      "@type": "PropertyValue",
-      "name": "ResolutionUnit",
-      "value": "inches"
-    },
-    {
-      "@id": "#b173",
-      "@type": "PropertyValue",
-      "name": "Saturation",
-      "value": "High"
-    },
-    {
-      "@id": "#b174",
-      "@type": "PropertyValue",
-      "name": "ScaleFactor35efl",
-      "value": 2
-    },
-    {
-      "@id": "#b175",
-      "@type": "PropertyValue",
-      "name": "SceneCaptureType",
-      "value": "Standard"
-    },
-    {
-      "@id": "#b176",
-      "@type": "PropertyValue",
-      "name": "SceneDetect",
-      "value": 0
-    },
-    {
-      "@id": "#b177",
-      "@type": "PropertyValue",
-      "name": "SceneMode",
-      "value": "Standard"
-    },
-    {
-      "@id": "#b178",
-      "@type": "PropertyValue",
-      "name": "SensorCalibration",
-      "value": "0 0"
-    },
-    {
-      "@id": "#b179",
-      "@type": "PropertyValue",
-      "name": "SensorTemperature",
-      "value": "48.0 C"
-    },
-    {
-      "@id": "#b18",
-      "@type": "PropertyValue",
-      "name": "CircleOfConfusion",
-      "value": "0.015 mm"
-    },
-    {
-      "@id": "#b180",
-      "@type": "PropertyValue",
-      "name": "SerialNumber",
-      "value": "B3B505338"
-    },
-    {
-      "@id": "#b181",
-      "@type": "PropertyValue",
-      "name": "ShadingCompensation",
-      "value": "Off"
-    },
-    {
-      "@id": "#b182",
-      "@type": "PropertyValue",
-      "name": "ShadingCompensation2",
-      "value": "Off"
-    },
-    {
-      "@id": "#b183",
-      "@type": "PropertyValue",
-      "name": "Sharpness",
-      "value": "Hard"
-    },
-    {
-      "@id": "#b184",
-      "@type": "PropertyValue",
-      "name": "SharpnessSetting",
-      "value": "1 (min -5, max 5)"
-    },
-    {
-      "@id": "#b185",
-      "@type": "PropertyValue",
-      "name": "ShutterSpeed",
-      "value": "1/80"
-    },
-    {
-      "@id": "#b186",
-      "@type": "PropertyValue",
-      "name": "Software",
-      "value": "Version 1.1"
-    },
-    {
-      "@id": "#b187",
-      "@type": "PropertyValue",
-      "name": "SourceFile",
-      "value": "test_data/sample/pics/2017-06-11 12.56.14.jpg"
-    },
-    {
-      "@id": "#b188",
-      "@type": "PropertyValue",
-      "name": "SpecialMode",
-      "value": "Normal, Sequence: 0, Panorama: (none)"
-    },
-    {
-      "@id": "#b189",
-      "@type": "PropertyValue",
-      "name": "ThumbnailImage",
-      "value": "(Binary data 7738 bytes, use -b option to extract)"
-    },
-    {
-      "@id": "#b19",
-      "@type": "PropertyValue",
-      "name": "ColorComponents",
-      "value": 3
-    },
-    {
-      "@id": "#b190",
-      "@type": "PropertyValue",
-      "name": "ThumbnailLength",
-      "value": 7738
-    },
-    {
-      "@id": "#b191",
-      "@type": "PropertyValue",
-      "name": "ThumbnailOffset",
-      "value": 14464
-    },
-    {
-      "@id": "#b192",
-      "@type": "PropertyValue",
-      "name": "ToneLevel",
-      "value": "0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0"
-    },
-    {
-      "@id": "#b193",
-      "@type": "PropertyValue",
-      "name": "UserComment",
-      "value": ""
-    },
-    {
-      "@id": "#b194",
-      "@type": "PropertyValue",
-      "name": "WB_RBLevels",
-      "value": "456 350 256 260"
-    },
-    {
-      "@id": "#b195",
-      "@type": "PropertyValue",
-      "name": "WhiteBalance",
-      "value": "Auto"
-    },
-    {
-      "@id": "#b196",
-      "@type": "PropertyValue",
-      "name": "WhiteBalance2",
-      "value": "Auto"
-    },
-    {
-      "@id": "#b197",
-      "@type": "PropertyValue",
-      "name": "WhiteBalanceBracket",
-      "value": "0 0"
-    },
-    {
-      "@id": "#b198",
-      "@type": "PropertyValue",
-      "name": "WhiteBalanceTemperature",
-      "value": "Auto"
-    },
-    {
-      "@id": "#b199",
-      "@type": "PropertyValue",
-      "name": "XResolution",
-      "value": 314
-    },
-    {
-      "@id": "#b2",
-      "@type": "PropertyValue",
-      "name": "AFFineTune",
-      "value": "Off"
-    },
-    {
-      "@id": "#b20",
-      "@type": "PropertyValue",
-      "name": "ColorMatrix",
-      "value": "322 -40 -26 -32 332 -44 -2 -72 330"
-    },
-    {
-      "@id": "#b200",
-      "@type": "PropertyValue",
-      "name": "YCbCrPositioning",
-      "value": "Co-sited"
-    },
-    {
-      "@id": "#b201",
-      "@type": "PropertyValue",
-      "name": "YCbCrSubSampling",
-      "value": "YCbCr4:2:2 (2 1)"
-    },
-    {
-      "@id": "#b202",
-      "@type": "PropertyValue",
-      "name": "YResolution",
-      "value": 314
-    },
-    {
-      "@id": "#b203",
-      "@type": "PropertyValue",
-      "name": "ZoomStepCount",
-      "value": 0
-    },
-    {
-      "@id": "#b204",
-      "@type": "PropertyValue",
-      "name": "AELock",
-      "value": "Off"
-    },
-    {
-      "@id": "#b205",
-      "@type": "PropertyValue",
-      "name": "AFAreas",
-      "value": "(111,106)-(144,149)"
-    },
-    {
-      "@id": "#b206",
-      "@type": "PropertyValue",
-      "name": "AFFineTune",
-      "value": "Off"
-    },
-    {
-      "@id": "#b207",
-      "@type": "PropertyValue",
-      "name": "AFFineTuneAdj",
-      "value": "0 0 0"
-    },
-    {
-      "@id": "#b208",
-      "@type": "PropertyValue",
-      "name": "AFPoint",
-      "value": "Left (or n/a)"
-    },
-    {
-      "@id": "#b209",
-      "@type": "PropertyValue",
-      "name": "AFPointSelected",
-      "value": "(49%,69%) (49%,69%)"
-    },
-    {
-      "@id": "#b21",
-      "@type": "PropertyValue",
-      "name": "ColorSpace",
-      "value": "sRGB"
-    },
-    {
-      "@id": "#b210",
-      "@type": "PropertyValue",
-      "name": "AFSearch",
-      "value": "Ready"
-    },
-    {
-      "@id": "#b211",
-      "@type": "PropertyValue",
-      "name": "Aperture",
-      "value": 6.3
-    },
-    {
-      "@id": "#b212",
-      "@type": "PropertyValue",
-      "name": "ArtFilter",
-      "value": "Off; 0; 0; 0"
-    },
-    {
-      "@id": "#b213",
-      "@type": "PropertyValue",
-      "name": "AspectFrame",
-      "value": "0 0 4031 2687"
-    },
-    {
-      "@id": "#b214",
-      "@type": "PropertyValue",
-      "name": "AspectRatio",
-      "value": "3:2"
-    },
-    {
-      "@id": "#b215",
-      "@type": "PropertyValue",
-      "name": "BitsPerSample",
-      "value": 8
-    },
-    {
-      "@id": "#b216",
-      "@type": "PropertyValue",
-      "name": "BlackLevel2",
-      "value": "64 64 64 64"
-    },
-    {
-      "@id": "#b217",
-      "@type": "PropertyValue",
-      "name": "BlueBalance",
-      "value": 1.367188
-    },
-    {
-      "@id": "#b218",
-      "@type": "PropertyValue",
-      "name": "BodyFirmwareVersion",
-      "value": 1.103
-    },
-    {
-      "@id": "#b219",
-      "@type": "PropertyValue",
-      "name": "CameraID",
-      "value": "OLYMPUS DIGITAL CAMERA         "
-    },
-    {
-      "@id": "#b22",
-      "@type": "PropertyValue",
-      "name": "ComponentsConfiguration",
-      "value": "Y, Cb, Cr, -"
-    },
-    {
-      "@id": "#b220",
-      "@type": "PropertyValue",
-      "name": "CameraSettingsVersion",
-      "value": "0100"
-    },
-    {
-      "@id": "#b221",
-      "@type": "PropertyValue",
-      "name": "CameraType2",
-      "value": "E-PL1"
-    },
-    {
-      "@id": "#b222",
-      "@type": "PropertyValue",
-      "name": "CircleOfConfusion",
-      "value": "0.015 mm"
-    },
-    {
-      "@id": "#b223",
-      "@type": "PropertyValue",
-      "name": "ColorComponents",
-      "value": 3
-    },
-    {
-      "@id": "#b224",
-      "@type": "PropertyValue",
-      "name": "ColorMatrix",
-      "value": "322 -40 -26 -32 332 -44 -2 -72 330"
-    },
-    {
-      "@id": "#b225",
-      "@type": "PropertyValue",
-      "name": "ColorSpace",
-      "value": "sRGB"
-    },
-    {
-      "@id": "#b226",
-      "@type": "PropertyValue",
-      "name": "ComponentsConfiguration",
-      "value": "Y, Cb, Cr, -"
-    },
-    {
-      "@id": "#b227",
-      "@type": "PropertyValue",
-      "name": "Compression",
-      "value": "JPEG (old-style)"
-    },
-    {
-      "@id": "#b228",
-      "@type": "PropertyValue",
-      "name": "CompressionFactor",
-      "value": 4
-    },
-    {
-      "@id": "#b229",
-      "@type": "PropertyValue",
-      "name": "Contrast",
-      "value": "Normal"
-    },
-    {
-      "@id": "#b23",
-      "@type": "PropertyValue",
-      "name": "Compression",
-      "value": "JPEG (old-style)"
-    },
-    {
-      "@id": "#b230",
-      "@type": "PropertyValue",
-      "name": "ContrastSetting",
-      "value": "0 (min -5, max 5)"
-    },
-    {
-      "@id": "#b231",
-      "@type": "PropertyValue",
-      "name": "CreateDate",
-      "value": "2017:06:11 12:56:14"
-    },
-    {
-      "@id": "#b232",
-      "@type": "PropertyValue",
-      "name": "CropHeight",
-      "value": 3024
-    },
-    {
-      "@id": "#b233",
-      "@type": "PropertyValue",
-      "name": "CropLeft",
-      "value": "28 0"
-    },
-    {
-      "@id": "#b234",
-      "@type": "PropertyValue",
-      "name": "CropTop",
-      "value": "30 0"
-    },
-    {
-      "@id": "#b235",
-      "@type": "PropertyValue",
-      "name": "CropWidth",
-      "value": 4032
-    },
-    {
-      "@id": "#b236",
-      "@type": "PropertyValue",
-      "name": "CustomRendered",
-      "value": "Normal"
-    },
-    {
-      "@id": "#b237",
-      "@type": "PropertyValue",
-      "name": "CustomSaturation",
-      "value": "1 (min -5, max 5)"
-    },
-    {
-      "@id": "#b238",
-      "@type": "PropertyValue",
-      "name": "DOF",
-      "value": "0.98 m (1.04 - 2.02 m)"
-    },
-    {
-      "@id": "#b239",
-      "@type": "PropertyValue",
-      "name": "DateTimeOriginal",
-      "value": "2017:06:11 12:56:14"
-    },
-    {
-      "@id": "#b24",
-      "@type": "PropertyValue",
-      "name": "CompressionFactor",
-      "value": 4
-    },
-    {
-      "@id": "#b240",
-      "@type": "PropertyValue",
-      "name": "DigitalZoomRatio",
-      "value": 1
-    },
-    {
-      "@id": "#b241",
-      "@type": "PropertyValue",
-      "name": "Directory",
-      "value": "test_data/sample/pics"
-    },
-    {
-      "@id": "#b242",
-      "@type": "PropertyValue",
-      "name": "DistortionCorrection",
-      "value": "Off"
-    },
-    {
-      "@id": "#b243",
-      "@type": "PropertyValue",
-      "name": "DistortionCorrection2",
-      "value": "Off"
-    },
-    {
-      "@id": "#b244",
-      "@type": "PropertyValue",
-      "name": "DriveMode",
-      "value": "Single Shot"
-    },
-    {
-      "@id": "#b245",
-      "@type": "PropertyValue",
-      "name": "EncodingProcess",
-      "value": "Baseline DCT, Huffman coding"
-    },
-    {
-      "@id": "#b246",
-      "@type": "PropertyValue",
-      "name": "EquipmentVersion",
-      "value": "0100"
-    },
-    {
-      "@id": "#b247",
-      "@type": "PropertyValue",
-      "name": "ExifByteOrder",
-      "value": "Little-endian (Intel, II)"
-    },
-    {
-      "@id": "#b248",
-      "@type": "PropertyValue",
-      "name": "ExifImageHeight",
-      "value": 2688
-    },
-    {
-      "@id": "#b249",
-      "@type": "PropertyValue",
-      "name": "ExifImageWidth",
-      "value": 4032
-    },
-    {
-      "@id": "#b25",
-      "@type": "PropertyValue",
-      "name": "Contrast",
-      "value": "Normal"
-    },
-    {
-      "@id": "#b250",
-      "@type": "PropertyValue",
-      "name": "ExifToolVersion",
-      "value": 10.8
-    },
-    {
-      "@id": "#b251",
-      "@type": "PropertyValue",
-      "name": "ExifVersion",
-      "value": "0221"
-    },
-    {
-      "@id": "#b252",
-      "@type": "PropertyValue",
-      "name": "ExposureCompensation",
-      "value": -0.3
-    },
-    {
-      "@id": "#b253",
-      "@type": "PropertyValue",
-      "name": "ExposureMode",
-      "value": "Manual"
-    },
-    {
-      "@id": "#b254",
-      "@type": "PropertyValue",
-      "name": "ExposureProgram",
-      "value": "Aperture-priority AE"
-    },
-    {
-      "@id": "#b255",
-      "@type": "PropertyValue",
-      "name": "ExposureShift",
-      "value": 0
-    },
-    {
-      "@id": "#b256",
-      "@type": "PropertyValue",
-      "name": "ExposureTime",
-      "value": "1/80"
-    },
-    {
-      "@id": "#b257",
-      "@type": "PropertyValue",
-      "name": "ExtendedWBDetect",
-      "value": "Off"
-    },
-    {
-      "@id": "#b258",
-      "@type": "PropertyValue",
-      "name": "Extender",
-      "value": "None"
-    },
-    {
-      "@id": "#b259",
-      "@type": "PropertyValue",
-      "name": "ExtenderFirmwareVersion",
-      "value": 0
-    },
-    {
-      "@id": "#b26",
-      "@type": "PropertyValue",
-      "name": "ContrastSetting",
-      "value": "0 (min -5, max 5)"
-    },
-    {
-      "@id": "#b260",
-      "@type": "PropertyValue",
-      "name": "ExtenderModel",
-      "value": ""
-    },
-    {
-      "@id": "#b261",
-      "@type": "PropertyValue",
-      "name": "ExtenderSerialNumber",
-      "value": ""
-    },
-    {
-      "@id": "#b262",
-      "@type": "PropertyValue",
-      "name": "ExtenderStatus",
-      "value": "Not attached"
-    },
-    {
-      "@id": "#b263",
-      "@type": "PropertyValue",
-      "name": "ExternalFlash",
-      "value": "Off"
-    },
-    {
-      "@id": "#b264",
-      "@type": "PropertyValue",
-      "name": "ExternalFlashBounce",
-      "value": "Bounce or Off"
-    },
-    {
-      "@id": "#b265",
-      "@type": "PropertyValue",
-      "name": "ExternalFlashZoom",
-      "value": 0
-    },
-    {
-      "@id": "#b266",
-      "@type": "PropertyValue",
-      "name": "FNumber",
-      "value": 6.3
-    },
-    {
-      "@id": "#b267",
-      "@type": "PropertyValue",
-      "name": "FOV",
-      "value": "47.8 deg (1.22 m)"
-    },
-    {
-      "@id": "#b268",
-      "@type": "PropertyValue",
-      "name": "FaceDetectArea",
-      "value": "(Binary data 383 bytes, use -b option to extract)"
-    },
-    {
-      "@id": "#b269",
-      "@type": "PropertyValue",
-      "name": "FaceDetectFrameCrop",
-      "value": "0 14 320 212 0 14 320 212 0 0 0 0"
-    },
-    {
-      "@id": "#b27",
-      "@type": "PropertyValue",
-      "name": "CreateDate",
-      "value": "2017:06:11 12:56:14"
-    },
-    {
-      "@id": "#b270",
-      "@type": "PropertyValue",
-      "name": "FaceDetectFrameSize",
-      "value": "320 240 320 240 0 0"
-    },
-    {
-      "@id": "#b271",
-      "@type": "PropertyValue",
-      "name": "FacesDetected",
-      "value": "0 0 0"
-    },
-    {
-      "@id": "#b272",
-      "@type": "PropertyValue",
-      "name": "FileAccessDate",
-      "value": "2018:09:19 17:01:08+10:00"
-    },
-    {
-      "@id": "#b273",
-      "@type": "PropertyValue",
-      "name": "FileInodeChangeDate",
-      "value": "2018:09:19 17:01:07+10:00"
-    },
-    {
-      "@id": "#b274",
-      "@type": "PropertyValue",
-      "name": "FileModifyDate",
-      "value": "2018:09:19 17:01:07+10:00"
-    },
-    {
-      "@id": "#b275",
-      "@type": "PropertyValue",
-      "name": "FileName",
-      "value": "sepia_fence.jpg"
-    },
-    {
-      "@id": "#b276",
-      "@type": "PropertyValue",
-      "name": "FilePermissions",
-      "value": "rw-r--r--"
-    },
-    {
-      "@id": "#b277",
-      "@type": "PropertyValue",
-      "name": "FileSize",
-      "value": "4.6 MB"
-    },
-    {
-      "@id": "#b278",
-      "@type": "PropertyValue",
-      "name": "FileSource",
-      "value": "Digital Camera"
-    },
-    {
-      "@id": "#b279",
-      "@type": "PropertyValue",
-      "name": "FileType",
-      "value": "JPEG"
-    },
-    {
-      "@id": "#b28",
-      "@type": "PropertyValue",
-      "name": "CropHeight",
-      "value": 3024
-    },
-    {
-      "@id": "#b280",
-      "@type": "PropertyValue",
-      "name": "FileTypeExtension",
-      "value": "jpg"
-    },
-    {
-      "@id": "#b281",
-      "@type": "PropertyValue",
-      "name": "Flash",
-      "value": "On, Did not fire"
-    },
-    {
-      "@id": "#b282",
-      "@type": "PropertyValue",
-      "name": "FlashControlMode",
-      "value": "Off; 0; 0"
-    },
-    {
-      "@id": "#b283",
-      "@type": "PropertyValue",
-      "name": "FlashExposureComp",
-      "value": 0
-    },
-    {
-      "@id": "#b284",
-      "@type": "PropertyValue",
-      "name": "FlashFirmwareVersion",
-      "value": 0
-    },
-    {
-      "@id": "#b285",
-      "@type": "PropertyValue",
-      "name": "FlashIntensity",
-      "value": "n/a"
-    },
-    {
-      "@id": "#b286",
-      "@type": "PropertyValue",
-      "name": "FlashMode",
-      "value": "Fill-in"
-    },
-    {
-      "@id": "#b287",
-      "@type": "PropertyValue",
-      "name": "FlashModel",
-      "value": "None"
-    },
-    {
-      "@id": "#b288",
-      "@type": "PropertyValue",
-      "name": "FlashRemoteControl",
-      "value": "Off"
-    },
-    {
-      "@id": "#b289",
-      "@type": "PropertyValue",
-      "name": "FlashSerialNumber",
-      "value": ""
-    },
-    {
-      "@id": "#b29",
-      "@type": "PropertyValue",
-      "name": "CropLeft",
-      "value": "28 0"
-    },
-    {
-      "@id": "#b290",
-      "@type": "PropertyValue",
-      "name": "FlashType",
-      "value": "None"
-    },
-    {
-      "@id": "#b291",
-      "@type": "PropertyValue",
-      "name": "FlashpixVersion",
-      "value": "0100"
-    },
-    {
-      "@id": "#b292",
-      "@type": "PropertyValue",
-      "name": "FocalLength",
-      "value": "20.0 mm"
-    },
-    {
-      "@id": "#b293",
-      "@type": "PropertyValue",
-      "name": "FocalLength35efl",
-      "value": "20.0 mm (35 mm equivalent: 40.1 mm)"
-    },
-    {
-      "@id": "#b294",
-      "@type": "PropertyValue",
-      "name": "FocalPlaneDiagonal",
-      "value": "21.6 mm"
-    },
-    {
-      "@id": "#b295",
-      "@type": "PropertyValue",
-      "name": "FocusDistance",
-      "value": "1.375 m"
-    },
-    {
-      "@id": "#b296",
-      "@type": "PropertyValue",
-      "name": "FocusInfoVersion",
-      "value": "0100"
-    },
-    {
-      "@id": "#b297",
-      "@type": "PropertyValue",
-      "name": "FocusMode",
-      "value": "Single AF; S-AF, Imager AF"
-    },
-    {
-      "@id": "#b298",
-      "@type": "PropertyValue",
-      "name": "FocusProcess",
-      "value": "AF Used; 64"
-    },
-    {
-      "@id": "#b299",
-      "@type": "PropertyValue",
-      "name": "FocusStepCount",
-      "value": 3151
-    },
-    {
-      "@id": "#b3",
-      "@type": "PropertyValue",
-      "name": "AFFineTuneAdj",
-      "value": "0 0 0"
-    },
-    {
-      "@id": "#b30",
-      "@type": "PropertyValue",
-      "name": "CropTop",
-      "value": "30 0"
-    },
-    {
-      "@id": "#b300",
-      "@type": "PropertyValue",
-      "name": "GainBase",
-      "value": 256
-    },
-    {
-      "@id": "#b301",
-      "@type": "PropertyValue",
-      "name": "GainControl",
-      "value": "High gain up"
-    },
-    {
-      "@id": "#b302",
-      "@type": "PropertyValue",
-      "name": "Gradation",
-      "value": "Normal; Auto-Override"
-    },
-    {
-      "@id": "#b303",
-      "@type": "PropertyValue",
-      "name": "HyperfocalDistance",
-      "value": "4.23 m"
-    },
-    {
-      "@id": "#b304",
-      "@type": "PropertyValue",
-      "name": "ISO",
-      "value": 400
-    },
-    {
-      "@id": "#b305",
-      "@type": "PropertyValue",
-      "name": "ImageDescription",
-      "value": "OLYMPUS DIGITAL CAMERA         "
-    },
-    {
-      "@id": "#b306",
-      "@type": "PropertyValue",
-      "name": "ImageHeight",
-      "value": 2688
-    },
-    {
-      "@id": "#b307",
-      "@type": "PropertyValue",
-      "name": "ImageProcessingVersion",
-      "value": "0112"
-    },
-    {
-      "@id": "#b308",
-      "@type": "PropertyValue",
-      "name": "ImageSize",
-      "value": "4032x2688"
-    },
-    {
-      "@id": "#b309",
-      "@type": "PropertyValue",
-      "name": "ImageStabilization",
-      "value": "On, Mode 1"
-    },
-    {
-      "@id": "#b31",
-      "@type": "PropertyValue",
-      "name": "CropWidth",
-      "value": 4032
-    },
-    {
-      "@id": "#b310",
-      "@type": "PropertyValue",
-      "name": "ImageWidth",
-      "value": 4032
-    },
-    {
-      "@id": "#b311",
-      "@type": "PropertyValue",
-      "name": "InternalFlash",
-      "value": "Off"
-    },
-    {
-      "@id": "#b312",
-      "@type": "PropertyValue",
-      "name": "InternalSerialNumber",
-      "value": "4102011002108002               "
-    },
-    {
-      "@id": "#b313",
-      "@type": "PropertyValue",
-      "name": "InteropIndex",
-      "value": "R98 - DCF basic file (sRGB)"
-    },
-    {
-      "@id": "#b314",
-      "@type": "PropertyValue",
-      "name": "InteropVersion",
-      "value": "0100"
-    },
-    {
-      "@id": "#b315",
-      "@type": "PropertyValue",
-      "name": "JFIFVersion",
-      "value": 1.01
-    },
-    {
-      "@id": "#b316",
-      "@type": "PropertyValue",
-      "name": "LensFirmwareVersion",
-      "value": 1.1
-    },
-    {
-      "@id": "#b317",
-      "@type": "PropertyValue",
-      "name": "LensID",
-      "value": "Lumix G 20mm F1.7 Asph."
-    },
-    {
-      "@id": "#b318",
-      "@type": "PropertyValue",
-      "name": "LensModel",
-      "value": "LUMIX G 20/F1.7"
-    },
-    {
-      "@id": "#b319",
-      "@type": "PropertyValue",
-      "name": "LensProperties",
-      "value": "0x4110"
-    },
-    {
-      "@id": "#b32",
-      "@type": "PropertyValue",
-      "name": "CustomRendered",
-      "value": "Normal"
-    },
-    {
-      "@id": "#b320",
-      "@type": "PropertyValue",
-      "name": "LensSerialNumber",
-      "value": "01FG3033651"
-    },
-    {
-      "@id": "#b321",
-      "@type": "PropertyValue",
-      "name": "LensType",
-      "value": "Lumix G 20mm F1.7 Asph."
-    },
-    {
-      "@id": "#b322",
-      "@type": "PropertyValue",
-      "name": "LightSource",
-      "value": "Unknown"
-    },
-    {
-      "@id": "#b323",
-      "@type": "PropertyValue",
-      "name": "LightValue",
-      "value": 9.6
-    },
-    {
-      "@id": "#b324",
-      "@type": "PropertyValue",
-      "name": "MIMEType",
-      "value": "image/jpeg"
-    },
-    {
-      "@id": "#b325",
-      "@type": "PropertyValue",
-      "name": "MacroLED",
-      "value": "Off"
-    },
-    {
-      "@id": "#b326",
-      "@type": "PropertyValue",
-      "name": "MacroMode",
-      "value": "Off"
-    },
-    {
-      "@id": "#b327",
-      "@type": "PropertyValue",
-      "name": "Make",
-      "value": "OLYMPUS IMAGING CORP."
-    },
-    {
-      "@id": "#b328",
-      "@type": "PropertyValue",
-      "name": "ManometerPressure",
-      "value": "0 kPa"
-    },
-    {
-      "@id": "#b329",
-      "@type": "PropertyValue",
-      "name": "ManometerReading",
-      "value": "0 m, 0 ft"
-    },
-    {
-      "@id": "#b33",
-      "@type": "PropertyValue",
-      "name": "CustomSaturation",
-      "value": "1 (min -5, max 5)"
-    },
-    {
-      "@id": "#b330",
-      "@type": "PropertyValue",
-      "name": "ManualFlash",
-      "value": "Off"
-    },
-    {
-      "@id": "#b331",
-      "@type": "PropertyValue",
-      "name": "ManualFlashStrength",
-      "value": "n/a"
-    },
-    {
-      "@id": "#b332",
-      "@type": "PropertyValue",
-      "name": "MaxAperture",
-      "value": 1.8
-    },
-    {
-      "@id": "#b333",
-      "@type": "PropertyValue",
-      "name": "MaxApertureAtMaxFocal",
-      "value": 1.7
-    },
-    {
-      "@id": "#b334",
-      "@type": "PropertyValue",
-      "name": "MaxApertureAtMinFocal",
-      "value": 1.7
-    },
-    {
-      "@id": "#b335",
-      "@type": "PropertyValue",
-      "name": "MaxApertureValue",
-      "value": 1.7
-    },
-    {
-      "@id": "#b336",
-      "@type": "PropertyValue",
-      "name": "MaxFaces",
-      "value": "8 8 0"
-    },
-    {
-      "@id": "#b337",
-      "@type": "PropertyValue",
-      "name": "MaxFocalLength",
-      "value": 20
-    },
-    {
-      "@id": "#b338",
-      "@type": "PropertyValue",
-      "name": "Megapixels",
-      "value": 10.8
-    },
-    {
-      "@id": "#b339",
-      "@type": "PropertyValue",
-      "name": "MeteringMode",
-      "value": "ESP"
-    },
-    {
-      "@id": "#b34",
-      "@type": "PropertyValue",
-      "name": "DOF",
-      "value": "0.98 m (1.04 - 2.02 m)"
-    },
-    {
-      "@id": "#b340",
-      "@type": "PropertyValue",
-      "name": "MinFocalLength",
-      "value": 20
-    },
-    {
-      "@id": "#b341",
-      "@type": "PropertyValue",
-      "name": "Model",
-      "value": "E-PL1"
-    },
-    {
-      "@id": "#b342",
-      "@type": "PropertyValue",
-      "name": "ModifiedSaturation",
-      "value": "Off"
-    },
-    {
-      "@id": "#b343",
-      "@type": "PropertyValue",
-      "name": "ModifyDate",
-      "value": "2017:06:11 12:56:14"
-    },
-    {
-      "@id": "#b344",
-      "@type": "PropertyValue",
-      "name": "MultipleExposureMode",
-      "value": "Off; 1"
-    },
-    {
-      "@id": "#b345",
-      "@type": "PropertyValue",
-      "name": "NoiseFilter",
-      "value": "Standard"
-    },
-    {
-      "@id": "#b346",
-      "@type": "PropertyValue",
-      "name": "NoiseReduction",
-      "value": "Auto"
-    },
-    {
-      "@id": "#b347",
-      "@type": "PropertyValue",
-      "name": "NoiseReduction2",
-      "value": "(none)"
-    },
-    {
-      "@id": "#b348",
-      "@type": "PropertyValue",
-      "name": "Orientation",
-      "value": "Horizontal (normal)"
-    },
-    {
-      "@id": "#b349",
-      "@type": "PropertyValue",
-      "name": "PanoramaMode",
-      "value": "Off"
-    },
-    {
-      "@id": "#b35",
-      "@type": "PropertyValue",
-      "name": "DateTimeOriginal",
-      "value": "2017:06:11 12:56:14"
-    },
-    {
-      "@id": "#b350",
-      "@type": "PropertyValue",
-      "name": "PictureMode",
-      "value": "Vivid; 2"
-    },
-    {
-      "@id": "#b351",
-      "@type": "PropertyValue",
-      "name": "PictureModeBWFilter",
-      "value": "n/a"
-    },
-    {
-      "@id": "#b352",
-      "@type": "PropertyValue",
-      "name": "PictureModeContrast",
-      "value": "0 (min -2, max 2)"
-    },
-    {
-      "@id": "#b353",
-      "@type": "PropertyValue",
-      "name": "PictureModeEffect",
-      "value": "Standard"
-    },
-    {
-      "@id": "#b354",
-      "@type": "PropertyValue",
-      "name": "PictureModeSaturation",
-      "value": "0 (min -2, max 2)"
-    },
-    {
-      "@id": "#b355",
-      "@type": "PropertyValue",
-      "name": "PictureModeSharpness",
-      "value": "0 (min -2, max 2)"
-    },
-    {
-      "@id": "#b356",
-      "@type": "PropertyValue",
-      "name": "PictureModeTone",
-      "value": "n/a"
-    },
-    {
-      "@id": "#b357",
-      "@type": "PropertyValue",
-      "name": "PreviewImage",
-      "value": "(Binary data 514170 bytes, use -b option to extract)"
-    },
-    {
-      "@id": "#b358",
-      "@type": "PropertyValue",
-      "name": "PreviewImageLength",
-      "value": 514170
-    },
-    {
-      "@id": "#b359",
-      "@type": "PropertyValue",
-      "name": "PreviewImageStart",
-      "value": 4600626
-    },
-    {
-      "@id": "#b36",
-      "@type": "PropertyValue",
-      "name": "DigitalZoomRatio",
-      "value": 1
-    },
-    {
-      "@id": "#b360",
-      "@type": "PropertyValue",
-      "name": "PreviewImageValid",
-      "value": "Yes"
-    },
-    {
-      "@id": "#b361",
-      "@type": "PropertyValue",
-      "name": "PrintIMVersion",
-      "value": "0300"
-    },
-    {
-      "@id": "#b362",
-      "@type": "PropertyValue",
-      "name": "RawDevColorSpace",
-      "value": "sRGB"
-    },
-    {
-      "@id": "#b363",
-      "@type": "PropertyValue",
-      "name": "RawDevContrastValue",
-      "value": "0 0 0"
-    },
-    {
-      "@id": "#b364",
-      "@type": "PropertyValue",
-      "name": "RawDevEditStatus",
-      "value": "Original"
-    },
-    {
-      "@id": "#b365",
-      "@type": "PropertyValue",
-      "name": "RawDevEngine",
-      "value": "High Speed"
-    },
-    {
-      "@id": "#b366",
-      "@type": "PropertyValue",
-      "name": "RawDevExposureBiasValue",
-      "value": 0
-    },
-    {
-      "@id": "#b367",
-      "@type": "PropertyValue",
-      "name": "RawDevGrayPoint",
-      "value": "0 0 0"
-    },
-    {
-      "@id": "#b368",
-      "@type": "PropertyValue",
-      "name": "RawDevMemoryColorEmphasis",
-      "value": 0
-    },
-    {
-      "@id": "#b369",
-      "@type": "PropertyValue",
-      "name": "RawDevNoiseReduction",
-      "value": "(none)"
-    },
-    {
-      "@id": "#b37",
-      "@type": "PropertyValue",
-      "name": "Directory",
-      "value": "test_data/sample/pics"
-    },
-    {
-      "@id": "#b370",
-      "@type": "PropertyValue",
-      "name": "RawDevSaturationEmphasis",
-      "value": "0 0 0"
-    },
-    {
-      "@id": "#b371",
-      "@type": "PropertyValue",
-      "name": "RawDevSettings",
-      "value": "(none)"
-    },
-    {
-      "@id": "#b372",
-      "@type": "PropertyValue",
-      "name": "RawDevSharpnessValue",
-      "value": "0 0 0"
-    },
-    {
-      "@id": "#b373",
-      "@type": "PropertyValue",
-      "name": "RawDevVersion",
-      "value": "0100"
-    },
-    {
-      "@id": "#b374",
-      "@type": "PropertyValue",
-      "name": "RawDevWBFineAdjustment",
-      "value": 0
-    },
-    {
-      "@id": "#b375",
-      "@type": "PropertyValue",
-      "name": "RawDevWhiteBalanceValue",
-      "value": 0
-    },
-    {
-      "@id": "#b376",
-      "@type": "PropertyValue",
-      "name": "RedBalance",
-      "value": 1.78125
-    },
-    {
-      "@id": "#b377",
-      "@type": "PropertyValue",
-      "name": "ResolutionUnit",
-      "value": "inches"
-    },
-    {
-      "@id": "#b378",
-      "@type": "PropertyValue",
-      "name": "Saturation",
-      "value": "High"
-    },
-    {
-      "@id": "#b379",
-      "@type": "PropertyValue",
-      "name": "ScaleFactor35efl",
-      "value": 2
-    },
-    {
-      "@id": "#b38",
-      "@type": "PropertyValue",
-      "name": "DistortionCorrection",
-      "value": "Off"
-    },
-    {
-      "@id": "#b380",
-      "@type": "PropertyValue",
-      "name": "SceneCaptureType",
-      "value": "Standard"
-    },
-    {
-      "@id": "#b381",
-      "@type": "PropertyValue",
-      "name": "SceneDetect",
-      "value": 0
-    },
-    {
-      "@id": "#b382",
-      "@type": "PropertyValue",
-      "name": "SceneMode",
-      "value": "Standard"
-    },
-    {
-      "@id": "#b383",
-      "@type": "PropertyValue",
-      "name": "SensorCalibration",
-      "value": "0 0"
-    },
-    {
-      "@id": "#b384",
-      "@type": "PropertyValue",
-      "name": "SensorTemperature",
-      "value": "48.0 C"
-    },
-    {
-      "@id": "#b385",
-      "@type": "PropertyValue",
-      "name": "SerialNumber",
-      "value": "B3B505338"
-    },
-    {
-      "@id": "#b386",
-      "@type": "PropertyValue",
-      "name": "ShadingCompensation",
-      "value": "Off"
-    },
-    {
-      "@id": "#b387",
-      "@type": "PropertyValue",
-      "name": "ShadingCompensation2",
-      "value": "Off"
-    },
-    {
-      "@id": "#b388",
-      "@type": "PropertyValue",
-      "name": "Sharpness",
-      "value": "Hard"
-    },
-    {
-      "@id": "#b389",
-      "@type": "PropertyValue",
-      "name": "SharpnessSetting",
-      "value": "1 (min -5, max 5)"
-    },
-    {
-      "@id": "#b39",
-      "@type": "PropertyValue",
-      "name": "DistortionCorrection2",
-      "value": "Off"
-    },
-    {
-      "@id": "#b390",
-      "@type": "PropertyValue",
-      "name": "ShutterSpeed",
-      "value": "1/80"
-    },
-    {
-      "@id": "#b391",
-      "@type": "PropertyValue",
-      "name": "Software",
-      "value": "Version 1.1"
-    },
-    {
-      "@id": "#b392",
-      "@type": "PropertyValue",
-      "name": "SourceFile",
-      "value": "test_data/sample/pics/sepia_fence.jpg"
-    },
-    {
-      "@id": "#b393",
-      "@type": "PropertyValue",
-      "name": "SpecialMode",
-      "value": "Normal, Sequence: 0, Panorama: (none)"
-    },
-    {
-      "@id": "#b394",
-      "@type": "PropertyValue",
-      "name": "ThumbnailImage",
-      "value": "(Binary data 7738 bytes, use -b option to extract)"
-    },
-    {
-      "@id": "#b395",
-      "@type": "PropertyValue",
-      "name": "ThumbnailLength",
-      "value": 7738
-    },
-    {
-      "@id": "#b396",
-      "@type": "PropertyValue",
-      "name": "ThumbnailOffset",
-      "value": 14482
-    },
-    {
-      "@id": "#b397",
-      "@type": "PropertyValue",
-      "name": "ToneLevel",
-      "value": "0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0"
-    },
-    {
-      "@id": "#b398",
-      "@type": "PropertyValue",
-      "name": "UserComment",
-      "value": ""
-    },
-    {
-      "@id": "#b399",
-      "@type": "PropertyValue",
-      "name": "WB_RBLevels",
-      "value": "456 350 256 260"
-    },
-    {
-      "@id": "#b4",
-      "@type": "PropertyValue",
-      "name": "AFPoint",
-      "value": "Left (or n/a)"
-    },
-    {
-      "@id": "#b40",
-      "@type": "PropertyValue",
-      "name": "DriveMode",
-      "value": "Single Shot"
-    },
-    {
-      "@id": "#b400",
-      "@type": "PropertyValue",
-      "name": "WhiteBalance",
-      "value": "Auto"
-    },
-    {
-      "@id": "#b401",
-      "@type": "PropertyValue",
-      "name": "WhiteBalance2",
-      "value": "Auto"
-    },
-    {
-      "@id": "#b402",
-      "@type": "PropertyValue",
-      "name": "WhiteBalanceBracket",
-      "value": "0 0"
-    },
-    {
-      "@id": "#b403",
-      "@type": "PropertyValue",
-      "name": "WhiteBalanceTemperature",
-      "value": "Auto"
-    },
-    {
-      "@id": "#b404",
-      "@type": "PropertyValue",
-      "name": "XResolution",
-      "value": 314
-    },
-    {
-      "@id": "#b405",
-      "@type": "PropertyValue",
-      "name": "YCbCrPositioning",
-      "value": "Co-sited"
-    },
-    {
-      "@id": "#b406",
-      "@type": "PropertyValue",
-      "name": "YCbCrSubSampling",
-      "value": "YCbCr4:2:2 (2 1)"
-    },
-    {
-      "@id": "#b407",
-      "@type": "PropertyValue",
-      "name": "YResolution",
-      "value": 314
-    },
-    {
-      "@id": "#b408",
-      "@type": "PropertyValue",
-      "name": "ZoomStepCount",
-      "value": 0
-    },
-    {
-      "@id": "#b41",
-      "@type": "PropertyValue",
-      "name": "EncodingProcess",
-      "value": "Baseline DCT, Huffman coding"
-    },
-    {
-      "@id": "#b42",
-      "@type": "PropertyValue",
-      "name": "EquipmentVersion",
-      "value": "0100"
-    },
-    {
-      "@id": "#b43",
-      "@type": "PropertyValue",
-      "name": "ExifByteOrder",
-      "value": "Little-endian (Intel, II)"
-    },
-    {
-      "@id": "#b44",
-      "@type": "PropertyValue",
-      "name": "ExifImageHeight",
-      "value": 2688
-    },
-    {
-      "@id": "#b45",
-      "@type": "PropertyValue",
-      "name": "ExifImageWidth",
-      "value": 4032
-    },
-    {
-      "@id": "#b46",
-      "@type": "PropertyValue",
-      "name": "ExifToolVersion",
-      "value": 10.8
-    },
-    {
-      "@id": "#b47",
-      "@type": "PropertyValue",
-      "name": "ExifVersion",
-      "value": "0221"
-    },
-    {
-      "@id": "#b48",
-      "@type": "PropertyValue",
-      "name": "ExposureCompensation",
-      "value": -0.3
-    },
-    {
-      "@id": "#b49",
-      "@type": "PropertyValue",
-      "name": "ExposureMode",
-      "value": "Manual"
-    },
-    {
-      "@id": "#b5",
-      "@type": "PropertyValue",
-      "name": "AFPointSelected",
-      "value": "(49%,69%) (49%,69%)"
-    },
-    {
-      "@id": "#b50",
-      "@type": "PropertyValue",
-      "name": "ExposureProgram",
-      "value": "Aperture-priority AE"
-    },
-    {
-      "@id": "#b51",
-      "@type": "PropertyValue",
-      "name": "ExposureShift",
-      "value": 0
-    },
-    {
-      "@id": "#b52",
-      "@type": "PropertyValue",
-      "name": "ExposureTime",
-      "value": "1/80"
-    },
-    {
-      "@id": "#b53",
-      "@type": "PropertyValue",
-      "name": "ExtendedWBDetect",
-      "value": "Off"
-    },
-    {
-      "@id": "#b54",
-      "@type": "PropertyValue",
-      "name": "Extender",
-      "value": "None"
-    },
-    {
-      "@id": "#b55",
-      "@type": "PropertyValue",
-      "name": "ExtenderFirmwareVersion",
-      "value": 0
-    },
-    {
-      "@id": "#b56",
-      "@type": "PropertyValue",
-      "name": "ExtenderModel",
-      "value": ""
-    },
-    {
-      "@id": "#b57",
-      "@type": "PropertyValue",
-      "name": "ExtenderSerialNumber",
-      "value": ""
-    },
-    {
-      "@id": "#b58",
-      "@type": "PropertyValue",
-      "name": "ExtenderStatus",
-      "value": "Not attached"
-    },
-    {
-      "@id": "#b59",
-      "@type": "PropertyValue",
-      "name": "ExternalFlash",
-      "value": "Off"
-    },
-    {
-      "@id": "#b6",
-      "@type": "PropertyValue",
-      "name": "AFSearch",
-      "value": "Ready"
-    },
-    {
-      "@id": "#b60",
-      "@type": "PropertyValue",
-      "name": "ExternalFlashBounce",
-      "value": "Bounce or Off"
-    },
-    {
-      "@id": "#b61",
-      "@type": "PropertyValue",
-      "name": "ExternalFlashZoom",
-      "value": 0
-    },
-    {
-      "@id": "#b62",
-      "@type": "PropertyValue",
-      "name": "FNumber",
-      "value": 6.3
-    },
-    {
-      "@id": "#b63",
-      "@type": "PropertyValue",
-      "name": "FOV",
-      "value": "47.8 deg (1.22 m)"
-    },
-    {
-      "@id": "#b64",
-      "@type": "PropertyValue",
-      "name": "FaceDetectArea",
-      "value": "(Binary data 383 bytes, use -b option to extract)"
-    },
-    {
-      "@id": "#b65",
-      "@type": "PropertyValue",
-      "name": "FaceDetectFrameCrop",
-      "value": "0 14 320 212 0 14 320 212 0 0 0 0"
-    },
-    {
-      "@id": "#b66",
-      "@type": "PropertyValue",
-      "name": "FaceDetectFrameSize",
-      "value": "320 240 320 240 0 0"
-    },
-    {
-      "@id": "#b67",
-      "@type": "PropertyValue",
-      "name": "FacesDetected",
-      "value": "0 0 0"
-    },
-    {
-      "@id": "#b68",
-      "@type": "PropertyValue",
-      "name": "FileAccessDate",
-      "value": "2018:09:19 16:05:34+10:00"
-    },
-    {
-      "@id": "#b69",
-      "@type": "PropertyValue",
-      "name": "FileInodeChangeDate",
-      "value": "2018:09:19 16:04:32+10:00"
-    },
-    {
-      "@id": "#b7",
-      "@type": "PropertyValue",
-      "name": "Aperture",
-      "value": 6.3
-    },
-    {
-      "@id": "#b70",
-      "@type": "PropertyValue",
-      "name": "FileModifyDate",
-      "value": "2017:06:18 13:10:09+10:00"
-    },
-    {
-      "@id": "#b71",
-      "@type": "PropertyValue",
-      "name": "FileName",
-      "value": "2017-06-11 12.56.14.jpg"
-    },
-    {
-      "@id": "#b72",
-      "@type": "PropertyValue",
-      "name": "FilePermissions",
-      "value": "rw-r--r--"
-    },
-    {
-      "@id": "#b73",
-      "@type": "PropertyValue",
-      "name": "FileSize",
-      "value": "4.9 MB"
-    },
-    {
-      "@id": "#b74",
-      "@type": "PropertyValue",
-      "name": "FileSource",
-      "value": "Digital Camera"
-    },
-    {
-      "@id": "#b75",
-      "@type": "PropertyValue",
-      "name": "FileType",
-      "value": "JPEG"
-    },
-    {
-      "@id": "#b76",
-      "@type": "PropertyValue",
-      "name": "FileTypeExtension",
-      "value": "jpg"
-    },
-    {
-      "@id": "#b77",
-      "@type": "PropertyValue",
-      "name": "Flash",
-      "value": "On, Did not fire"
-    },
-    {
-      "@id": "#b78",
-      "@type": "PropertyValue",
-      "name": "FlashControlMode",
-      "value": "Off; 0; 0"
-    },
-    {
-      "@id": "#b79",
-      "@type": "PropertyValue",
-      "name": "FlashExposureComp",
-      "value": 0
-    },
-    {
-      "@id": "#b8",
-      "@type": "PropertyValue",
-      "name": "ArtFilter",
-      "value": "Off; 0; 0; 0"
-    },
-    {
-      "@id": "#b80",
-      "@type": "PropertyValue",
-      "name": "FlashFirmwareVersion",
-      "value": 0
-    },
-    {
-      "@id": "#b81",
-      "@type": "PropertyValue",
-      "name": "FlashIntensity",
-      "value": "n/a"
-    },
-    {
-      "@id": "#b82",
-      "@type": "PropertyValue",
-      "name": "FlashMode",
-      "value": "Fill-in"
-    },
-    {
-      "@id": "#b83",
-      "@type": "PropertyValue",
-      "name": "FlashModel",
-      "value": "None"
-    },
-    {
-      "@id": "#b84",
-      "@type": "PropertyValue",
-      "name": "FlashRemoteControl",
-      "value": "Off"
-    },
-    {
-      "@id": "#b85",
-      "@type": "PropertyValue",
-      "name": "FlashSerialNumber",
-      "value": ""
-    },
-    {
-      "@id": "#b86",
-      "@type": "PropertyValue",
-      "name": "FlashType",
-      "value": "None"
-    },
-    {
-      "@id": "#b87",
-      "@type": "PropertyValue",
-      "name": "FlashpixVersion",
-      "value": "0100"
-    },
-    {
-      "@id": "#b88",
-      "@type": "PropertyValue",
-      "name": "FocalLength",
-      "value": "20.0 mm"
-    },
-    {
-      "@id": "#b89",
-      "@type": "PropertyValue",
-      "name": "FocalLength35efl",
-      "value": "20.0 mm (35 mm equivalent: 40.1 mm)"
-    },
-    {
-      "@id": "#b9",
-      "@type": "PropertyValue",
-      "name": "AspectFrame",
-      "value": "0 0 4031 2687"
-    },
-    {
-      "@id": "#b90",
-      "@type": "PropertyValue",
-      "name": "FocalPlaneDiagonal",
-      "value": "21.6 mm"
-    },
-    {
-      "@id": "#b91",
-      "@type": "PropertyValue",
-      "name": "FocusDistance",
-      "value": "1.375 m"
-    },
-    {
-      "@id": "#b92",
-      "@type": "PropertyValue",
-      "name": "FocusInfoVersion",
-      "value": "0100"
-    },
-    {
-      "@id": "#b93",
-      "@type": "PropertyValue",
-      "name": "FocusMode",
-      "value": "Single AF; S-AF, Imager AF"
-    },
-    {
-      "@id": "#b94",
-      "@type": "PropertyValue",
-      "name": "FocusProcess",
-      "value": "AF Used; 64"
-    },
-    {
-      "@id": "#b95",
-      "@type": "PropertyValue",
-      "name": "FocusStepCount",
-      "value": 3151
-    },
-    {
-      "@id": "#b96",
-      "@type": "PropertyValue",
-      "name": "GainBase",
-      "value": 256
-    },
-    {
-      "@id": "#b97",
-      "@type": "PropertyValue",
-      "name": "GainControl",
-      "value": "High gain up"
-    },
-    {
-      "@id": "#b98",
-      "@type": "PropertyValue",
-      "name": "Gradation",
-      "value": "Normal; Auto-Override"
-    },
-    {
-      "@id": "#b99",
-      "@type": "PropertyValue",
-      "name": "HyperfocalDistance",
-      "value": "4.23 m"
-    },
-    {
-      "@id": "http://ands.org.au",
-      "@type": "Organization",
-      "description": "The core purpose of the Australian National Data Service (ANDS) is to make Australia’s research data assets more valuable for researchers, research institutions and the nation.",
-      "name": "Australian National Data Service"
+      "@id": "http://orcid.org/0000-0002-3545-944X",
+      "@type": "Person",
+      "name": ""
     },
     {
       "@id": "http://dx.doi.org/10.1000/123456",
@@ -2603,30 +72,11 @@
       "name": "This is an example publication with a dodgy DOI"
     },
     {
-      "@id": "http://eresearch.uts.edu.au/projects/provisioner",
-      "@type": "Organization",
-      "description": "The University of Technology Sydney Provisioner project is ",
-      "funder": [
-        {
-          "@id": "https://ror.org/0384j8v12"
-        },
-        {
-          "@id": "http://ands.org.au"
-        }
-      ],
-      "name": "Provisioner Project"
-    },
-    {
-      "@id": "http://orcid.org/0000-0002-3545-944X",
-      "@type": "Person",
-      "affiliation": {
-        "@id": "https://ror.org/0384j8v12"
-      },
-      "contactPoint": "mailto:peter.sefton@uts.edu.au",
-      "email": "pt@ptsefton.com",
-      "familyName": "Sefton",
-      "givenName": "Peter",
-      "name": "Peter Sefton"
+      "@id": "mailto:peter.sefton@uts.edu.au",
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "peter.sefton@uts.edu.au",
+      "name": "Contact Peter Sefton"
     },
     {
       "@id": "http://www.geonames.org/8152662/catalina-park.html",
@@ -2640,32 +90,33 @@
       "name": "Catalina Park"
     },
     {
+      "@id": "#3e53e101-db05-49ad-a988-d97e484c2310",
+      "@type": "GeoCoordinates",
+      "name": ""
+    },
+    {
+      "@id": "http://ands.org.au",
+      "@type": "Organization",
+      "description": "The core purpose of the Australian National Data Service (ANDS) is to make Australia’s research data assets more valuable for researchers, research institutions and the nation.",
+      "name": "Australian National Data Service"
+    },
+    {
       "@id": "https://creativecommons.org/licenses/by-nc-sa/3.0/au/",
       "@type": "CreativeWork",
       "description": "This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Australia License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/au/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.",
       "name": "Attribution-NonCommercial-ShareAlike 3.0 Australia (CC BY-NC-SA 3.0 AU)"
     },
     {
-      "@id": "https://github.com/UTS-eResearch/projects/datacrate",
-      "@type": "Organization",
-      "description": "The DataCrate project is to write the spec for DataCrate, of which this is an example. The DataCrate project is part of the University of Technology Sydney's Provisioner project, which was part-funded by the Australian National Data Service (ANDS) - now part of the Australian Research Data Commons (ARDC).",
-      "funder": {
-        "@id": "https://ror.org/0384j8v12"
-      },
-      "name": "DataCrate Project"
-    },
-    {
       "@id": "https://ror.org/0384j8v12",
       "@type": "Organization",
-      "address": "Broadway, 2007, NSW Australia",
-      "name": "University of Technology Sydney"
+      "name": ""
     },
     {
-      "@id": "https://www.imagemagick.org/",
-      "@type": "SoftwareApplication",
-      "URL": "https://www.imagemagick.org/",
-      "name": "ImageMagick",
-      "version": " ImageMagick 7.0.8-2 Q16 x86_64 2018-06-19"
+      "@id": "https://data.research.uts.edu.au/examples/ro-crate/examples/src/downloads/sample.zip",
+      "contentUrl": "https://data.research.uts.edu.au/examples/ro-crate/examples/src/downloads/sample.zip",
+      "@type": "DataDownload",
+      "encodingFormat": "zip",
+      "name": ""
     },
     {
       "@id": "lots_of_little_files/",
@@ -2674,31 +125,22 @@
       "name": "Too many files"
     },
     {
-      "@id": "mailto:peter.sefton@uts.edu.au",
-      "@type": "ContactPoint",
-      "contactType": "customer service",
-      "email": "peter.sefton@uts.edu.au",
-      "name": "Contact Peter Sefton"
-    },
-    {
       "@id": "pics/",
       "@type": "Dataset",
       "description": "This directory contains the images for the research project",
+      "name": "Pictures",
       "distribution": {
         "@id": "#picsdistro"
       },
-      "hasPart": [
-        {
-          "@id": "pics/2017-06-11 12.56.14.jpg"
-        },
-        {
-          "@id": "pics/sepia_fence.jpg"
-        },
-        {
-          "@id": "pics/thumbs/"
-        }
-      ],
-      "name": "Pictures"
+      "hasPart": {
+        "@id": "pics/2017-06-11 12.56.14.jpg"
+      }
+    },
+    {
+      "@id": "#picsdistro",
+      "@type": "DataDownload",
+      "path": "http://data.research.uts.edu.au",
+      "name": ""
     },
     {
       "@id": "pics/2017-06-11 12.56.14.jpg",
@@ -2706,12 +148,17 @@
         "File",
         "ImageObject"
       ],
-      "contentSize": "5114778",
+      "contentSize": 5114778,
       "creator": {
         "@id": "http://orcid.org/0000-0002-3545-944X"
       },
       "description": "Depicts a fence at a disused motor racing venue with the front part of a slightly out of focus black dog in the foreground.",
-      "encodingFormat": "Exchangeable Image File Format (Compressed)",
+      "encodingFormat": [
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/645"
+        },
+        "image/jpeg"
+      ],
       "exifData": [
         {
           "@id": "#b0"
@@ -3327,11 +774,1101 @@
         }
       ],
       "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/645",
-      "filename": [],
       "name": "pics/2017-06-11 12.56.14.jpg",
       "thumbnail": {
         "@id": "pics/thumbs/2017-06-11 12.56.14.png"
+      },
+      "dateModified": "2023-04-04T11:02:34+10:00",
+      "filename": ""
+    },
+    {
+      "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/645",
+      "@type": "DigitalFormat",
+      "name": ""
+    },
+    {
+      "@id": "#b0",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b1",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b2",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b3",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b4",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b5",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b6",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b7",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b8",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b9",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b10",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b11",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b12",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b13",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b14",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b15",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b16",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b17",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b18",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b19",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b20",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b21",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b22",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b23",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b24",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b25",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b26",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b27",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b28",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b29",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b30",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b31",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b32",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b33",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b34",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b35",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b36",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b37",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b38",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b39",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b40",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b41",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b42",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b43",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b44",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b45",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b46",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b47",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b48",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b49",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b50",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b51",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b52",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b53",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b54",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b55",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b56",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b57",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b58",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b59",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b60",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b61",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b62",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b63",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b64",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b65",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b66",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b67",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b68",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b69",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b70",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b71",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b72",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b73",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b74",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b75",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b76",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b77",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b78",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b79",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b80",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b81",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b82",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b83",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b84",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b85",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b86",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b87",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b88",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b89",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b90",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b91",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b92",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b93",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b94",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b95",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b96",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b97",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b98",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b99",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b100",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b101",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b102",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b103",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b104",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b105",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b106",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b107",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b108",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b109",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b110",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b111",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b112",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b113",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b114",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b115",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b116",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b117",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b118",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b119",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b120",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b121",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b122",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b123",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b124",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b125",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b126",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b127",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b128",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b129",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b130",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b131",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b132",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b133",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b134",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b135",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b136",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b137",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b138",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b139",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b140",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b141",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b142",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b143",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b144",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b145",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b146",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b147",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b148",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b149",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b150",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b151",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b152",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b153",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b154",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b155",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b156",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b157",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b158",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b159",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b160",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b161",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b162",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b163",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b164",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b165",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b166",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b167",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b168",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b169",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b170",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b171",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b172",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b173",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b174",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b175",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b176",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b177",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b178",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b179",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b180",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b181",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b182",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b183",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b184",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b185",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b186",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b187",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b188",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b189",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b190",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b191",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b192",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b193",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b194",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b195",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b196",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b197",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b198",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b199",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b200",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b201",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b202",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b203",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "pics/thumbs/2017-06-11 12.56.14.png",
+      "@type": "File",
+      "contentSize": 20594,
+      "dateModified": "2023-04-04T11:02:34+10:00",
+      "encodingFormat": [
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/11"
+        },
+        "image/png"
+      ],
+      "name": ""
+    },
+    {
+      "@id": "pics/thumbs/",
+      "@type": "Dataset",
+      "name": "Thumbnails",
+      "hasPart": {
+        "@id": "pics/thumbs/2017-06-11 12.56.14.png"
       }
+    },
+    {
+      "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/11",
+      "@type": "DigitalFormat",
+      "name": "Portable Network Graphics"
+    },
+    {
+      "@id": "lots_of_little_files",
+      "@type": "Dataset",
+      "description": "",
+      "name": "lots_of_little_files",
+      "hasPart": []
+    },
+    {
+      "@id": "pics",
+      "@type": "Dataset",
+      "description": "",
+      "name": "pics",
+      "hasPart": [
+        {
+          "@id": "pics/2017-06-11 12.56.14.jpg"
+        },
+        {
+          "@id": "pics/sepia_fence.jpg"
+        },
+        {
+          "@id": "pics/thumbs"
+        }
+      ]
+    },
+    {
+      "@id": "pics/thumbs",
+      "@type": "Dataset",
+      "description": "",
+      "name": "thumbs",
+      "hasPart": [
+        {
+          "@id": "pics/thumbs/2017-06-11 12.56.14.png"
+        },
+        {
+          "@id": "pics/thumbs/sepia_fence.png"
+        }
+      ]
     },
     {
       "@id": "pics/sepia_fence.jpg",
@@ -3339,9 +1876,14 @@
         "File",
         "ImageObject"
       ],
-      "contentSize": "4855037",
+      "contentSize": 4855037,
       "description": "Sepia tone version of my fence/dog pic",
-      "encodingFormat": "JPEG File Interchange Format",
+      "encodingFormat": [
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/43"
+        },
+        "image/jpeg"
+      ],
       "exifData": [
         {
           "@id": "#b204"
@@ -3960,56 +2502,1138 @@
         }
       ],
       "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/43",
-      "filename": [],
       "name": "pics/sepia_fence.jpg",
       "thumbnail": {
         "@id": "pics/thumbs/sepia_fence.png"
-      }
+      },
+      "dateModified": "2023-04-04T11:02:34+10:00",
+      "filename": ""
     },
     {
-      "@id": "pics/thumbs/",
-      "@type": "Dataset",
-      "hasPart": [
-        {
-          "@id": "pics/thumbs/2017-06-11 12.56.14.png"
-        },
-        {
-          "@id": "pics/thumbs/sepia_fence.png"
-        }
-      ],
-      "name": "Thumbnails"
+      "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/43",
+      "@type": "DigitalFormat",
+      "name": ""
     },
     {
-      "@id": "pics/thumbs/2017-06-11 12.56.14.png",
-      "@type": "File",
-      "contentSize": "20594",
-      "encodingFormat": "Portable Network Graphics",
-      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/11",
-      "filename": [],
-      "name": "pics/thumbs/2017-06-11 12.56.14.png"
+      "@id": "#b204",
+      "@type": "PropertyValue",
+      "name": ""
     },
     {
       "@id": "pics/thumbs/sepia_fence.png",
       "@type": "File",
-      "contentSize": "20524",
-      "encodingFormat": "Portable Network Graphics",
-      "fileFormat": "http://www.nationalarchives.gov.uk/PRONOM/fmt/11",
-      "filename": [],
-      "name": "pics/thumbs/sepia_fence.png"
+      "contentSize": 20524,
+      "dateModified": "2023-04-04T11:02:34+10:00",
+      "encodingFormat": [
+        {
+          "@id": "https://www.nationalarchives.gov.uk/PRONOM/fmt/11"
+        },
+        "image/png"
+      ],
+      "name": ""
     },
     {
-      "@id": "ro-crate-metadata.jsonld",
-      "@type": "CreativeWork",
-      "about": {
-        "@id": "./"
+      "@id": "https://github.com/UTS-eResearch/projects/datacrate",
+      "@type": "Organization",
+      "description": "The DataCrate project is to write the spec for DataCrate, of which this is an example. The DataCrate project is part of the University of Technology Sydney's Provisioner project, which was part-funded by the Australian National Data Service (ANDS) - now part of the Australian Research Data Commons (ARDC).",
+      "name": "DataCrate Project",
+      "funder": {
+        "@id": "https://ror.org/0384j8v12"
+      }
+    },
+    {
+      "@id": "http://eresearch.uts.edu.au/projects/provisioner",
+      "@type": "Organization",
+      "description": "The University of Technology Sydney Provisioner project is ",
+      "name": "Provisioner Project",
+      "funder": {
+        "@id": "https://ror.org/0384j8v12"
+      }
+    },
+    {
+      "@id": "#b205",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b206",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b207",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b208",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b209",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b210",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b211",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b212",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b213",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b214",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b215",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b216",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b217",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b218",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b219",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b220",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b221",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b222",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b223",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b224",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b225",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b226",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b227",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b228",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b229",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b230",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b231",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b232",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b233",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b234",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b235",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b236",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b237",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b238",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b239",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b240",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b241",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b242",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b243",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b244",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b245",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b246",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b247",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b248",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b249",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b250",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b251",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b252",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b253",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b254",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b255",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b256",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b257",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b258",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b259",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b260",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b261",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b262",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b263",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b264",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b265",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b266",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b267",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b268",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b269",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b270",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b271",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b272",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b273",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b274",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b275",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b276",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b277",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b278",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b279",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b280",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b281",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b282",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b283",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b284",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b285",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b286",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b287",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b288",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b289",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b290",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b291",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b292",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b293",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b294",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b295",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b296",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b297",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b298",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b299",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b300",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b301",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b302",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b303",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b304",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b305",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b306",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b307",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b308",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b309",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b310",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b311",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b312",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b313",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b314",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b315",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b316",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b317",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b318",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b319",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b320",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b321",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b322",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b323",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b324",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b325",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b326",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b327",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b328",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b329",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b330",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b331",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b332",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b333",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b334",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b335",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b336",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b337",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b338",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b339",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b340",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b341",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b342",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b343",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b344",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b345",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b346",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b347",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b348",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b349",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b350",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b351",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b352",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b353",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b354",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b355",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b356",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b357",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b358",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b359",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b360",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b361",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b362",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b363",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b364",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b365",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b366",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b367",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b368",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b369",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b370",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b371",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b372",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b373",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b374",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b375",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b376",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b377",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b378",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b379",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b380",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b381",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b382",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b383",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b384",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b385",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b386",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b387",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b388",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b389",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b390",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b391",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b392",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b393",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b394",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b395",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b396",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b397",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b398",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b399",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b400",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b401",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b402",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b403",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b404",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b405",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b406",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b407",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#b408",
+      "@type": "PropertyValue",
+      "name": ""
+    },
+    {
+      "@id": "#EPL1",
+      "@type": "IndividualProduct",
+      "URL": "https://en.wikipedia.org/wiki/Olympus_PEN_E-PL1",
+      "description": "Olympus camera with Panasonic 20mm lens",
+      "manufacturer": "Olympus",
+      "model": "EPL 1",
+      "name": "EPL1 Camera",
+      "serialNumber": "B3B505338"
+    },
+    {
+      "@id": "#Panny20mm",
+      "@type": "IndividualProduct",
+      "URL": "https://en.wikipedia.org/wiki/Panasonic_Lumix_20mm_lens",
+      "description": "Panasonic lens",
+      "manufacturer": "Panasonic",
+      "model": "Lumix G 20mm F1.7 Asph.",
+      "name": "Lumix G 20/F1.7 lens",
+      "serialNumber": "01FG3033651"
+    },
+    {
+      "@id": "#Photo1",
+      "@type": "CreateAction",
+      "agent": {
+        "@id": "http://orcid.org/0000-0002-3545-944X"
       },
-      "identifier": "ro-crate-metadata.jsonld"
+      "description": "Photo snapped on a photo walk on a misty day",
+      "endTime": "2017:06:11T12:56:14+10:00",
+      "instrument": {
+        "@id": "#EPL1"
+      },
+      "name": "Took dog picture",
+      "object": {
+        "@id": "http://www.geonames.org/8152662/catalina-park.html"
+      },
+      "result": {
+        "@id": "pics/2017-06-11 12.56.14.jpg"
+      }
     },
     {
-      "@id": "https://data.research.uts.edu.au/examples/ro-crate/examples/src/downloads/sample.zip",
-      "contentUrl": "https://data.research.uts.edu.au/examples/ro-crate/examples/src/downloads/sample.zip",
-      "@type": "DataDownload",
-      "encodingFormat": "zip"
+      "@id": "#SepiaConversion",
+      "@type": "CreateAction",
+      "agent": {
+        "@id": "http://orcid.org/0000-0002-3545-944X"
+      },
+      "description": "convert -sepia-tone 80% test_data/sample/pics/2017-06-11\\ 12.56.14.jpg test_data/sample/pics/sepia_fence.jpg",
+      "endTime": "2018:09:19T17:01:07+10:00",
+      "instrument": {
+        "@id": "https://www.imagemagick.org/"
+      },
+      "name": "Converted dog picture to sepia",
+      "object": {
+        "@id": "pics/2017-06-11 12.56.14.jpg"
+      },
+      "result": {
+        "@id": "pics/sepia_fence.jpg"
+      }
+    },
+    {
+      "@id": "https://www.imagemagick.org/",
+      "@type": "SoftwareApplication",
+      "URL": "https://www.imagemagick.org/",
+      "name": "ImageMagick",
+      "version": " ImageMagick 7.0.8-2 Q16 x86_64 2018-06-19"
     }
   ]
 }
