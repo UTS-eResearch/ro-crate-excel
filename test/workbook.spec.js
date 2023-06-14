@@ -57,14 +57,11 @@ describe("Create a workbook from a crate",  function() {
           sheet.getCell("B2").value,
           "./"
         );
-
-
   });
 
 
   it("Should create a workbook with one sheet and some metadata", async function() {
     this.timeout(5000); 
-
     const c = new RoCrate();
     c.index();
     const root = c.getRootDataset();
