@@ -178,10 +178,21 @@ describe("Create a workbook from a crate",  function() {
     
   }); 
 
+  it("Can deal with there being no @context worksheet", async function() {
+    this.timeout(5000); 
+    const excelFilePath = "test_data/collections-workbook-sans-context.xlsx";
+    // New empty crate
+    var c = new RoCrate({array: true, link: true});
+
+    const workbook2 = new Workbook({crate: c});
+    await workbook2.loadExcel(excelFilePath, true); // true here means add to crate 
+    assert(workbook2.crate.toJSON()["@context"].length === 2)
+    //assert.equal(f.linguisticGenre[0]['@id'], "http://purl.archive.org/language-data-commons/terms#Dialogue", "Resolved context term")
+    console.log(workbook2.crate.toJSON()["@context"])
+  }); 
+
   it("Can resolve double quoted references", async function() {
     var c = new RoCrate({array: true, list: true});
-    
-
 
     c.addEntity({"@id": "#test1", name: "test 1"});
     c.addEntity({"@id": "#test2", name: "test 2"});
