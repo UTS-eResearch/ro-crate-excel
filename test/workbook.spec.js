@@ -103,17 +103,15 @@ describe("Create a workbook from a crate",  function() {
   it("Should handle the sample dataset", async function() {
     this.timeout(5000); 
 
-    var c = new RoCrate(JSON.parse(fs.readFileSync(metadataPath)));
-    c.index();
+    var c = new RoCrate(JSON.parse(fs.readFileSync(metadataPath)), {array: true, link: true});
     
     const workbook = new Workbook({crate: c});
     await workbook.crateToWorkbook();
-    //console.log(workbook.excel.Sheets)
-    assert.equal(workbook.workbook["_worksheets"].length, 12, "")
-
     workbook.workbook.xlsx.writeFile("test.xlsx");
+
+    assert.equal(workbook.workbook["_worksheets"].length, 17, "Right number of tabs")
     const root = workbook.sheetToItem("RootDataset");
-    assert.equal(root.publisher, `"https://ror.org/0384j8v12"`)
+    assert.equal(root.publisher, `"http://uts.edu.au"`)
    
     // Name indexing works
     workbook.indexCrateByName();
@@ -131,8 +129,7 @@ describe("Create a workbook from a crate",  function() {
   it("Should handle the the IDRC (Cameron Neylon) dataset", async function() {
     this.timeout(5000); 
     const excelFilePath = "METADATA_IDRC.xlsx";
-    var c = new RoCrate(JSON.parse(fs.readFileSync(IDRC_metadataPath)));
-    c.index();
+    var c = new RoCrate(JSON.parse(fs.readFileSync(IDRC_metadataPath)), {array: true, link: true});
     
     const workbook = new Workbook({crate: c});
     await workbook.crateToWorkbook();
@@ -148,7 +145,7 @@ describe("Create a workbook from a crate",  function() {
     //console.log(workbook.crate.getRootDataset())
     for (let item of workbook2.crate.getGraph()) {
       if(item.name) {
-        assert.equal(item.name, workbook.crate.getItem(item["@id"]).name)
+        assert.equal(item.name[0], workbook.crate.getItem(item["@id"]).name[0])
       }
     }
     assert.equal(workbook.crate.getGraph().length, workbook2.crate.getGraph().length);
@@ -218,8 +215,7 @@ describe("Create a workbook from a crate",  function() {
 
 
 it("Can deal with extra context terms", async function() {
-  var c = new RoCrate();
-  c.index();
+  var c = new RoCrate({array: true, link: true});
 
   c.getJson()["@graph"].push(
     {
