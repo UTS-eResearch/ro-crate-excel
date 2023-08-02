@@ -54,7 +54,7 @@ async function main() {
     .option("-b,  --bag [bag-dir]", "Create Bagit Bag(s) under [bag-dir])")
     .option("-a,  --add", "Add metadata from additional-ro-crate-metadata.xlsx to an existing ro-crate-metadata.json crate). Does not re-write the excel input file.")
     .option("-z   --zip", "Zip the bagged ro-crate (only works with --bag")
-    .option("-j   --JSON", "Use the ro-crate-metafata.json file rather than ro-crate-metadata.xslx")
+    .option("-j   --JSON", "Use the ro-crate-metadata.json file rather than ro-crate-metadata.xslx")
     .option("-p   --partOf [partOf]", "This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.")
     .option("-d,  --depth [depth]", "Maximum depth to recurse into directories")
     .option("-r,  --recurse", "Recurse into directories looking for files")
