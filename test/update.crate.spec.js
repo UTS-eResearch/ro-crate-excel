@@ -34,16 +34,23 @@ describe("excel to rocrate", function () {
         const json = JSON.parse(await fs.readFile(metadataPath, "utf8"));
         const crate = new ROCrate(json, {array: true, link: true});
         const objectRosa = crate.getItem("#OBJECT_Rosa");
-        assert(objectRosa["speakerNumber"] === "11", "should include speakerNumber");
+        const speakerNumber = objectRosa["speakerNumber"];
+        assert(speakerNumber[0] === "11", "should include speakerNumber");
         const rosa = objectRosa['speaker'];
-        const rosaId = rosa[0]['@id']
+        const rosaId = rosa[0]['@id'];
         assert(rosaId, '#Rosa');
         const eaf = crate.getItem("Transcripts_Anonymised/EAF_Rosa_anon.eaf");
         assert(eaf['@id'] === "Transcripts_Anonymised/EAF_Rosa_anon.eaf");
-        assert(eaf['annotationOf'] === {"@id": "AUDIO_Rosa.wav"});
+        const someProperty = eaf['someProperty'];
+        assert(someProperty[0], "anon");
+        const wav = crate.getItem("Audio_Anonymised/AUDIO_Rosa_anon.wav");
+        assert(wav['@id'] === "Audio_Anonymised/AUDIO_Rosa_anon.wav");
+        const someOtherProperty = wav['someOtherProperty'];
+        assert(someOtherProperty[0], "anon");
         const maria = crate.getItem("#Maria");
         const mariaType = maria["@type"][0];
         assert(mariaType, "Person");
-        assert(maria["gender"] === "Female", "Should include gender property");
+        const mariaGender = maria["gender"];
+        assert(mariaGender?.[0] === "Female", "Should include gender property");
     });
 });
