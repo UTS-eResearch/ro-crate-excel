@@ -1,10 +1,8 @@
-
-
 # ro-crate-excel
 
 Node library with utilities for converting RO-Crates to Spreadsheet format for data entry and vice versa
 
-THis replaces the Calcyte tool, both the [javascript](https://code.research.uts.edu.au/eresearch/calcytejs) and previous Python versions.
+This replaces the Calcyte tool, both the [javascript](https://code.research.uts.edu.au/eresearch/calcytejs) and previous Python versions.
 
 ## What is this?
 
@@ -37,12 +35,18 @@ Change into the directory:
 
 Install the app:
 
-`npm install .`
+`npm install`
 `npm link # to install the rocxl script` 
 
 Run the tests:
 
-`mocha`
+`npm test`
+
+or a specific test:
+
+```bash
+npm test test/update.crate.spec.js 
+```
 
 # Usage
 
@@ -57,10 +61,10 @@ Usage:
 Usage: rocxl [options] <directories...>
 ```
 
-Generates an an excel spreadsheet and RO-Crate metadata from a set of files and
+Generates an Excel spreadsheet and RO-Crate metadata from a set of files and
 updates the RO-Crate with data filled in the spreadsheet. 
 
-To generate an excel spreadsheet from an ro-crate-metadata.json file instead, use the --JSON option.
+To generate an Excel spreadsheet from an ro-crate-metadata.json file instead, use the --JSON option.
 
 The file system is ALWAYS traversed and file information merged into
 existing metadata.

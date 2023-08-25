@@ -1,6 +1,6 @@
 {
   "name": "ro-crate-excel",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Utilities for converting RO-Crates to Spreadsheet format for data entry and vice versa",
   "main": "index.js",
   "bin": {
@@ -8,7 +8,11 @@
     "rocxl": "rocxl"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "npx mocha"
+  },
+  "engines" : {
+    "npm" : ">=8.0.0",
+    "node" : ">=18.0.0"
   },
   "repository": {
     "type": "git",
@@ -30,7 +34,7 @@
     "n-readlines": "^1.0.1",
     "neat-csv": "^6.0.1",
     "path": "^0.12.7",
-    "ro-crate": "^3.3.1",
+    "ro-crate": "^3.3.2",
     "ro-crate-html": "*",
     "shell": "^0.8.6",
     "shelljs": "^0.8.4",
