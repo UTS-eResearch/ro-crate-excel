@@ -2,7 +2,7 @@
 
 /*
 This is part of ro-crate-excel tool for implementing the RO-Crate data packaging
-spec.  Copyright (C) 2018  University of Technology Sydney
+spec.  Copyright (C) 2018  University of Technology Sydney and 2023 University of QUeensland
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,8 +22,10 @@ const Bag = require("./lib/bag.js");
 const update = require("./lib/update.js")
 // 
 const ROCrate = require("ro-crate").ROCrate;
-const Preview = require("ro-crate-html-js").Preview;
-const HtmlFile = require("ro-crate-html-js").HtmlFile;
+const Preview = require("ro-crate-html").Preview;
+const HtmlFile = require("ro-crate-html").HtmlFile;
+const htmlDefaults = require("ro-crate-html").Defaults;
+
 
 const path = require("path");
 const shell = require("shelljs");
@@ -50,13 +52,15 @@ async function main() {
       dirs = directories;
     })
     .option("-b,  --bag [bag-dir]", "Create Bagit Bag(s) under [bag-dir])")
+    .option("-a,  --add", "Add metadata from additional-ro-crate-metadata.xlsx to an existing ro-crate-metadata.json crate). Does not re-write the excel input file.")
     .option("-z   --zip", "Zip the bagged ro-crate (only works with --bag")
-    .option("-j   --JSON", "Use the ro-crate-metafata.json file rather than ro-crate-metadata.xslx")
+    .option("-j   --JSON", "Use the ro-crate-metadata.json file rather than ro-crate-metadata.xslx")
     .option("-p   --partOf [partOf]", "This is part of another RO-Crate, supply the ro-crate-metadata.jsonld path.")
     .option("-d,  --depth [depth]", "Maximum depth to recurse into directories")
     .option("-r,  --recurse", "Recurse into directories looking for files")
     .option("-c,  --cratescript [cratesript]", "URL of Crate-script directory")
     .option("-m,  --maxfiles [maxfiles]", `Maximum number of files to itemise per directory (default is ${defaults.max_files_in_dir})`)
+    //.option("-f,  --filesOnly", "Find files and stop") NOT IMPLEMEMTED YET
     .option(
       "-u, --url [distro]",
       "Distribution URL"
@@ -78,15 +82,16 @@ async function main() {
   for( let dir of dirs ) {
     if (shell.test("-d", dir)) {
       shell.rm("-rf", path.join(dir, "ro-crate-metadata_files"));
-      await up(dir, depth);     
+      await processDirectory(dir, depth);   
+
       await generateHTML(path.join(dir, defaults.metadata_json_file_name));
     }
   }
 }
 
 
-async function up(dir, depth) {
-  await update(dir, depth, program.JSON);
+async function processDirectory(dir, depth) {
+  await update(dir, depth, program.JSON, program.add);
 }
 
 
@@ -153,7 +158,7 @@ async function generateHTML(metadataPath) {
       const f = new HtmlFile(preview); 
   
       fs.writeFileSync(path.join(dir, htmlFileName),
-                        await f.render(program.cratescript), "utf-8");
+      await f.render(program.cratescript || htmlDefaults.render_script), "utf-8");
      
     if (program.bag) {
       var bagger = new Bag();

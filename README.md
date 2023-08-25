@@ -1,11 +1,8 @@
-## Important Notice:
-> The active fork of this repo is https://github.com/Arkisto-Platform/ro-crate-excel and development efforts should be focused over there.
-
 # ro-crate-excel
 
 Node library with utilities for converting RO-Crates to Spreadsheet format for data entry and vice versa
 
-THis replaces the Calcyte tool, both the [javascript](https://code.research.uts.edu.au/eresearch/calcytejs) and previous Python versions.
+This replaces the Calcyte tool, both the [javascript](https://code.research.uts.edu.au/eresearch/calcytejs) and previous Python versions.
 
 ## What is this?
 
@@ -18,7 +15,7 @@ This is a library for building tools to assist in JSON-lD data entry, it has bee
 npm install ro-crate-excel --global
 
 ### As a docker container (experimentcode .al)
-
+See :)
 Clone this repository, change into the root then make a container: 
 
 `docker build -t rocxl .`
@@ -38,12 +35,18 @@ Change into the directory:
 
 Install the app:
 
-`npm install .`
+`npm install`
 `npm link # to install the rocxl script` 
 
 Run the tests:
 
-`mocha`
+`npm test`
+
+or a specific test:
+
+```bash
+npm test test/update.crate.spec.js 
+```
 
 # Usage
 
@@ -58,10 +61,10 @@ Usage:
 Usage: rocxl [options] <directories...>
 ```
 
-Generates an an excel spreadsheet and RO-Crate metadata from a set of files and
+Generates an Excel spreadsheet and RO-Crate metadata from a set of files and
 updates the RO-Crate with data filled in the spreadsheet. 
 
-To generate an excel spreadsheet from an ro-crate-metadata.json file instead, use the --JSON option.
+To generate an Excel spreadsheet from an ro-crate-metadata.json file instead, use the --JSON option.
 
 The file system is ALWAYS traversed and file information merged into
 existing metadata.
@@ -71,6 +74,7 @@ existing metadata.
 Options:
   -V, --version                    output the version number
   -b,  --bag [bag-dir]             Create Bagit Bag(s) under [bag-dir])
+  -a,  --add                       Add metadata from additional-ro-crate-metadata.xlsx to an existing ro-crate-metadata.json crate). Does not re-write the excel input file ro create ro-crate-metadata.xslsx.
   -z   --zip                       Zip the bagged ro-crate (only works with --bag
   -j   --JSON                      Use the ro-crate-metafata.json file rather than ro-crate-metadata.xslx
   -p   --partOf [partOf]           This is part of another RO-Crate, supply the ro-crate-metadata.json path.
@@ -116,9 +120,48 @@ rocxl will generate:
 
 See the examples in `test_data`.
 
+# To create an excel file in which to describe a bunch of objects
+
+To describe some things such as large numbers of predictably named files using a spreadsheet but use another tools such as Crate-O to describe the root dataset and top levl context
+
+Assuming data is in mydir.
+
+
+-  Create an excel crate in mydir 
+
+   `xlro -d 5 mydir`
+
+- Move the resulting .xlsx file out of the way
+  
+   `mv mydir/ro-crate-metadata.xlsx mydir/additional-ro-crate-metadata.xlsx`
+
+- Add whatever is needed to additional-ro-crate-metadata.xlsx to describe the files therein, and their relationship to RepositoryObject and RepositoryCollection entities
+
+-  Edit the `mydir/ro-crate-metadata.json` file  other tools of your choice
+
+-  Re-generate `mydir/ro-crate-metadata.json` with medata from `mydir/additional-ro-crate-metadata.xlsx` by typing:
+    `xlro -a mydir`
+
+
+
+
+```
+
 # About the spreadsheet format
 
 This library allows transformation between RO-Crate and Excel spreadsheets using multiple worksheets in a workbook which is named 'ro-crate-metadata.xslx' and appears alongside the ro-crate-metadata.json file in the root of the dataset.
+
+## SheetDefaults Worksheet
+
+Optionally, a sheet name SheetDefaults can specify a defult item template for that worksheet.
+
+This sheet (at the moment) has two rows - the top row lists the names of worksheets that have default values and the second 
+
+| SheetName	   | File	              | RepositoryObject	| Person
+| itemtemplate |	{"@type": "File"} |	{"@type": "RepositoryObject", "license" : "LICENSE.txt"}	| {"@type": "Person"}
+
+With the above configuration every object in the sheet named `RepositpryObject` will have {"@type": "RepositoryObject", "license" : "LICENSE.txt"} as a starting point -- any additional valies such as a `@type` column will be *added* to the item.
+
 
 ## The `Root Dataset Worksheet`
 
@@ -208,11 +251,65 @@ And the `@type=CreativeWork` worksheet:
 | --- | ------ | ------ | ----------- |
 | https://creativecommons.org/licenses/by/4.0/ | CreativeWork | CC BY 4.0 | Creative Commons Attribution 4.0 International License | 
 
+### Adding addtional @types using isType_<Type>
 
+If there is a column named `isType_<Type>` such as `istype_Annotation` then rows representing items will have an additional type (eg `Annotation`) if the value of the cell evalutates to True (ie it has a non empty, no-zero value).
+ 
+
+
+| @id | @type  | name   | description | isType_Annotation |
+| --- | ------ | ------ | ----------- | ----------------- |
+| somefile.txt | CreativeWork | My annotation | A description of  | 
+### Referring to other items
+
+Columns with names that start with isRef_ are converted as references to an ids references to an @id 
+
+eg
+
+| @id | @type  |  isRef_hasAnnotation |
+| --- | ------ |  ----------- |
+| my_audio.wav  |File  |  ./my_audio_annotation.json
+
+Will be converted to 
+```
+{
+  "@id": "Mmy_audio.wav",
+  "@type": "File",
+  "hasAnnotation" : {"@id": "./my_audio_annotation.json"}
+}
+
+
+```
+Columns with names that start with isTerm_ are treated as references to vocabulary items that are defined in the context:
+
+So assuming the @context sheet contains:
+
+| name |	@id |
+| ----- | -----------------------------|
+| ldac	| http://purl.archive.org/language-data-commons/terms# |
+
+
+| @id | @type  |  isTerm_annotationType  |
+| --- | ------ |  ----------- |
+| my_audio.wav  | File  |  ldac:Dialogue |
+
+
+The resulting item will be:
+
+```
+{
+  "@id": "my_audio.wav",
+  "@type": "File",
+  "annotationType" : {"@id": "http://purl.archive.org/language-data-commons/terms#Dialogue"}
+}
+```
 
 ### Representing multiple values
 
-To represent multiple values - for example if there are multiple affiliations for a person then a comma separated list enclosed in square brackets.
+To represent multiple values - for example if there are multiple affiliations for a person there are two ways to accomplish this:
+
+1.  Repeat a column header with the SAME name as many times as needed (for the maximum number of repeats in the colum), OR
+2.  Use a comma separated list enclosed in square brackets
 
 | @id | @type | name | FamilyName | givenName  | affiliation |  
 | -- | -- | -- | -- | -- | -- |
@@ -226,6 +323,14 @@ This approach can also be used in the `Root Dataset Worksheet`. The URL is treat
 | author      | ["Peter Sefton", http://ptsefton.com] |
 
 These values will be interpreted as references, omitting the quotes will cause a value to be interpreted as a string.
+
+### Hiding values (and showing provenance)
+
+To stop a column in the spreadsheet from being copied to the output crate, add a "." to the name. For example, if an orignal data source uses the term `Title`, then in order to show the provenance of the data, create a column called `name` (which is the RO-Crate correct term for the name of a work), and use a formula to copy the data into the `name` column.
+
+| .Title                                 | name                             |
+| ----                                   | --------------------------------- |
+| A Short Introduction to Spreadsheets   | =A1 |
 
 ### Embedding JSON
 
@@ -255,7 +360,8 @@ NOTE: Any cell that contains at least one `{` and one `}` will be parsed as JSON
 
 # Adding additional properties to the @context 
 
-There are reasons to add additional properties. 
+TODO
+
 
 ## If the URL for a property does not resolve to a useful URL. 
 
@@ -328,5 +434,8 @@ When converting from a worksheet to a JSON-LD item the process is to:
     -  If the value matches a known @id then add a reference `{"@id": "#someid"}`
     -  else if the value (without quotes) matches a known name add a reference to the item with that name
     -  else if the value (without quotes) does not start with `#` prepend `#` and see if it matches a known `@id` - if it does add it as a reference 
+
+
+
 
 
